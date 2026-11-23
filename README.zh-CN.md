@@ -1,4 +1,4 @@
-# DuoBar
+# CbarDuo
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
@@ -10,28 +10,28 @@
 - 网络
 - 音量
 
-[**下载 DuoBar 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [查看所有版本](https://github.com/Mikeli7666/DuoBar/releases) · [English](README.md)
+[**下载 CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [查看所有版本](https://github.com/Mikeli7666/DuoBar/releases) · [English](README.md)
 
-DuoBar 1.4.2（Build 11）· macOS 13 Ventura 或更高版本 · Apple Silicon 与 Intel Mac · Universal 2
+CbarDuo 1.4.2（Build 11）· macOS 13 Ventura 或更高版本 · Apple Silicon 与 Intel Mac · Universal 2
 
-> **注意：** 这是 Mikeli7666 开发的免费开源 DuoBar，仅在 GitHub 发布。Mac App Store 上有一个同名应用，那是另一位开发者的独立闭源应用，与本项目无关。
+> **注意：** 这是 Mikeli7666 开发的免费开源 CbarDuo，仅在 GitHub 发布。Mac App Store 上有一个同名应用，那是另一位开发者的独立闭源应用，与本项目无关。
 
 <p align="center">
   <a href="https://ko-fi.com/duobar"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="在 Ko-fi 上支持 DuoBar"></a>
 </p>
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="DuoBar 菜单栏" width="1340">
+  <img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo 菜单栏" width="1340">
 
 </p>
 
 ## 📥 下载与安装教程
 
-### 第一步：下载 DuoBar
+### 第一步：下载 CbarDuo
 
-点击页面上方的“下载 DuoBar 1.4.2”。浏览器会下载：
+点击页面上方的“下载 CbarDuo 1.4.2”。浏览器会下载：
 
-`DuoBar-1.4.2.dmg`
+`CbarDuo-1.4.2.dmg`
 
 普通用户只需要这个 DMG 文件。不要下载：
 
@@ -42,32 +42,32 @@ DuoBar 1.4.2（Build 11）· macOS 13 Ventura 或更高版本 · Apple Silicon �
 
 如果你是从 GitHub Releases 页面开始：
 
-1. 找到最新版本 **DuoBar 1.4.2**。
+1. 找到最新版本 **CbarDuo 1.4.2**。
 2. 找到页面下方的 **Assets** 文件列表。
-3. 点击 **DuoBar-1.4.2.dmg**。
+3. 点击 **CbarDuo-1.4.2.dmg**。
 
 ### 第二步：安装
 
-1. 双击 `DuoBar-1.4.2.dmg`。
+1. 双击 `CbarDuo-1.4.2.dmg`。
 2. Finder 会打开一个磁盘映像窗口。
-3. 将 `DuoBar.app` 拖到 **Applications / 应用程序** 文件夹；窗口中提供了应用程序文件夹入口。
+3. 将 `CbarDuo.app` 拖到 **Applications / 应用程序** 文件夹；窗口中提供了应用程序文件夹入口。
 4. 等待复制完成。
 5. 打开“应用程序”文件夹。
-6. 双击 DuoBar。
+6. 双击 CbarDuo。
 
 ### 第三步：第一次打开
 
-DuoBar 1.4.2 使用 Developer ID 签名并通过 Apple 公证。正常安装不需要关闭 Gatekeeper 或 SIP，也不需要 Terminal、`sudo` 或 `xattr`。
+CbarDuo 1.4.2 使用 Developer ID 签名并通过 Apple 公证。正常安装不需要关闭 Gatekeeper 或 SIP，也不需要 Terminal、`sudo` 或 `xattr`。
 
-DuoBar 是菜单栏应用，默认不会出现在 Dock 中（可在设置中开启可选的 Dock 图标，点击打开设置）。打开后，请查看屏幕最上方的 macOS 菜单栏，DuoBar 图标会在那里出现。
+CbarDuo 是菜单栏应用，默认不会出现在 Dock 中（可在设置中开启可选的 Dock 图标，点击打开设置）。打开后，请查看屏幕最上方的 macOS 菜单栏，CbarDuo 图标会在那里出现。
 
 ## 为什么会请求“位置”权限？
 
-macOS 可能要求应用获得“位置”权限，才能读取当前连接的 Wi-Fi 网络名称（SSID）。DuoBar 只通过系统公开 API 使用这项权限来获取 Wi-Fi 名称。
+macOS 可能要求应用获得“位置”权限，才能读取当前连接的 Wi-Fi 网络名称（SSID）。CbarDuo 只通过系统公开 API 使用这项权限来获取 Wi-Fi 名称。
 
 如果拒绝权限：
 
-- DuoBar 仍然可以使用
+- CbarDuo 仍然可以使用
 - 电池功能不受影响
 - 音量功能不受影响
 - 基本网络状态仍然可以显示
@@ -75,13 +75,13 @@ macOS 可能要求应用获得“位置”权限，才能读取当前连接的 W
 
 ## 🖱 怎么使用
 
-DuoBar 常驻在菜单栏。图标中的三个部分分别表示：
+CbarDuo 常驻在菜单栏。图标中的三个部分分别表示：
 
 - **外圈** → 电池 / Adaptive Ring
 - **中间** → Wi-Fi、Ethernet 或其他网络状态
 - **下方四个点** → 音量
 
-点击 DuoBar 图标即可打开弹出面板。面板包含：
+点击 CbarDuo 图标即可打开弹出面板。面板包含：
 
 - 网络
 - 音量
@@ -95,8 +95,8 @@ DuoBar 常驻在菜单栏。图标中的三个部分分别表示：
 设置中还可以选择开启 **Open on Hover（悬停打开）**。
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="DuoBar 1.4.2 弹出面板，经典样式" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="DuoBar 1.4.2 弹出面板，Liquid Glass 样式" width="360">
+  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="CbarDuo 1.4.2 弹出面板，经典样式" width="360">
+  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="CbarDuo 1.4.2 弹出面板，Liquid Glass 样式" width="360">
 </p>
 
 ## 功能
@@ -107,7 +107,7 @@ DuoBar 常驻在菜单栏。图标中的三个部分分别表示：
 - 圆润的 Wi-Fi 指示器和精致的 Duo 视觉风格
 - 显示当前 Wi-Fi 网络名称（SSID）
 - 网络行实时显示下载和上传速度
-- 直接在 DuoBar 中打开或关闭 Wi-Fi
+- 直接在 CbarDuo 中打开或关闭 Wi-Fi
 - Wi-Fi、Ethernet 和离线网络状态
 - 音量状态、音量滑块、静音控制和切换输出设备（取决于音频设备是否支持）
 - 在弹出菜单中选择 Audio Output
@@ -131,7 +131,7 @@ DuoBar 常驻在菜单栏。图标中的三个部分分别表示：
 
 ## 安全与隐私
 
-DuoBar 1.4.2 使用 Apple Developer ID 签名并通过 Apple 公证。DuoBar 不通过 Mac App Store 分发。
+CbarDuo 1.4.2 使用 Apple Developer ID 签名并通过 Apple 公证。CbarDuo 不通过 Mac App Store 分发。
 
 系统状态在本机处理：
 
@@ -140,7 +140,7 @@ DuoBar 1.4.2 使用 Apple Developer ID 签名并通过 Apple 公证。DuoBar 不
 - 不上传系统状态
 - 无无关网络请求
 
-DuoBar 是独立项目，与 Apple Inc. 没有隶属、赞助或认可关系。
+CbarDuo 是独立项目，与 Apple Inc. 没有隶属、赞助或认可关系。
 
 ## 🐛 遇到问题？
 
@@ -150,7 +150,7 @@ DuoBar 是独立项目，与 Apple Inc. 没有隶属、赞助或认可关系。
 
 - Mac 型号
 - macOS 版本
-- DuoBar 版本
+- CbarDuo 版本
 - 问题描述
 - 如果方便，附上一张截图
 
@@ -158,7 +158,7 @@ DuoBar 是独立项目，与 Apple Inc. 没有隶属、赞助或认可关系。
 
 ## 下载完整性
 
-官方 DuoBar 1.4.2 DMG 的 SHA-256：
+官方 CbarDuo 1.4.2 DMG 的 SHA-256：
 
 `97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
 
@@ -166,4 +166,4 @@ DuoBar 是独立项目，与 Apple Inc. 没有隶属、赞助或认可关系。
 
 ## 开源许可
 
-DuoBar 使用 [MIT License](LICENSE) 开源。
+CbarDuo 使用 [MIT License](LICENSE) 开源。
