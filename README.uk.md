@@ -1,35 +1,35 @@
-# DuoBar
+# CbarDuo
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
 Компактний індикатор для рядка меню macOS: акумулятор, мережа й гучність в одному значку.
 
-[Завантажити DuoBar 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [Усі версії](https://github.com/Mikeli7666/DuoBar/releases) · [Повідомити про помилку](https://github.com/Mikeli7666/DuoBar/issues)
+[Завантажити CbarDuo 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [Усі версії](https://github.com/Mikeli7666/DuoBar/releases) · [Повідомити про помилку](https://github.com/Mikeli7666/DuoBar/issues)
 
-DuoBar 1.4.2 (збірка 11) · macOS 13+ · Apple Silicon та Intel · Universal 2 · Безкоштовний проєкт із відкритим кодом
+CbarDuo 1.4.2 (збірка 11) · macOS 13+ · Apple Silicon та Intel · Universal 2 · Безкоштовний проєкт із відкритим кодом
 
-> **Примітка:** Це безкоштовний DuoBar з відкритим вихідним кодом від Mikeli7666, доступний лише на GitHub. Інший застосунок із такою самою назвою продається в Mac App Store — це окремий застосунок із закритим вихідним кодом від іншого розробника, не пов'язаний із цим проєктом.
+> **Примітка:** Це безкоштовний CbarDuo з відкритим вихідним кодом від Mikeli7666, доступний лише на GitHub. Інший застосунок із такою самою назвою продається в Mac App Store — це окремий застосунок із закритим вихідним кодом від іншого розробника, не пов'язаний із цим проєктом.
 
 <p align="center">
   <a href="https://ko-fi.com/duobar"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Підтримати DuoBar на Ko-fi"></a>
 </p>
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="DuoBar у рядку меню macOS" width="1340">
+  <img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo у рядку меню macOS" width="1340">
 </p>
 
 ## 📥 Встановлення для початківців
 
-1. Відкрийте [реліз DuoBar 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/tag/v1.4.2).
-2. У розділі **Assets** завантажте **DuoBar-1.4.2.dmg**. Не завантажуйте `Source code (zip)` або `Source code (tar.gz)` — це вихідний код.
-3. Двічі клацніть файл **DuoBar-1.4.2.dmg** і перетягніть **DuoBar.app** до **Applications / Програми**.
-4. Відкрийте «Програми» та запустіть DuoBar. Це утиліта рядка меню, тому зазвичай вона не з’являється в Dock.
+1. Відкрийте [реліз CbarDuo 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/tag/v1.4.2).
+2. У розділі **Assets** завантажте **CbarDuo-1.4.2.dmg**. Не завантажуйте `Source code (zip)` або `Source code (tar.gz)` — це вихідний код.
+3. Двічі клацніть файл **CbarDuo-1.4.2.dmg** і перетягніть **CbarDuo.app** до **Applications / Програми**.
+4. Відкрийте «Програми» та запустіть CbarDuo. Це утиліта рядка меню, тому зазвичай вона не з’являється в Dock.
 
-DuoBar 1.4.2 підписано Developer ID та нотаризовано Apple. Не потрібно вимикати Gatekeeper або SIP, використовувати Terminal, `sudo` чи `xattr`.
+CbarDuo 1.4.2 підписано Developer ID та нотаризовано Apple. Не потрібно вимикати Gatekeeper або SIP, використовувати Terminal, `sudo` чи `xattr`.
 
 ## Дозвіл геолокації та Wi‑Fi
 
-Дозвіл «Геолокація» потрібен лише для відображення назви поточної Wi‑Fi мережі (SSID) через CoreWLAN. Відмова може приховати SSID, але базовий стан мережі працюватиме. DuoBar не відстежує та не передає фізичне місцезнаходження.
+Дозвіл «Геолокація» потрібен лише для відображення назви поточної Wi‑Fi мережі (SSID) через CoreWLAN. Відмова може приховати SSID, але базовий стан мережі працюватиме. CbarDuo не відстежує та не передає фізичне місцезнаходження.
 
 ## Можливості
 
@@ -46,8 +46,8 @@ DuoBar 1.4.2 підписано Developer ID та нотаризовано Apple
 - English, французька, 简体中文, 繁體中文, русский, українська та тайська.
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="Спливаюча панель DuoBar 1.4.2, класичний вигляд" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="Спливаюча панель DuoBar 1.4.2, Liquid Glass" width="360">
+  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="Спливаюча панель CbarDuo 1.4.2, класичний вигляд" width="360">
+  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="Спливаюча панель CbarDuo 1.4.2, Liquid Glass" width="360">
 </p>
 
 ## Системні вимоги та сумісність
@@ -58,10 +58,10 @@ DuoBar 1.4.2 підписано Developer ID та нотаризовано Apple
 
 ## Безпека, обмеження та ліцензія
 
-Системний стан обробляється локально: немає аналітики, відстеження, бекенду, телеметрії чи сторонніх мережевих запитів. DuoBar не сканує найближчі Wi‑Fi мережі, не підключається до них і не створює пару з Bluetooth-пристроями. Деякі зовнішні аудіопристрої не підтримують програмне керування гучністю.
+Системний стан обробляється локально: немає аналітики, відстеження, бекенду, телеметрії чи сторонніх мережевих запитів. CbarDuo не сканує найближчі Wi‑Fi мережі, не підключається до них і не створює пару з Bluetooth-пристроями. Деякі зовнішні аудіопристрої не підтримують програмне керування гучністю.
 
-SHA-256 офіційного DMG DuoBar 1.4.2:
+SHA-256 офіційного DMG CbarDuo 1.4.2:
 
 `97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
 
-DuoBar поширюється за [MIT License](LICENSE).
+CbarDuo поширюється за [MIT License](LICENSE).

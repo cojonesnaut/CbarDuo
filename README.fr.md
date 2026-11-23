@@ -1,6 +1,6 @@
 <div align="center">
 
-# DuoBar
+# CbarDuo
 
 ### Un indicateur compact pour la barre de menus macOS : batterie, réseau et volume.
 
@@ -8,23 +8,23 @@
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
-[**Télécharger DuoBar 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [**Toutes les versions**](https://github.com/Mikeli7666/DuoBar/releases) · [**Signaler un bug**](https://github.com/Mikeli7666/DuoBar/issues)
+[**Télécharger CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [**Toutes les versions**](https://github.com/Mikeli7666/DuoBar/releases) · [**Signaler un bug**](https://github.com/Mikeli7666/DuoBar/issues)
 
-DuoBar 1.4.2 (Build 11) · macOS 13+ · Apple Silicon ou Intel · Universal 2 · Gratuit et open source
+CbarDuo 1.4.2 (Build 11) · macOS 13+ · Apple Silicon ou Intel · Universal 2 · Gratuit et open source
 
-> **Remarque :** Ceci est le DuoBar gratuit et open source de Mikeli7666, disponible uniquement sur GitHub. Une autre application du même nom est vendue sur le Mac App Store — c'est une application distincte, à code source fermé, d'un autre développeur, sans affiliation avec ce projet.
+> **Remarque :** Ceci est le CbarDuo gratuit et open source de Mikeli7666, disponible uniquement sur GitHub. Une autre application du même nom est vendue sur le Mac App Store — c'est une application distincte, à code source fermé, d'un autre développeur, sans affiliation avec ce projet.
 
 <a href="https://ko-fi.com/duobar"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Soutenir DuoBar sur Ko-fi"></a>
 
 <br>
 
-<img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="DuoBar dans la barre de menus macOS" width="1340">
+<img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo dans la barre de menus macOS" width="1340">
 
 </div>
 
 ## Un glyphe, trois états en direct
 
-DuoBar adapte le concept de statut trois-en-un inspiré de l'iPhone Duo pour la barre de menus du Mac. Un seul glyphe compact présente les informations système normalement réparties sur plusieurs indicateurs :
+CbarDuo adapte le concept de statut trois-en-un inspiré de l'iPhone Duo pour la barre de menus du Mac. Un seul glyphe compact présente les informations système normalement réparties sur plusieurs indicateurs :
 
 - **Arc extérieur** → un anneau de batterie en direct sur les MacBook, ou un anneau adaptatif sur les Mac de bureau
 - **Centre** → le réseau actif : Wi-Fi, Ethernet ou un état hors ligne / de secours
@@ -33,15 +33,15 @@ DuoBar adapte le concept de statut trois-en-un inspiré de l'iPhone Duo pour la 
 L'état persistant reste monochrome et d'aspect natif. Quand des AirPods ou une autre sortie audio Bluetooth prise en charge devient active, le centre passe brièvement de Réseau → AirPods / écouteurs → Réseau. La déconnexion ne déclenche pas d'animation.
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="Fenêtre DuoBar 1.4.2, style classique" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="Fenêtre DuoBar 1.4.2, style Liquid Glass" width="360">
+  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="Fenêtre CbarDuo 1.4.2, style classique" width="360">
+  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="Fenêtre CbarDuo 1.4.2, style Liquid Glass" width="360">
 </p>
 
 ## Anneau adaptatif et anneau de batterie
 
 Sur les MacBook, l'anneau de batterie extérieur affiche le niveau de batterie en direct, un éclair de charge dynamique et un code couleur de batterie optionnel pour la charge, le mode économie d'énergie et les états de batterie faible. Sur les Mac de bureau, l'anneau adaptatif reste neutre en l'absence d'activité de performance significative et fait apparaître automatiquement une pression soutenue sur le CPU, la mémoire ou la température le cas échéant. Il reste automatique : il n'y a pas de sélecteur de métrique manuel.
 
-## DuoBar sur macOS
+## CbarDuo sur macOS
 
 La version 1.4.2 actuelle ajoute le français et un interrupteur Liquid Glass marche/arrêt, en plus du widget de bureau, du changement de langue dans l'application et de la fenêtre de réglages redimensionnable.
 
@@ -77,12 +77,12 @@ La version 1.4.2 actuelle ajoute le français et un interrupteur Liquid Glass ma
 
 ## Installation
 
-1. Ouvrez la [version DuoBar 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/tag/v1.4.2) et trouvez **Assets**.
-2. Téléchargez **DuoBar-1.4.2.dmg**. Ne téléchargez pas `Source code (zip)` ou `Source code (tar.gz)`.
-3. Double-cliquez sur le DMG et glissez **DuoBar.app** vers **Applications**.
-4. Ouvrez Applications et lancez DuoBar. C'est un utilitaire de barre de menus et il n'apparaît normalement pas dans le Dock.
+1. Ouvrez la [version CbarDuo 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/tag/v1.4.2) et trouvez **Assets**.
+2. Téléchargez **CbarDuo-1.4.2.dmg**. Ne téléchargez pas `Source code (zip)` ou `Source code (tar.gz)`.
+3. Double-cliquez sur le DMG et glissez **CbarDuo.app** vers **Applications**.
+4. Ouvrez Applications et lancez CbarDuo. C'est un utilitaire de barre de menus et il n'apparaît normalement pas dans le Dock.
 
-DuoBar 1.4.2 utilise la signature Developer ID, le Hardened Runtime et la notarisation Apple. L'installation normale ne nécessite pas de désactiver Gatekeeper / SIP, Terminal, `sudo` ou `xattr`.
+CbarDuo 1.4.2 utilise la signature Developer ID, le Hardened Runtime et la notarisation Apple. L'installation normale ne nécessite pas de désactiver Gatekeeper / SIP, Terminal, `sudo` ou `xattr`.
 
 SHA-256 : `97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
 
@@ -90,14 +90,14 @@ Les travaux de build et de compatibilité / fiabilité ont été vérifiés avec
 
 ## Autorisations
 
-- **Localisation :** macOS peut exiger une autorisation avant que CoreWLAN puisse exposer le nom du réseau Wi-Fi actuel. Refuser l'accès ne casse ni la connexion de base, ni l'interface, ni l'état du signal ; le SSID peut simplement rester indisponible. DuoBar ne demande l'accès au SSID que quand c'est utile pour l'interface.
-- **Bluetooth :** DuoBar conserve l'observation publique du contrôleur Bluetooth tandis que Core Audio fournit la source principale pour les points de terminaison audio Bluetooth. L'application ne gère ni n'apparie les périphériques.
+- **Localisation :** macOS peut exiger une autorisation avant que CoreWLAN puisse exposer le nom du réseau Wi-Fi actuel. Refuser l'accès ne casse ni la connexion de base, ni l'interface, ni l'état du signal ; le SSID peut simplement rester indisponible. CbarDuo ne demande l'accès au SSID que quand c'est utile pour l'interface.
+- **Bluetooth :** CbarDuo conserve l'observation publique du contrôleur Bluetooth tandis que Core Audio fournit la source principale pour les points de terminaison audio Bluetooth. L'application ne gère ni n'apparie les périphériques.
 
 ## Comportement de la sortie audio
 
 Le contrôle du volume n'est disponible que lorsque la sortie Core Audio active expose des propriétés de volume public réglables par logiciel. Les sorties externes HDMI, AirPlay, USB et autres peuvent afficher **Contrôlé par l'appareil** à la place.
 
-La classification audio AirPods et Bluetooth est une approximation basée sur les métadonnées publiques du système. DuoBar ne prétend pas détecter la génération exacte des AirPods.
+La classification audio AirPods et Bluetooth est une approximation basée sur les métadonnées publiques du système. CbarDuo ne prétend pas détecter la génération exacte des AirPods.
 
 ## Confidentialité
 
@@ -112,17 +112,17 @@ La classification audio AirPods et Bluetooth est une approximation basée sur le
 - Le nom du réseau Wi-Fi peut être indisponible sans l'autorisation de localisation ou quand macOS le retient.
 - La puissance Wi-Fi utilise des données RSSI documentées et de larges plages de signal ; elle ne reproduit pas l'algorithme d'icône privé d'Apple.
 - Certains périphériques audio exposent un volume fixe ou contrôlé de l'extérieur.
-- DuoBar ne rejoint pas les réseaux Wi-Fi et n'apparie pas les périphériques Bluetooth.
+- CbarDuo ne rejoint pas les réseaux Wi-Fi et n'apparie pas les périphériques Bluetooth.
 - La détection audio Bluetooth et de la famille AirPods est une approximation via les API publiques.
 
 ## Compiler depuis les sources
 
-Ouvrez `DuoBar.xcodeproj` dans Xcode, sélectionnez le schéma **DuoBar** et lancez. Les builds de débogage incluent la simulation d'état et des outils de capture marketing ; ces outils sont exclus du comportement Release.
+Ouvrez `CbarDuo.xcodeproj` dans Xcode, sélectionnez le schéma **CbarDuo** et lancez. Les builds de débogage incluent la simulation d'état et des outils de capture marketing ; ces outils sont exclus du comportement Release.
 
 ## Avertissement
 
-DuoBar est un projet indépendant et n'est ni affilié à Apple Inc. ni approuvé par Apple Inc.
+CbarDuo est un projet indépendant et n'est ni affilié à Apple Inc. ni approuvé par Apple Inc.
 
 ## Licence
 
-DuoBar est disponible sous la [licence MIT](LICENSE).
+CbarDuo est disponible sous la [licence MIT](LICENSE).

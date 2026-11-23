@@ -1,0 +1,2 @@
+"NSBluetoothAlwaysUsageDescription" = "CbarDuo використовує доступність Bluetooth і відкриті метадані аудіо, щоб розпізнавати підключення бездротових навушників.";
+"NSLocationWhenInUseUsageDescription" = "CbarDuo запитує геолокацію лише щоб показати ім’я мережі Wi‑Fi, до якої ви підключені.";
