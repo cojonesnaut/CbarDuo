@@ -44,27 +44,28 @@ final class SystemTabMonitor: ObservableObject {
     static let historyLength = 90
     private var visibleViews = 0
     private var timer: Timer?
-    private var historyTimer: Timer?
+    private var isRecordingHistory = false
+    private var historySlots = HistorySlots(slotLength: 2, capacity: historyLength)
     private let core = SamplerCore()
 
     private init() {}
 
-    /// Records memory used every 2 s from launch (one cheap kernel call), so
-    /// the graph already covers the last 3 minutes when the tab opens.
+    /// Records memory used in 2 s slots from launch (one cheap kernel call per
+    /// `HistoryClock` tick), so the graph already covers the last 3 minutes
+    /// when the tab opens.
     func startHistory() {
-        guard historyTimer == nil else { return }
-        recordHistory()
-        let timer = Timer(timeInterval: 2, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.recordHistory() }
+        guard !isRecordingHistory else { return }
+        isRecordingHistory = true
+        HistoryClock.shared.subscribe { [weak self] elapsed in
+            guard let self else { return }
+            let count = elapsed == 0 ? 1 : historySlots.advance(by: elapsed)
+            if count > 0 { recordHistory(slots: count) }
         }
-        timer.tolerance = 0.5
-        RunLoop.main.add(timer, forMode: .common)
-        historyTimer = timer
     }
 
-    private func recordHistory() {
+    private func recordHistory(slots: Int) {
         guard let used = SystemUsageMonitor.readMemoryBreakdown()?.usedFraction else { return }
-        memoryHistory.append(used)
+        memoryHistory.append(contentsOf: repeatElement(used, count: slots))
         if memoryHistory.count > Self.historyLength {
             memoryHistory.removeFirst(memoryHistory.count - Self.historyLength)
         }
@@ -96,7 +97,7 @@ final class SystemTabMonitor: ObservableObject {
             Task { @MainActor in
                 guard let self else { return }
                 self.snapshot = snapshot
-                if self.historyTimer == nil, let used = snapshot.memory?.usedFraction {
+                if !self.isRecordingHistory, let used = snapshot.memory?.usedFraction {
                     self.memoryHistory.append(used)
                     if self.memoryHistory.count > Self.historyLength {
                         self.memoryHistory.removeFirst(self.memoryHistory.count - Self.historyLength)

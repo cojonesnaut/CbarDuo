@@ -3,9 +3,9 @@ import IOKit
 
 /// Power readings for the Battery tab: total system draw, adapter input and
 /// rating, battery temperature, and the apps using significant energy.
-/// System draw is recorded every 2 s from launch (one SMC read) so its graph
-/// already has history when the tab opens; the rest is read only while the
-/// tab is visible.
+/// System draw is recorded in 2 s slots from launch (one SMC read per
+/// `HistoryClock` tick) so its graph already has history when the tab opens;
+/// the rest is read only while the tab is visible.
 @MainActor
 final class PowerMonitor: ObservableObject {
     static let shared = PowerMonitor()
@@ -31,33 +31,32 @@ final class PowerMonitor: ObservableObject {
             guard wantsEnergyApps != oldValue else { return }
             energyApps = []
             energyAppsMeasured = false
-            if wantsEnergyApps { tick(full: true) }
+            if wantsEnergyApps { tick(full: true, slots: 0) }
         }
     }
 
-    private var historyTimer: Timer?
+    private var isStarted = false
     private var visibleViews = 0
     private let core = PowerSamplerCore()
+    private var slots = HistorySlots(slotLength: 2, capacity: historyLength)
 
     private init() {}
 
     func start() {
-        guard historyTimer == nil else { return }
-        tick(full: false)
-        let timer = Timer(timeInterval: 2, repeats: true) { [weak self] _ in
-            Task { @MainActor in
-                guard let self else { return }
-                self.tick(full: self.visibleViews > 0)
-            }
+        guard !isStarted else { return }
+        isStarted = true
+        HistoryClock.shared.subscribe { [weak self] elapsed in
+            guard let self else { return }
+            // The first tick records one point so the graph has a start.
+            let count = elapsed == 0 ? 1 : slots.advance(by: elapsed)
+            guard count > 0 else { return }
+            tick(full: visibleViews > 0, slots: count)
         }
-        timer.tolerance = 0.5
-        RunLoop.main.add(timer, forMode: .common)
-        historyTimer = timer
     }
 
     func viewAppeared() {
         visibleViews += 1
-        if visibleViews == 1 { tick(full: true) }
+        if visibleViews == 1 { tick(full: true, slots: 0) }
     }
 
     func viewDisappeared() {
@@ -65,13 +64,15 @@ final class PowerMonitor: ObservableObject {
         if visibleViews == 0 { wantsEnergyApps = false }
     }
 
-    private func tick(full: Bool) {
+    /// `slots`: how many 2 s graph slots this reading fills (0 for an
+    /// out-of-band refresh such as the tab opening).
+    private func tick(full: Bool, slots: Int) {
         let includeApps = full && wantsEnergyApps
         core.sample(full: full, includeApps: includeApps) { [weak self] reading, apps in
             Task { @MainActor in
                 guard let self else { return }
-                if let watts = reading.systemWatts {
-                    self.systemHistory.append(watts)
+                if let watts = reading.systemWatts, slots > 0 {
+                    self.systemHistory.append(contentsOf: repeatElement(watts, count: slots))
                     if self.systemHistory.count > Self.historyLength {
                         self.systemHistory.removeFirst(self.systemHistory.count - Self.historyLength)
                     }

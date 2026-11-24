@@ -2,10 +2,11 @@ import Darwin
 import Foundation
 
 /// Keeps the last minute of download/upload rates for the Network tab's
-/// graph, plus the active interface's IPv4 address. It samples the
-/// interface's byte counters once a second in the background, so the
-/// graph already has history when the popover opens. Only the Network tab
-/// observes it, so its updates never redraw the menu bar item.
+/// graph (one slot per second), plus the active interface's IPv4 address.
+/// It samples on `HistoryClock`: every second while the popover is open,
+/// every few seconds in the background, filling the slots in between with
+/// the average rate. Only the Network tab observes it, so its updates never
+/// redraw the menu bar item.
 @MainActor
 final class NetworkTrafficMonitor: ObservableObject {
     static let shared = NetworkTrafficMonitor()
@@ -22,19 +23,15 @@ final class NetworkTrafficMonitor: ObservableObject {
 
     var current: Sample? { history.last }
 
-    private var timer: Timer?
+    private var isStarted = false
     private var calculator = NetworkSpeedCalculator()
     private var interfaceName: String?
+    private var slots = HistorySlots(slotLength: 1, capacity: historyLength)
 
     func start() {
-        guard timer == nil else { return }
-        let timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.sample() }
-        }
-        timer.tolerance = 0.2
-        self.timer = timer
-        RunLoop.main.add(timer, forMode: .common)
-        sample()
+        guard !isStarted else { return }
+        isStarted = true
+        HistoryClock.shared.subscribe { [weak self] elapsed in self?.sample(elapsed: elapsed) }
     }
 
     /// The interface whose traffic is measured; nil while offline.
@@ -45,15 +42,17 @@ final class NetworkTrafficMonitor: ObservableObject {
         ipAddress = name.flatMap(Self.ipv4Address(for:))
     }
 
-    private func sample() {
+    private func sample(elapsed: TimeInterval) {
         let counters = interfaceName.flatMap(NetworkSpeedService.readCounters(for:))
+        // The rate is the average since the previous tick, however long ago.
         let speed = calculator.update(
             interface: interfaceName,
             counters: counters,
             at: ProcessInfo.processInfo.systemUptime
         )
         // A gap (offline, first reading) records as zero so the graph keeps time.
-        append(Sample(download: speed?.downloadBytesPerSecond ?? 0, upload: speed?.uploadBytesPerSecond ?? 0))
+        let sample = Sample(download: speed?.downloadBytesPerSecond ?? 0, upload: speed?.uploadBytesPerSecond ?? 0)
+        for _ in 0..<slots.advance(by: elapsed) { append(sample) }
         // Addresses change on DHCP renewals without an interface change.
         let address = interfaceName.flatMap(Self.ipv4Address(for:))
         if address != ipAddress { ipAddress = address }
