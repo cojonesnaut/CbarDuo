@@ -20,7 +20,6 @@ final class SystemStatusStore: ObservableObject {
     private let bluetoothService: BluetoothService
     private let networkSpeedService = NetworkSpeedService()
     private var batteryTimeTimer: Timer?
-    private var isPopoverActive = false
     private var barNeedsNetwork = false
     private var barSlotObserver: NSObjectProtocol?
 
@@ -139,8 +138,12 @@ final class SystemStatusStore: ObservableObject {
         updateNetworkSampling()
     }
 
+    /// Only the indicator bar's network slot needs this 1 s rate: the
+    /// Network tab reads NetworkTrafficMonitor, and publishing here while the
+    /// popover is open would redraw the whole popover and menu bar icon
+    /// every second.
     private func updateNetworkSampling() {
-        if isPopoverActive || barNeedsNetwork {
+        if barNeedsNetwork {
             networkSpeedService.start()
         } else {
             networkSpeedService.stop()
@@ -157,10 +160,8 @@ final class SystemStatusStore: ObservableObject {
         #endif
     }()
 
-    /// Live details (network speed, battery time estimate) are only sampled while the popover is open.
+    /// The battery time estimate is only sampled while the popover is open.
     func setPopoverActive(_ active: Bool) {
-        isPopoverActive = active
-        updateNetworkSampling()
         if active {
             startBatteryTimeUpdates()
         } else {
