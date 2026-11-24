@@ -15,7 +15,7 @@ CbarDuo 1.4.3 (сборка 12) · macOS 15 Sequoia или новее · тол�
 </p>
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo в строке меню macOS" width="1340">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-menubar.png" alt="CbarDuo в строке меню macOS" width="108">
 </p>
 
 ## Скачивание и установка
@@ -86,8 +86,8 @@ CbarDuo постоянно в строке меню. Три части знач�
 В настройках можно включить **Open on Hover** (открывать при наведении).
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="Панель CbarDuo 1.4.2, классический вид" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="Панель CbarDuo 1.4.2, Liquid Glass" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-network.png" alt="Панель CbarDuo 1.4.3, вкладка «Сеть»" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-system.png" alt="Панель CbarDuo 1.4.3, вкладка «Система»" width="360">
 </p>
 
 ## Возможности

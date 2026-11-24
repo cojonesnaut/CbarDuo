@@ -15,7 +15,7 @@ CbarDuo 1.4.3 (збірка 12) · macOS 15+ · лише Apple Silicon · Без
 </p>
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo у рядку меню macOS" width="1340">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-menubar.png" alt="CbarDuo у рядку меню macOS" width="108">
 </p>
 
 ## 📥 Встановлення для початківців
@@ -46,8 +46,8 @@ CbarDuo 1.4.3 підписано ad-hoc і не нотаризовано Apple, 
 - English, французька, 简体中文, 繁體中文, русский, українська та тайська.
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="Спливаюча панель CbarDuo 1.4.2, класичний вигляд" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="Спливаюча панель CbarDuo 1.4.2, Liquid Glass" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-network.png" alt="Спливаюча панель CbarDuo 1.4.3, вкладка «Мережа»" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-system.png" alt="Спливаюча панель CbarDuo 1.4.3, вкладка «Система»" width="360">
 </p>
 
 ## Системні вимоги та сумісність
