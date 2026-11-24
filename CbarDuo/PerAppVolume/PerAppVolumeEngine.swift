@@ -81,6 +81,7 @@ final class PerAppVolumeEngine: ObservableObject {
         store.save(volumes)
         releaseTap(app.bundleID)
         syncRouteVolumes()
+        updateTracking()
     }
 
     /// Ramps every attenuated tap back to unity before teardown so apps don't
@@ -168,6 +169,7 @@ final class PerAppVolumeEngine: ObservableObject {
     private func apply(_ entry: AppVolume, to app: AudioApp) {
         volumes[app.bundleID] = entry
         scheduleSave()
+        defer { updateTracking() }
 
         if let tap = taps[app.bundleID] {
             let routed = !entry.outputDeviceUIDs.isEmpty
@@ -190,6 +192,7 @@ final class PerAppVolumeEngine: ObservableObject {
             neutralTeardownTasks[bundleID] = nil
             volumes[bundleID] = nil
             releaseTap(bundleID)
+            updateTracking()
         }
     }
 
@@ -228,6 +231,14 @@ final class PerAppVolumeEngine: ObservableObject {
             installTap(for: app, entry: entry)
         }
         syncRouteVolumes()
+        updateTracking()
+    }
+
+    /// Tells the process monitor which apps' playing state to keep polling
+    /// while no mixer list is on screen: the ones with a custom volume.
+    private func updateTracking() {
+        let adjusted = volumes.filter { !$0.value.isNeutral }.keys
+        processMonitor.setTrackedBundleIDs(Set(adjusted).union(taps.keys))
     }
 
     /// Make-before-break: the replacement starts before the old tap goes, so
