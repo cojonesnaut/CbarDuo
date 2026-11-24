@@ -8,7 +8,7 @@
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
-[**ดาวน์โหลด CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [**รุ่นทั้งหมด**](https://github.com/cojonesnaut/CbarDuo/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/cojonesnaut/CbarDuo/issues)
+[**ดาวน์โหลด CbarDuo 1.4.4**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg) · [**รุ่นทั้งหมด**](https://github.com/cojonesnaut/CbarDuo/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/cojonesnaut/CbarDuo/issues)
 
 CbarDuo 1.4.4 (Build 13) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
 
@@ -44,7 +44,7 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 
 ## CbarDuo บน macOS
 
-รุ่น 1.4.3 ปัจจุบันออกแบบป๊อปโอเวอร์ใหม่ด้วยแท็บเครือข่าย เสียง ไมโครโฟน แบตเตอรี่ บลูทูธ และระบบ พร้อมเพิ่มการปรับเสียงแยกตามแอป รวมถึงสถิติระบบและพลังงาน
+รุ่น 1.4.4 ปัจจุบันช่วยให้ CbarDuo ใช้ CPU และแบตเตอรี่น้อยลงมาก ต่อยอดจากรุ่น 1.4.3 ที่ออกแบบป๊อปโอเวอร์ใหม่ด้วยแท็บเครือข่าย เสียง ไมโครโฟน แบตเตอรี่ บลูทูธ และระบบ พร้อมการปรับเสียงแยกตามแอป รวมถึงสถิติระบบและพลังงาน
 
 ## คุณสมบัติ
 
@@ -77,14 +77,14 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 
 ## การติดตั้ง
 
-1. เปิด [รุ่น CbarDuo 1.4.3](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.3) และค้นหา **Assets**
-2. ดาวน์โหลด **CbarDuo-1.4.3.dmg** อย่าดาวน์โหลด `Source code (zip)` หรือ `Source code (tar.gz)`
+1. เปิด [รุ่น CbarDuo 1.4.4](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.4) และค้นหา **Assets**
+2. ดาวน์โหลด **CbarDuo-1.4.4.dmg** อย่าดาวน์โหลด `Source code (zip)` หรือ `Source code (tar.gz)`
 3. ดับเบิลคลิก DMG แล้วลาก **CbarDuo.app** ไปยัง **Applications**
 4. เปิด Applications แล้วเปิด CbarDuo macOS จะแจ้งว่าไม่สามารถตรวจสอบแอปได้: เปิด **การตั้งค่าระบบ → ความเป็นส่วนตัวและความปลอดภัย** คลิก **เปิดต่อไป** ข้าง CbarDuo แล้วยืนยัน เป็นยูทิลิตี้แถบเมนูและปกติจะไม่ปรากฏใน Dock
 
-CbarDuo 1.4.3 ลงนามแบบ ad-hoc และไม่ได้รับการรับรอง (notarize) จาก Apple การเปิดครั้งแรกจึงต้องคลิก **เปิดต่อไป** หนึ่งครั้ง ไม่จำเป็นต้องปิด Gatekeeper/SIP หรือใช้ Terminal, `sudo` หรือ `xattr`
+CbarDuo 1.4.4 ลงนามแบบ ad-hoc และไม่ได้รับการรับรอง (notarize) จาก Apple การเปิดครั้งแรกจึงต้องคลิก **เปิดต่อไป** หนึ่งครั้ง ไม่จำเป็นต้องปิด Gatekeeper/SIP หรือใช้ Terminal, `sudo` หรือ `xattr`
 
-SHA-256: `12be3c84afc86fc144ea3f90fa8727108f774d6b2ca24971002bc61e8dd7f2a2`
+SHA-256: `ff02c4c9b1b2ac819d716453164366837dc7a3161b65bf0146dde6b2e4400192`
 
 งานสร้างและความเข้ากันได้/ความน่าเชื่อถือได้รับการตรวจสอบโดยใช้ Xcode 27 และ macOS 27 SDK โดยต้องใช้ macOS 15 ขึ้นไป ซึ่งไม่ได้อ้างถึงการตรวจสอบฮาร์ดแวร์ macOS 27
 

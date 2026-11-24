@@ -10,7 +10,7 @@
 - 网络
 - 音量
 
-[**下载 CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
+[**下载 CbarDuo 1.4.4**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
 CbarDuo 1.4.4（Build 13）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
 
@@ -29,9 +29,9 @@ CbarDuo 1.4.4（Build 13）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 ### 第一步：下载 CbarDuo
 
-点击页面上方的“下载 CbarDuo 1.4.3”。浏览器会下载：
+点击页面上方的“下载 CbarDuo 1.4.4”。浏览器会下载：
 
-`CbarDuo-1.4.3.dmg`
+`CbarDuo-1.4.4.dmg`
 
 普通用户只需要这个 DMG 文件。不要下载：
 
@@ -42,13 +42,13 @@ CbarDuo 1.4.4（Build 13）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 如果你是从 GitHub Releases 页面开始：
 
-1. 找到最新版本 **CbarDuo 1.4.3**。
+1. 找到最新版本 **CbarDuo 1.4.4**。
 2. 找到页面下方的 **Assets** 文件列表。
-3. 点击 **CbarDuo-1.4.3.dmg**。
+3. 点击 **CbarDuo-1.4.4.dmg**。
 
 ### 第二步：安装
 
-1. 双击 `CbarDuo-1.4.3.dmg`。
+1. 双击 `CbarDuo-1.4.4.dmg`。
 2. Finder 会打开一个磁盘映像窗口。
 3. 将 `CbarDuo.app` 拖到 **Applications / 应用程序** 文件夹；窗口中提供了应用程序文件夹入口。
 4. 等待复制完成。
@@ -57,7 +57,7 @@ CbarDuo 1.4.4（Build 13）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 ### 第三步：第一次打开
 
-CbarDuo 1.4.3 使用临时（ad-hoc）签名，未经 Apple 公证。第一次打开时 macOS 会提示无法验证该 App：请打开 **系统设置 → 隐私与安全性**，点击 CbarDuo 旁边的 **仍要打开**，然后确认。只需操作一次，不需要关闭 Gatekeeper 或 SIP，也不需要 Terminal、`sudo` 或 `xattr`。
+CbarDuo 1.4.4 使用临时（ad-hoc）签名，未经 Apple 公证。第一次打开时 macOS 会提示无法验证该 App：请打开 **系统设置 → 隐私与安全性**，点击 CbarDuo 旁边的 **仍要打开**，然后确认。只需操作一次，不需要关闭 Gatekeeper 或 SIP，也不需要 Terminal、`sudo` 或 `xattr`。
 
 CbarDuo 是菜单栏应用，默认不会出现在 Dock 中（可在设置中开启可选的 Dock 图标，点击打开设置）。打开后，请查看屏幕最上方的 macOS 菜单栏，CbarDuo 图标会在那里出现。
 
@@ -129,7 +129,7 @@ CbarDuo 常驻在菜单栏。图标中的三个部分分别表示：
 
 ## 安全与隐私
 
-CbarDuo 1.4.3 使用临时（ad-hoc）签名，未经 Apple 公证。CbarDuo 不通过 Mac App Store 分发。
+CbarDuo 1.4.4 使用临时（ad-hoc）签名，未经 Apple 公证。CbarDuo 不通过 Mac App Store 分发。
 
 系统状态在本机处理：
 
@@ -156,9 +156,9 @@ CbarDuo 是独立项目，与 Apple Inc. 没有隶属、赞助或认可关系。
 
 ## 下载完整性
 
-官方 CbarDuo 1.4.3 DMG 的 SHA-256：
+官方 CbarDuo 1.4.4 DMG 的 SHA-256：
 
-`12be3c84afc86fc144ea3f90fa8727108f774d6b2ca24971002bc61e8dd7f2a2`
+`ff02c4c9b1b2ac819d716453164366837dc7a3161b65bf0146dde6b2e4400192`
 
 普通用户不需要验证这一项。它主要用于希望确认下载文件完整性的用户。
 
