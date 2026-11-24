@@ -4,11 +4,11 @@
 
 Компактний індикатор для рядка меню macOS: акумулятор, мережа й гучність в одному значку.
 
-[Завантажити CbarDuo 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [Усі версії](https://github.com/Mikeli7666/DuoBar/releases) · [Повідомити про помилку](https://github.com/Mikeli7666/DuoBar/issues)
+[Завантажити CbarDuo 1.4.3](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [Усі версії](https://github.com/cojonesnaut/CbarDuo/releases) · [Повідомити про помилку](https://github.com/cojonesnaut/CbarDuo/issues)
 
 CbarDuo 1.4.3 (збірка 12) · macOS 15+ · лише Apple Silicon · Безкоштовний проєкт із відкритим кодом
 
-> **Примітка:** Це безкоштовний CbarDuo з відкритим вихідним кодом від Mikeli7666, доступний лише на GitHub. Інший застосунок із такою самою назвою продається в Mac App Store — це окремий застосунок із закритим вихідним кодом від іншого розробника, не пов'язаний із цим проєктом.
+> **Примітка:** CbarDuo — це форк [DuoBar](https://github.com/Mikeli7666/DuoBar) від Mikeli7666.
 
 <p align="center">
   <a href="https://ko-fi.com/duobar"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Підтримати DuoBar на Ko-fi"></a>
@@ -20,12 +20,12 @@ CbarDuo 1.4.3 (збірка 12) · macOS 15+ · лише Apple Silicon · Без
 
 ## 📥 Встановлення для початківців
 
-1. Відкрийте [реліз CbarDuo 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/tag/v1.4.2).
-2. У розділі **Assets** завантажте **CbarDuo-1.4.2.dmg**. Не завантажуйте `Source code (zip)` або `Source code (tar.gz)` — це вихідний код.
-3. Двічі клацніть файл **CbarDuo-1.4.2.dmg** і перетягніть **CbarDuo.app** до **Applications / Програми**.
-4. Відкрийте «Програми» та запустіть CbarDuo. Це утиліта рядка меню, тому зазвичай вона не з’являється в Dock.
+1. Відкрийте [реліз CbarDuo 1.4.3](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.3).
+2. У розділі **Assets** завантажте **CbarDuo-1.4.3.dmg**. Не завантажуйте `Source code (zip)` або `Source code (tar.gz)` — це вихідний код.
+3. Двічі клацніть файл **CbarDuo-1.4.3.dmg** і перетягніть **CbarDuo.app** до **Applications / Програми**.
+4. Відкрийте «Програми» та запустіть CbarDuo. macOS повідомить, що не може перевірити програму: відкрийте **Системні параметри → Приватність і безпека**, натисніть **Усе одно відкрити** поруч із CbarDuo та підтвердьте. Це утиліта рядка меню, тому зазвичай вона не з’являється в Dock.
 
-CbarDuo 1.4.2 підписано Developer ID та нотаризовано Apple. Не потрібно вимикати Gatekeeper або SIP, використовувати Terminal, `sudo` чи `xattr`.
+CbarDuo 1.4.3 підписано ad-hoc і не нотаризовано Apple, тому під час першого запуску потрібно один раз натиснути **Усе одно відкрити**. Не потрібно вимикати Gatekeeper або SIP, використовувати Terminal, `sudo` чи `xattr`.
 
 ## Дозвіл геолокації та Wi‑Fi
 
@@ -60,8 +60,8 @@ CbarDuo 1.4.2 підписано Developer ID та нотаризовано Appl
 
 Системний стан обробляється локально: немає аналітики, відстеження, бекенду, телеметрії чи сторонніх мережевих запитів. CbarDuo не сканує найближчі Wi‑Fi мережі, не підключається до них і не створює пару з Bluetooth-пристроями. Деякі зовнішні аудіопристрої не підтримують програмне керування гучністю.
 
-SHA-256 офіційного DMG CbarDuo 1.4.2:
+SHA-256 офіційного DMG CbarDuo 1.4.3:
 
-`97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
+`12be3c84afc86fc144ea3f90fa8727108f774d6b2ca24971002bc61e8dd7f2a2`
 
 CbarDuo поширюється за [MIT License](LICENSE).
