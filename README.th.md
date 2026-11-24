@@ -8,11 +8,11 @@
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
-[**ดาวน์โหลด CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [**รุ่นทั้งหมด**](https://github.com/Mikeli7666/DuoBar/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/Mikeli7666/DuoBar/issues)
+[**ดาวน์โหลด CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [**รุ่นทั้งหมด**](https://github.com/cojonesnaut/CbarDuo/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/cojonesnaut/CbarDuo/issues)
 
 CbarDuo 1.4.3 (Build 12) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
 
-> **หมายเหตุ:** นี่คือ CbarDuo ฟรีแบบโอเพนซอร์สโดย Mikeli7666 มีให้เฉพาะบน GitHub เท่านั้น แอปอื่นที่มีชื่อเดียวกันจำหน่ายบน Mac App Store ซึ่งเป็นแอปแยกต่างหากแบบปิดซอร์สโดยนักพัฒนาอีกราย และไม่เกี่ยวข้องกับโปรเจกต์นี้
+> **หมายเหตุ:** CbarDuo เป็นฟอร์กของ [DuoBar](https://github.com/Mikeli7666/DuoBar) โดย Mikeli7666
 
 <a href="https://ko-fi.com/duobar"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Support DuoBar on Ko-fi"></a>
 
@@ -44,9 +44,8 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 
 ## CbarDuo บน macOS
 
-รุ่น 1.4.2 ปัจจุบันเพิ่มภาษาฝรั่งเศสและสวิตช์เปิด/ปิด Liquid Glass พร้อมวิดเจ็ตเดสก์ท็อป การสลับภาษาในแอป และหน้าต่างการตั้งค่าที่ปรับขนาดได้
+รุ่น 1.4.3 ปัจจุบันออกแบบป๊อปโอเวอร์ใหม่ด้วยแท็บเครือข่าย เสียง ไมโครโฟน แบตเตอรี่ บลูทูธ และระบบ พร้อมเพิ่มการปรับเสียงแยกตามแอป รวมถึงสถิติระบบและพลังงาน
 
-<p align="center">
 ## คุณสมบัติ
 
 - วงแหวนแบตเตอรี่พร้อมระดับสด สายฟ้าชาร์จแบบไดนามิก สถานะแบตเตอรี่ต่ำ และรหัสสีแบตเตอรี่เสริม
@@ -78,14 +77,14 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 
 ## การติดตั้ง
 
-1. เปิด [รุ่น CbarDuo 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/tag/v1.4.2) และค้นหา **Assets**
-2. ดาวน์โหลด **CbarDuo-1.4.2.dmg** อย่าดาวน์โหลด `Source code (zip)` หรือ `Source code (tar.gz)`
+1. เปิด [รุ่น CbarDuo 1.4.3](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.3) และค้นหา **Assets**
+2. ดาวน์โหลด **CbarDuo-1.4.3.dmg** อย่าดาวน์โหลด `Source code (zip)` หรือ `Source code (tar.gz)`
 3. ดับเบิลคลิก DMG แล้วลาก **CbarDuo.app** ไปยัง **Applications**
-4. เปิด Applications แล้วเปิด CbarDuo เป็นยูทิลิตี้แถบเมนูและปกติจะไม่ปรากฏใน Dock
+4. เปิด Applications แล้วเปิด CbarDuo macOS จะแจ้งว่าไม่สามารถตรวจสอบแอปได้: เปิด **การตั้งค่าระบบ → ความเป็นส่วนตัวและความปลอดภัย** คลิก **เปิดต่อไป** ข้าง CbarDuo แล้วยืนยัน เป็นยูทิลิตี้แถบเมนูและปกติจะไม่ปรากฏใน Dock
 
-CbarDuo 1.4.2 ใช้การลงนาม Developer ID, Hardened Runtime และการรับรอง Apple การติดตั้งปกติไม่จำเป็นต้องปิด Gatekeeper/SIP, Terminal, `sudo` หรือ `xattr`
+CbarDuo 1.4.3 ลงนามแบบ ad-hoc และไม่ได้รับการรับรอง (notarize) จาก Apple การเปิดครั้งแรกจึงต้องคลิก **เปิดต่อไป** หนึ่งครั้ง ไม่จำเป็นต้องปิด Gatekeeper/SIP หรือใช้ Terminal, `sudo` หรือ `xattr`
 
-SHA-256: `97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
+SHA-256: `12be3c84afc86fc144ea3f90fa8727108f774d6b2ca24971002bc61e8dd7f2a2`
 
 งานสร้างและความเข้ากันได้/ความน่าเชื่อถือได้รับการตรวจสอบโดยใช้ Xcode 27 และ macOS 27 SDK โดยต้องใช้ macOS 15 ขึ้นไป ซึ่งไม่ได้อ้างถึงการตรวจสอบฮาร์ดแวร์ macOS 27
 

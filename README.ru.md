@@ -4,11 +4,11 @@
 
 Индикатор в стиле iPhone Duo для строки меню macOS: батарея, сеть и громкость в одном значке.
 
-[**Скачать CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [Все версии](https://github.com/Mikeli7666/DuoBar/releases) · [English](README.md)
+[**Скачать CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [Все версии](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
 CbarDuo 1.4.3 (сборка 12) · macOS 15 Sequoia или новее · только Apple Silicon
 
-> **Примечание:** Это бесплатный CbarDuo с открытым исходным кодом от Mikeli7666, доступный только на GitHub. Другое приложение с тем же названием продаётся в Mac App Store — это отдельное приложение с закрытым исходным кодом от другого разработчика, не связанное с этим проектом.
+> **Примечание:** CbarDuo — это форк [DuoBar](https://github.com/Mikeli7666/DuoBar) от Mikeli7666.
 
 <p align="center">
   <a href="https://ko-fi.com/duobar"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Поддержать DuoBar на Ko-fi"></a>
@@ -22,9 +22,9 @@ CbarDuo 1.4.3 (сборка 12) · macOS 15 Sequoia или новее · тол�
 
 ### Шаг 1. Скачать CbarDuo
 
-Нажмите «Скачать CbarDuo 1.4.2» выше. Браузер загрузит файл:
+Нажмите «Скачать CbarDuo 1.4.3» выше. Браузер загрузит файл:
 
-`CbarDuo-1.4.2.dmg`
+`CbarDuo-1.4.3.dmg`
 
 Обычному пользователю нужен только этот DMG. Не скачивайте:
 
@@ -33,15 +33,15 @@ CbarDuo 1.4.3 (сборка 12) · macOS 15 Sequoia или новее · тол�
 
 Это исходники для разработчиков, а не установщик.
 
-Если вы открыли страницу [Releases](https://github.com/Mikeli7666/DuoBar/releases):
+Если вы открыли страницу [Releases](https://github.com/cojonesnaut/CbarDuo/releases):
 
-1. Найдите последнюю версию **CbarDuo 1.4.2**.
+1. Найдите последнюю версию **CbarDuo 1.4.3**.
 2. Внизу страницы откройте список **Assets**.
-3. Скачайте **CbarDuo-1.4.2.dmg**.
+3. Скачайте **CbarDuo-1.4.3.dmg**.
 
 ### Шаг 2. Установить
 
-1. Дважды щёлкните `CbarDuo-1.4.2.dmg`.
+1. Дважды щёлкните `CbarDuo-1.4.3.dmg`.
 2. Finder откроет окно образа диска.
 3. Перетащите `CbarDuo.app` в папку **Программы / Applications**.
 4. Дождитесь окончания копирования.
@@ -50,7 +50,7 @@ CbarDuo 1.4.3 (сборка 12) · macOS 15 Sequoia или новее · тол�
 
 ### Шаг 3. Первый запуск
 
-CbarDuo 1.4.2 подписан Developer ID и прошёл нотариальную проверку Apple. Для обычной установки не нужно отключать Gatekeeper или SIP, использовать Terminal, `sudo` или `xattr`.
+CbarDuo 1.4.3 подписан ad-hoc и не проходил нотариальную проверку Apple. При первом запуске macOS сообщит, что не может проверить приложение: откройте **Системные настройки → Конфиденциальность и безопасность**, нажмите **Все равно открыть** рядом с CbarDuo и подтвердите. Это нужно сделать один раз; отключать Gatekeeper или SIP, использовать Terminal, `sudo` или `xattr` не нужно.
 
 CbarDuo живёт в строке меню и **по умолчанию не появляется в Dock** (необязательный значок Dock включается в настройках; щелчок по нему открывает настройки). После запуска смотрите на верхний край экрана — значок CbarDuo будет там.
 
@@ -117,7 +117,7 @@ CbarDuo постоянно в строке меню. Три части знач�
 
 ## Безопасность и приватность
 
-CbarDuo 1.4.2 подписан Apple Developer ID и прошёл нотариальную проверку Apple. Приложение не распространяется через Mac App Store.
+CbarDuo 1.4.3 подписан ad-hoc и не нотаризован Apple. Приложение не распространяется через Mac App Store.
 
 Состояние системы обрабатывается локально:
 
@@ -130,7 +130,7 @@ CbarDuo — независимый проект и не связан с Apple In
 
 ## Если что-то не так
 
-Напишите в [GitHub Issues](https://github.com/Mikeli7666/DuoBar/issues).
+Напишите в [GitHub Issues](https://github.com/cojonesnaut/CbarDuo/issues).
 
 Если вы не технарь, достаточно:
 
@@ -144,9 +144,9 @@ CbarDuo — независимый проект и не связан с Apple In
 
 ## Целостность загрузки
 
-SHA-256 официального DMG CbarDuo 1.4.2:
+SHA-256 официального DMG CbarDuo 1.4.3:
 
-`97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
+`12be3c84afc86fc144ea3f90fa8727108f774d6b2ca24971002bc61e8dd7f2a2`
 
 Обычному пользователю это проверять не нужно. Строка для тех, кто хочет убедиться, что файл не подменили.
 

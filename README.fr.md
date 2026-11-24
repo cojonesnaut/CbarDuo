@@ -8,11 +8,11 @@
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
-[**Télécharger CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [**Toutes les versions**](https://github.com/Mikeli7666/DuoBar/releases) · [**Signaler un bug**](https://github.com/Mikeli7666/DuoBar/issues)
+[**Télécharger CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [**Toutes les versions**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Signaler un bug**](https://github.com/cojonesnaut/CbarDuo/issues)
 
 CbarDuo 1.4.3 (Build 12) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
 
-> **Remarque :** Ceci est le CbarDuo gratuit et open source de Mikeli7666, disponible uniquement sur GitHub. Une autre application du même nom est vendue sur le Mac App Store — c'est une application distincte, à code source fermé, d'un autre développeur, sans affiliation avec ce projet.
+> **Remarque :** CbarDuo est un fork de [DuoBar](https://github.com/Mikeli7666/DuoBar) par Mikeli7666.
 
 <a href="https://ko-fi.com/duobar"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Soutenir DuoBar sur Ko-fi"></a>
 
@@ -43,9 +43,8 @@ Sur les MacBook, l'anneau de batterie extérieur affiche le niveau de batterie e
 
 ## CbarDuo sur macOS
 
-La version 1.4.2 actuelle ajoute le français et un interrupteur Liquid Glass marche/arrêt, en plus du widget de bureau, du changement de langue dans l'application et de la fenêtre de réglages redimensionnable.
+La version 1.4.3 actuelle repense la fenêtre avec des onglets Réseau, Volume, Micro, Batterie, Bluetooth et Système, et ajoute le volume par app ainsi que des statistiques système et d'alimentation.
 
-<p align="center">
 ## Fonctionnalités
 
 - Anneau de batterie avec niveau en direct, éclair de charge dynamique, état de batterie faible et code couleur de batterie optionnel
@@ -77,14 +76,14 @@ La version 1.4.2 actuelle ajoute le français et un interrupteur Liquid Glass ma
 
 ## Installation
 
-1. Ouvrez la [version CbarDuo 1.4.2](https://github.com/Mikeli7666/DuoBar/releases/tag/v1.4.2) et trouvez **Assets**.
-2. Téléchargez **CbarDuo-1.4.2.dmg**. Ne téléchargez pas `Source code (zip)` ou `Source code (tar.gz)`.
+1. Ouvrez la [version CbarDuo 1.4.3](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.3) et trouvez **Assets**.
+2. Téléchargez **CbarDuo-1.4.3.dmg**. Ne téléchargez pas `Source code (zip)` ou `Source code (tar.gz)`.
 3. Double-cliquez sur le DMG et glissez **CbarDuo.app** vers **Applications**.
-4. Ouvrez Applications et lancez CbarDuo. C'est un utilitaire de barre de menus et il n'apparaît normalement pas dans le Dock.
+4. Ouvrez Applications et lancez CbarDuo. macOS indiquera qu'il ne peut pas vérifier l'app : ouvrez **Réglages Système → Confidentialité et sécurité**, cliquez sur **Ouvrir quand même** à côté de CbarDuo, puis confirmez. C'est un utilitaire de barre de menus et il n'apparaît normalement pas dans le Dock.
 
-CbarDuo 1.4.2 utilise la signature Developer ID, le Hardened Runtime et la notarisation Apple. L'installation normale ne nécessite pas de désactiver Gatekeeper / SIP, Terminal, `sudo` ou `xattr`.
+CbarDuo 1.4.3 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Il n'est pas nécessaire de désactiver Gatekeeper / SIP, ni d'utiliser Terminal, `sudo` ou `xattr`.
 
-SHA-256 : `97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
+SHA-256 : `12be3c84afc86fc144ea3f90fa8727108f774d6b2ca24971002bc61e8dd7f2a2`
 
 Les travaux de build et de compatibilité / fiabilité ont été vérifiés avec Xcode 27 et le SDK macOS 27 avec macOS 15 comme version minimale. Cela ne prétend pas à une validation matérielle de macOS 27.
 
