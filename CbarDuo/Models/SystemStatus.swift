@@ -241,6 +241,8 @@ struct AudioStatus: Equatable, Sendable {
     var availableOutputs: [AudioDeviceStatus] = []
     var defaultInput: AudioDeviceStatus? = nil
     var availableInputs: [AudioDeviceStatus] = []
+    /// Level of the default input device (microphone).
+    var inputVolume: OutputVolumeStatus = .unavailable
 
     static let unavailable = AudioStatus(
         isAvailable: false,

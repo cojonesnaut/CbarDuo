@@ -101,33 +101,10 @@
 "Bluetooth Settings…" = "Bluetooth Settings…";
 "Unable to Switch Output" = "Unable to Switch Output";
 "Select audio output" = "Select audio output";
-"Open Wi-Fi Settings" = "Open Wi-Fi Settings";
-"Open Network Settings" = "Open Network Settings";
 "Open Battery Settings" = "Open Battery Settings";
 "No output devices" = "No output devices";
-"Nearby Networks" = "Nearby Networks";
-"Browse nearby Wi-Fi networks" = "Browse nearby Wi-Fi networks";
-"Scanning…" = "Scanning…";
 "Refresh" = "Refresh";
 "Network Settings…" = "Network Settings…";
-"Wi-Fi is Off" = "Wi-Fi is Off";
-"Wi-Fi unavailable" = "Wi-Fi unavailable";
-"Unable to Scan" = "Unable to Scan";
-"No Networks Found" = "No Networks Found";
-"Secured network" = "Secured network";
-"Current Network" = "Current Network";
-"Joining…" = "Joining…";
-"Join network" = "Join network";
-"Strong signal" = "Strong signal";
-"Medium signal" = "Medium signal";
-"Weak signal" = "Weak signal";
-"Signal unavailable" = "Signal unavailable";
-"Password" = "Password";
-"Cancel" = "Cancel";
-"Join" = "Join";
-"Unable to Join" = "Unable to Join";
-"Location access is needed to show Wi-Fi network names." = "Location access is needed to show Wi-Fi network names.";
-"Open System Settings…" = "Open System Settings…";
 "Audio Input" = "Audio Input";
 "No input device" = "No input device";
 "No input devices" = "No input devices";
@@ -135,3 +112,148 @@
 "Select audio input" = "Select audio input";
 "Extra Large" = "Extra Large";
 "Battery Percentage" = "Battery Percentage";
+
+/* Settings window */
+"Appearance" = "Appearance";
+"Automatically check for updates" = "Automatically check for updates";
+"Behavior" = "Behavior";
+"Check for Updates…" = "Check for Updates…";
+"Content" = "Content";
+"Custom Mode Center" = "Custom Mode Center";
+"Custom Mode Dots" = "Custom Mode Dots";
+"Custom Mode Ring" = "Custom Mode Ring";
+"Custom Mode" = "Custom Mode";
+"Dark" = "Dark";
+"Desktop Widget" = "Desktop Widget";
+"Fine-tune" = "Fine-tune";
+"Icon" = "Icon";
+"Indicator" = "Indicator";
+"Language" = "Language";
+"Light" = "Light";
+"Live" = "Live";
+"Low" = "Low";
+"Popover" = "Popover";
+"Preview" = "Preview";
+"Ring" = "Ring";
+"Show CbarDuo on the desktop. Click it to switch modes, drag it to move it." = "Show CbarDuo on the desktop. Click it to switch modes, drag it to move it.";
+"Show Percentage" = "Show Percentage";
+"Show on Desktop" = "Show on Desktop";
+"Show the battery level above the menu bar icon." = "Show the battery level above the menu bar icon.";
+"Startup" = "Startup";
+"System" = "System";
+"Updates" = "Updates";
+"Version %@" = "Version %@";
+"Widget Size" = "Widget Size";
+"Yellow in Low Power Mode and red below 20%. The ring is always green on power." = "Yellow in Low Power Mode and red below 20%. The ring is always green on power.";
+
+/* Popover */
+"Sound" = "Sound";
+"Quit" = "Quit";
+"Microphone" = "Microphone";
+"On" = "On";
+"Output" = "Output";
+"No Bluetooth audio devices connected" = "No Bluetooth audio devices connected";
+
+/* Battery page */
+"Power Source" = "Power Source";
+"Power Adapter" = "Power Adapter";
+"Energy Mode" = "Energy Mode";
+"Battery Health" = "Battery Health";
+"Maximum Capacity" = "Maximum Capacity";
+"Cycle Count" = "Cycle Count";
+"Battery Settings…" = "Battery Settings…";
+"Back" = "Back";
+"Show battery details" = "Show battery details";
+
+/* Audio devices */
+"Input" = "Input";
+"Input volume" = "Input volume";
+
+/* Icon thickness */
+"Thickness" = "Thickness";
+"Thin" = "Thin";
+"Regular" = "Regular";
+"Bold" = "Bold";
+"Ring thickness" = "Ring thickness";
+
+/* Indicator bar */
+"Bar" = "Bar";
+"Slot" = "Slot";
+"Style" = "Style";
+"Fill Style" = "Fill Style";
+"Dotted" = "Dotted";
+"Solid" = "Solid";
+"Segmented" = "Segmented";
+"Classic" = "Classic";
+"Fade" = "Fade";
+"Grow" = "Grow";
+"Snap" = "Snap";
+"Network Activity" = "Network Activity";
+"Memory" = "Memory";
+"Disk" = "Disk";
+"The bar under the ring. Network Activity, Memory and Disk are measured only while chosen." = "The bar under the ring. Network Activity, Memory and Disk are measured only while chosen.";
+
+/* Memory and popover rows */
+"Rows" = "Rows";
+"Choose which sections the popover shows." = "Choose which sections the popover shows.";
+"At least one section stays visible." = "At least one section stays visible.";
+"Memory Used" = "Memory Used";
+"%@ of %@" = "%@ of %@";
+"App Memory" = "App Memory";
+"Wired Memory" = "Wired Memory";
+"Compressed" = "Compressed";
+"Cached Files" = "Cached Files";
+"Activity Monitor…" = "Activity Monitor…";
+"%@ GB" = "%@ GB";
+
+/* System tab */
+"Temperatures" = "Temperatures";
+"CPU" = "CPU";
+"GPU" = "GPU";
+"%d °C" = "%d °C";
+"Hardware usage" = "Hardware usage";
+"%@%%" = "%@%%";
+"Pressure" = "Pressure";
+"%@ / %@" = "%@ / %@";
+"Cached files" = "Cached files";
+"Swap used" = "Swap used";
+"Up for %@" = "Up for %@";
+"%dd %dh" = "%dd %dh";
+"%dh %dm" = "%dh %dm";
+"%dm" = "%dm";
+"Connected Devices" = "Connected Devices";
+"USB Device" = "USB Device";
+"Warning" = "Warning";
+"%@ MB" = "%@ MB";
+
+/* Per-app volume */
+"Nothing is playing" = "Nothing is playing";
+"Nothing is using the microphone" = "Nothing is using the microphone";
+"Reset to 100%" = "Reset to 100%";
+"Play On" = "Play On";
+"Play on Default Output" = "Play on Default Output";
+"Stop playing to this device" = "Stop playing to this device";
+"Options" = "Options";
+"Allow CbarDuo to adjust app volumes" = "Allow CbarDuo to adjust app volumes";
+"macOS needs your permission for CbarDuo to process app audio. Audio never leaves your Mac." = "macOS needs your permission for CbarDuo to process app audio. Audio never leaves your Mac.";
+"Open Privacy Settings" = "Open Privacy Settings";
+
+/* Network tab */
+"Download" = "Download";
+"Upload" = "Upload";
+"Connection" = "Connection";
+"IP Address" = "IP Address";
+"Network Name" = "Network Name";
+"%@ KB/s" = "%@ KB/s";
+"%@ MB/s" = "%@ MB/s";
+"%@ GB/s" = "%@ GB/s";
+
+/* Battery tab power */
+"Battery temperature" = "Battery temperature";
+"Adapter" = "Adapter";
+"%@ max" = "%@ max";
+"Plugged in" = "Plugged in";
+"Apps using significant energy" = "Apps using significant energy";
+"No apps using significant energy" = "No apps using significant energy";
+"%@ W" = "%@ W";
+"No apps using the GPU" = "No apps using the GPU";

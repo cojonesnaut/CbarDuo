@@ -10,7 +10,7 @@
 
 [**Download CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [**All Releases**](https://github.com/Mikeli7666/DuoBar/releases) · [**Report a Bug**](https://github.com/Mikeli7666/DuoBar/issues)
 
-CbarDuo 1.4.2 (Build 11) · macOS 13+ · Apple Silicon or Intel · Universal 2 · Free and Open Source
+CbarDuo 1.4.3 (Build 12) · macOS 15+ · Apple Silicon only · Free and Open Source
 
 > **Note:** CbarDuo is a fork of [DuoBar](https://github.com/Mikeli7666/DuoBar) by Mikeli7666. The download links point to the original DuoBar releases.
 
@@ -66,14 +66,14 @@ The current 1.4.2 release adds French and a Liquid Glass on/off switch, alongsid
 - Liquid Glass popover on macOS 26 and later, with a switch in Settings to bring back the classic pre-1.4.0 look
 - Light and Dark Mode
 - Launch at Login
-- Universal 2: Apple Silicon and Intel support on macOS 13+
+- Native Apple Silicon (arm64) build for macOS 15+
 - Native Swift, SwiftUI, and AppKit
 - Optional Dock icon (off by default); clicking it opens Settings
 
 ## Requirements
 
-**macOS 13.0+**<br>
-**Apple Silicon or Intel**
+**macOS 15.0+**<br>
+**Apple Silicon (M-series) only**
 
 ## Installation
 
@@ -86,7 +86,7 @@ CbarDuo 1.4.2 uses Developer ID signing, Hardened Runtime, and Apple notarizatio
 
 SHA-256: `97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
 
-Build and compatibility/reliability work was checked using Xcode 27 and the macOS 27 SDK while continuing to support macOS 13+. This does not claim macOS 27 hardware validation.
+Build and compatibility/reliability work was checked using Xcode 27 and the macOS 27 SDK with macOS 15 as the minimum. This does not claim macOS 27 hardware validation.
 
 ## Permissions
 

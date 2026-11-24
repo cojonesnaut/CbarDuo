@@ -17,7 +17,13 @@ enum PreferenceKeys {
     static let desktopWidgetSize = "cbarDuo.desktopWidget.size"
     static let desktopWidgetFrameX = "cbarDuo.desktopWidget.frameX"
     static let desktopWidgetFrameY = "cbarDuo.desktopWidget.frameY"
-    static let liquidGlassEnabled = "cbarDuo.liquidGlassEnabled"
+    static let popoverTab = "cbarDuo.popoverTab"
+    static let appearance = "cbarDuo.appearance"
+    static let iconThickness = "cbarDuo.iconThickness"
+    static let barSlot = "cbarDuo.bar.slot"
+    static let popoverHiddenTabs = "cbarDuo.popoverHiddenTabs"
+    static let barStyle = "cbarDuo.bar.style"
+    static let barFill = "cbarDuo.bar.fill"
 
     #if DEBUG
     static let simulateDesktopMac = "debug.simulateDesktopMac"

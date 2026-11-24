@@ -6,7 +6,7 @@
 
 [**Скачать CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [Все версии](https://github.com/Mikeli7666/DuoBar/releases) · [English](README.md)
 
-CbarDuo 1.4.2 (сборка 11) · macOS 13 Ventura или новее · Apple Silicon и Intel · Universal 2
+CbarDuo 1.4.3 (сборка 12) · macOS 15 Sequoia или новее · только Apple Silicon
 
 > **Примечание:** Это бесплатный CbarDuo с открытым исходным кодом от Mikeli7666, доступный только на GitHub. Другое приложение с тем же названием продаётся в Mac App Store — это отдельное приложение с закрытым исходным кодом от другого разработчика, не связанное с этим проектом.
 
@@ -112,10 +112,8 @@ CbarDuo постоянно в строке меню. Три части знач�
 
 ## Системные требования
 
-- macOS 13 Ventura или новее
-- Apple Silicon
-- Intel Mac
-- Universal 2
+- macOS 15 Sequoia или новее
+- Только Apple Silicon (чипы M-серии)
 
 ## Безопасность и приватность
 
@@ -154,9 +152,9 @@ SHA-256 официального DMG CbarDuo 1.4.2:
 
 ## Совместимость
 
-- macOS 13.0 или новее
-- Apple Silicon или Intel, Universal 2
-- Сборка и работы по совместимости/надёжности выполнены с Xcode 27 и SDK macOS 27 при сохранении поддержки macOS 13+. Это не заявление о завершённом тестировании macOS 27 на реальном оборудовании.
+- macOS 15.0 или новее
+- Только Apple Silicon (arm64)
+- Сборка и работы по совместимости/надёжности выполнены с Xcode 27 и SDK macOS 27 с минимальной версией macOS 15. Это не заявление о завершённом тестировании macOS 27 на реальном оборудовании.
 
 В панели CbarDuo доступны переключение аудиовыхода и быстрые переходы к настройкам Network, Battery и Sound.
 

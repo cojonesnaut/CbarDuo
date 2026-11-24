@@ -101,33 +101,10 @@
 "Bluetooth Settings…" = "Параметри Bluetooth…";
 "Unable to Switch Output" = "Не вдалося перемкнути аудіовихід";
 "Select audio output" = "Вибрати аудіовихід";
-"Open Wi-Fi Settings" = "Відкрити параметри Wi‑Fi";
-"Open Network Settings" = "Відкрити параметри мережі";
 "Open Battery Settings" = "Відкрити параметри акумулятора";
 "No output devices" = "Немає пристроїв виводу";
-"Nearby Networks" = "Мережі поруч";
-"Browse nearby Wi-Fi networks" = "Переглянути доступні мережі Wi-Fi";
-"Scanning…" = "Пошук…";
 "Refresh" = "Оновити";
 "Network Settings…" = "Параметри мережі…";
-"Wi-Fi is Off" = "Wi-Fi вимкнено";
-"Wi-Fi unavailable" = "Wi-Fi недоступний";
-"Unable to Scan" = "Не вдалося знайти мережі";
-"No Networks Found" = "Мереж не знайдено";
-"Secured network" = "Захищена мережа";
-"Current Network" = "Поточна мережа";
-"Joining…" = "Підключення…";
-"Join network" = "Підключитися до мережі";
-"Strong signal" = "Сильний сигнал";
-"Medium signal" = "Середній сигнал";
-"Weak signal" = "Слабкий сигнал";
-"Signal unavailable" = "Сигнал недоступний";
-"Password" = "Пароль";
-"Cancel" = "Скасувати";
-"Join" = "Підключитися";
-"Unable to Join" = "Не вдалося підключитися";
-"Location access is needed to show Wi-Fi network names." = "Доступ до геопозиції потрібен для відображення назв мереж Wi-Fi.";
-"Open System Settings…" = "Відкрити Системні параметри…";
 "Audio Input" = "Аудіовхід";
 "No input device" = "Немає пристрою введення";
 "No input devices" = "Немає пристроїв введення";
@@ -135,3 +112,148 @@
 "Select audio input" = "Вибрати пристрій введення звуку";
 "Extra Large" = "Дуже великий";
 "Battery Percentage" = "Відсоток заряду";
+
+/* Settings window */
+"Appearance" = "Оформлення";
+"Automatically check for updates" = "Автоматично перевіряти оновлення";
+"Behavior" = "Поведінка";
+"Check for Updates…" = "Перевірити оновлення…";
+"Content" = "Вміст";
+"Custom Mode Center" = "Центр (власний режим)";
+"Custom Mode Dots" = "Точки (власний режим)";
+"Custom Mode Ring" = "Кільце (власний режим)";
+"Custom Mode" = "Власний режим";
+"Dark" = "Темне";
+"Desktop Widget" = "Віджет на робочому столі";
+"Fine-tune" = "Точне налаштування";
+"Icon" = "Значок";
+"Indicator" = "Індикатор";
+"Language" = "Мова";
+"Light" = "Світле";
+"Live" = "Зараз";
+"Low" = "Низький";
+"Popover" = "Панель";
+"Preview" = "Попередній перегляд";
+"Ring" = "Кільце";
+"Show CbarDuo on the desktop. Click it to switch modes, drag it to move it." = "Показувати CbarDuo на робочому столі. Натисніть, щоб змінити режим, перетягніть, щоб перемістити.";
+"Show Percentage" = "Показувати відсоток";
+"Show on Desktop" = "Показувати на робочому столі";
+"Show the battery level above the menu bar icon." = "Показувати заряд над значком у рядку меню.";
+"Startup" = "Запуск";
+"System" = "Системне";
+"Updates" = "Оновлення";
+"Version %@" = "Версія %@";
+"Widget Size" = "Розмір віджета";
+"Yellow in Low Power Mode and red below 20%. The ring is always green on power." = "Жовте в режимі енергозбереження і червоне нижче 20%. Під час живлення від мережі кільце завжди зелене.";
+
+/* Popover */
+"Sound" = "Звук";
+"Quit" = "Вийти";
+"Microphone" = "Мікрофон";
+"On" = "Увімк.";
+"Output" = "Вихід";
+"No Bluetooth audio devices connected" = "Немає підключених аудіопристроїв Bluetooth";
+
+/* Battery page */
+"Power Source" = "Джерело живлення";
+"Power Adapter" = "Адаптер живлення";
+"Energy Mode" = "Режим енергоспоживання";
+"Battery Health" = "Стан акумулятора";
+"Maximum Capacity" = "Максимальна ємність";
+"Cycle Count" = "Кількість циклів";
+"Battery Settings…" = "Параметри акумулятора…";
+"Back" = "Назад";
+"Show battery details" = "Показати відомості про акумулятор";
+
+/* Audio devices */
+"Input" = "Вхід";
+"Input volume" = "Гучність входу";
+
+/* Icon thickness */
+"Thickness" = "Товщина";
+"Thin" = "Тонка";
+"Regular" = "Звичайна";
+"Bold" = "Жирна";
+"Ring thickness" = "Товщина кільця";
+
+/* Indicator bar */
+"Bar" = "Смуга";
+"Slot" = "Показник";
+"Style" = "Стиль";
+"Fill Style" = "Заповнення";
+"Dotted" = "Крапки";
+"Solid" = "Суцільна";
+"Segmented" = "Сегменти";
+"Classic" = "Класика";
+"Fade" = "Плавно";
+"Grow" = "Ріст";
+"Snap" = "Різко";
+"Network Activity" = "Мережева активність";
+"Memory" = "Пам’ять";
+"Disk" = "Диск";
+"The bar under the ring. Network Activity, Memory and Disk are measured only while chosen." = "Смуга під кільцем. Мережева активність, пам’ять і диск вимірюються, лише поки вибрані.";
+
+/* Memory and popover rows */
+"Rows" = "Розділи";
+"Choose which sections the popover shows." = "Виберіть, які розділи показує панель.";
+"At least one section stays visible." = "Принаймні один розділ лишається видимим.";
+"Memory Used" = "Використано пам’яті";
+"%@ of %@" = "%@ з %@";
+"App Memory" = "Пам’ять програм";
+"Wired Memory" = "Зарезервована пам’ять";
+"Compressed" = "Стиснута";
+"Cached Files" = "Кешовані файли";
+"Activity Monitor…" = "Монітор активності…";
+"%@ GB" = "%@ ГБ";
+
+/* System tab */
+"Temperatures" = "Температури";
+"CPU" = "ЦП";
+"GPU" = "ГП";
+"%d °C" = "%d °C";
+"Hardware usage" = "Навантаження обладнання";
+"%@%%" = "%@%%";
+"Pressure" = "Навантаження";
+"%@ / %@" = "%@ / %@";
+"Cached files" = "Кешовані файли";
+"Swap used" = "Використано підкачки";
+"Up for %@" = "Працює %@";
+"%dd %dh" = "%d д %d год";
+"%dh %dm" = "%d год %d хв";
+"%dm" = "%d хв";
+"Connected Devices" = "Підключені пристрої";
+"USB Device" = "USB-пристрій";
+"Warning" = "Увага";
+"%@ MB" = "%@ МБ";
+
+/* Per-app volume */
+"Nothing is playing" = "Нічого не відтворюється";
+"Nothing is using the microphone" = "Мікрофон ніхто не використовує";
+"Reset to 100%" = "Скинути до 100%";
+"Play On" = "Відтворювати на";
+"Play on Default Output" = "Відтворювати на типовому виході";
+"Stop playing to this device" = "Не відтворювати на цьому пристрої";
+"Options" = "Параметри";
+"Allow CbarDuo to adjust app volumes" = "Дозвольте CbarDuo змінювати гучність програм";
+"macOS needs your permission for CbarDuo to process app audio. Audio never leaves your Mac." = "macOS потребує вашого дозволу, щоб CbarDuo обробляв звук програм. Звук не залишає ваш Mac.";
+"Open Privacy Settings" = "Відкрити параметри приватності";
+
+/* Network tab */
+"Download" = "Завантаження";
+"Upload" = "Вивантаження";
+"Connection" = "Підключення";
+"IP Address" = "IP-адреса";
+"Network Name" = "Назва мережі";
+"%@ KB/s" = "%@ КБ/с";
+"%@ MB/s" = "%@ МБ/с";
+"%@ GB/s" = "%@ ГБ/с";
+
+/* Battery tab power */
+"Battery temperature" = "Температура акумулятора";
+"Adapter" = "Адаптер";
+"%@ max" = "макс. %@";
+"Plugged in" = "Під’єднано";
+"Apps using significant energy" = "Програми, що споживають багато енергії";
+"No apps using significant energy" = "Немає програм, що споживають багато енергії";
+"%@ W" = "%@ Вт";
+"No apps using the GPU" = "Немає програм, що використовують GPU";

@@ -139,14 +139,17 @@ final class HoverPopoverInteractionTests: XCTestCase {
     }
 
     func testCompletePopoverRootUsesPersistentVisibleBoundsTrackingArea() throws {
-        let view = HoverTrackingContainerView(frame: NSRect(x: 0, y: 0, width: 304, height: 316))
+        let view = NSView(frame: NSRect(x: 0, y: 0, width: 330, height: 316))
+        let tracker = PopoverHoverTracker()
 
-        view.updateTrackingAreas()
+        tracker.install(on: view)
+        tracker.install(on: view)
 
+        XCTAssertEqual(view.trackingAreas.count, 1, "reinstalling must not stack tracking areas")
         let area = try XCTUnwrap(view.trackingAreas.first)
         XCTAssertTrue(area.options.contains(.mouseEnteredAndExited))
         XCTAssertTrue(area.options.contains(.activeAlways))
         XCTAssertTrue(area.options.contains(.inVisibleRect))
-        XCTAssertTrue((area.owner as AnyObject?) === view)
+        XCTAssertTrue((area.owner as AnyObject?) === tracker)
     }
 }

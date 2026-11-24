@@ -10,7 +10,7 @@
 
 [**Télécharger CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [**Toutes les versions**](https://github.com/Mikeli7666/DuoBar/releases) · [**Signaler un bug**](https://github.com/Mikeli7666/DuoBar/issues)
 
-CbarDuo 1.4.2 (Build 11) · macOS 13+ · Apple Silicon ou Intel · Universal 2 · Gratuit et open source
+CbarDuo 1.4.3 (Build 12) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
 
 > **Remarque :** Ceci est le CbarDuo gratuit et open source de Mikeli7666, disponible uniquement sur GitHub. Une autre application du même nom est vendue sur le Mac App Store — c'est une application distincte, à code source fermé, d'un autre développeur, sans affiliation avec ce projet.
 
@@ -66,14 +66,14 @@ La version 1.4.2 actuelle ajoute le français et un interrupteur Liquid Glass ma
 - Fenêtre Liquid Glass sur macOS 26 et versions ultérieures, avec un interrupteur dans Réglages pour revenir à l'aspect classique d'avant la 1.4.0
 - Modes clair et sombre
 - Lancement à l'ouverture de session
-- Universal 2 : prise en charge Apple Silicon et Intel sur macOS 13+
+- Build natif Apple Silicon (arm64) pour macOS 15+
 - Swift, SwiftUI et AppKit natifs
 - Icône Dock optionnelle (désactivée par défaut) ; un clic ouvre les Réglages
 
 ## Configuration requise
 
-**macOS 13.0+**<br>
-**Apple Silicon ou Intel**
+**macOS 15.0+**<br>
+**Apple Silicon (série M) uniquement**
 
 ## Installation
 
@@ -86,7 +86,7 @@ CbarDuo 1.4.2 utilise la signature Developer ID, le Hardened Runtime et la notar
 
 SHA-256 : `97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
 
-Les travaux de build et de compatibilité / fiabilité ont été vérifiés avec Xcode 27 et le SDK macOS 27 tout en continuant à prendre en charge macOS 13+. Cela ne prétend pas à une validation matérielle de macOS 27.
+Les travaux de build et de compatibilité / fiabilité ont été vérifiés avec Xcode 27 et le SDK macOS 27 avec macOS 15 comme version minimale. Cela ne prétend pas à une validation matérielle de macOS 27.
 
 ## Autorisations
 

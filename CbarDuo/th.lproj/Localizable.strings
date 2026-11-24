@@ -93,10 +93,153 @@
 "%@, %@, %@" = "%@, %@, %@";
 "Sound Settings…" = "การตั้งค่าเสียง…";
 "Select audio output" = "เลือกเอาต์พุตเสียง";
-"Open Wi-Fi Settings" = "เปิดการตั้งค่า Wi-Fi";
-"Open Network Settings" = "เปิดการตั้งค่าเครือข่าย";
 "Open Battery Settings" = "เปิดการตั้งค่าแบตเตอรี่";
 "No output devices" = "ไม่มีอุปกรณ์เอาต์พุต";
 "Extra Large" = "ใหญ่พิเศษ";
 "Battery Percentage" = "เปอร์เซ็นต์แบตเตอรี่";
 "Default" = "ค่าเริ่มต้น";
+
+/* Settings window */
+"Appearance" = "ลักษณะที่ปรากฏ";
+"Automatically check for updates" = "ตรวจหาอัปเดตโดยอัตโนมัติ";
+"Behavior" = "การทำงาน";
+"Check for Updates…" = "ตรวจหาอัปเดต…";
+"Content" = "เนื้อหา";
+"Custom Mode Center" = "ตรงกลาง (โหมดกำหนดเอง)";
+"Custom Mode Dots" = "จุด (โหมดกำหนดเอง)";
+"Custom Mode Ring" = "วงแหวน (โหมดกำหนดเอง)";
+"Custom Mode" = "โหมดกำหนดเอง";
+"Dark" = "มืด";
+"Desktop Widget" = "วิดเจ็ตบนเดสก์ท็อป";
+"Fine-tune" = "ปรับละเอียด";
+"Icon" = "ไอคอน";
+"Indicator" = "ตัวบ่งชี้";
+"Language" = "ภาษา";
+"Light" = "สว่าง";
+"Live" = "ปัจจุบัน";
+"Low" = "ต่ำ";
+"Popover" = "ป๊อปโอเวอร์";
+"Preview" = "ตัวอย่าง";
+"Ring" = "วงแหวน";
+"Show CbarDuo on the desktop. Click it to switch modes, drag it to move it." = "แสดง CbarDuo บนเดสก์ท็อป คลิกเพื่อสลับโหมด ลากเพื่อย้าย";
+"Show Percentage" = "แสดงเปอร์เซ็นต์";
+"Show on Desktop" = "แสดงบนเดสก์ท็อป";
+"Show the battery level above the menu bar icon." = "แสดงระดับแบตเตอรี่เหนือไอคอนในแถบเมนู";
+"Startup" = "การเริ่มต้น";
+"System" = "ระบบ";
+"Updates" = "อัปเดต";
+"Version %@" = "เวอร์ชัน %@";
+"Widget Size" = "ขนาดวิดเจ็ต";
+"Yellow in Low Power Mode and red below 20%. The ring is always green on power." = "สีเหลืองในโหมดพลังงานต่ำ และสีแดงเมื่อต่ำกว่า 20% วงแหวนเป็นสีเขียวเสมอเมื่อเสียบสายชาร์จ";
+
+/* Popover */
+"Sound" = "เสียง";
+"Quit" = "ออก";
+"Microphone" = "ไมโครโฟน";
+"On" = "เปิด";
+"Output" = "เอาต์พุต";
+"No Bluetooth audio devices connected" = "ไม่มีอุปกรณ์เสียง Bluetooth ที่เชื่อมต่อ";
+
+/* Battery page */
+"Power Source" = "แหล่งพลังงาน";
+"Power Adapter" = "อะแดปเตอร์แปลงไฟ";
+"Energy Mode" = "โหมดพลังงาน";
+"Battery Health" = "สุขภาพแบตเตอรี่";
+"Maximum Capacity" = "ความจุสูงสุด";
+"Cycle Count" = "จำนวนรอบ";
+"Battery Settings…" = "การตั้งค่าแบตเตอรี่…";
+"Back" = "ย้อนกลับ";
+"Show battery details" = "แสดงรายละเอียดแบตเตอรี่";
+
+/* Audio devices */
+"Input" = "อินพุต";
+"Input volume" = "ระดับเสียงอินพุต";
+
+/* Icon thickness */
+"Thickness" = "ความหนา";
+"Thin" = "บาง";
+"Regular" = "ปกติ";
+"Bold" = "หนา";
+"Ring thickness" = "ความหนาของวงแหวน";
+
+/* Indicator bar */
+"Bar" = "แถบ";
+"Slot" = "ข้อมูลที่แสดง";
+"Style" = "รูปแบบ";
+"Fill Style" = "รูปแบบการเติม";
+"Dotted" = "จุด";
+"Solid" = "ทึบ";
+"Segmented" = "แบ่งช่วง";
+"Classic" = "คลาสสิก";
+"Fade" = "จางเข้า";
+"Grow" = "ขยาย";
+"Snap" = "ทันที";
+"Network Activity" = "กิจกรรมเครือข่าย";
+"Memory" = "หน่วยความจำ";
+"Disk" = "ดิสก์";
+"The bar under the ring. Network Activity, Memory and Disk are measured only while chosen." = "แถบใต้วงแหวน กิจกรรมเครือข่าย หน่วยความจำ และดิสก์จะวัดเฉพาะเมื่อเลือกไว้";
+
+/* Memory and popover rows */
+"Rows" = "แถว";
+"Choose which sections the popover shows." = "เลือกส่วนที่จะแสดงในป๊อปโอเวอร์";
+"At least one section stays visible." = "ต้องแสดงอย่างน้อยหนึ่งส่วน";
+"Memory Used" = "หน่วยความจำที่ใช้";
+"%@ of %@" = "%@ จาก %@";
+"App Memory" = "หน่วยความจำของแอป";
+"Wired Memory" = "หน่วยความจำแบบผูก";
+"Compressed" = "บีบอัด";
+"Cached Files" = "ไฟล์ในแคช";
+"Activity Monitor…" = "ตัวตรวจสอบกิจกรรม…";
+"%@ GB" = "%@ GB";
+
+/* System tab */
+"Temperatures" = "อุณหภูมิ";
+"CPU" = "CPU";
+"GPU" = "GPU";
+"%d °C" = "%d °C";
+"Hardware usage" = "การใช้งานฮาร์ดแวร์";
+"%@%%" = "%@%%";
+"Pressure" = "แรงกดดัน";
+"%@ / %@" = "%@ / %@";
+"Cached files" = "ไฟล์ในแคช";
+"Swap used" = "Swap ที่ใช้";
+"Up for %@" = "ทำงานมา %@";
+"%dd %dh" = "%d วัน %d ชม.";
+"%dh %dm" = "%d ชม. %d นาที";
+"%dm" = "%d นาที";
+"Connected Devices" = "อุปกรณ์ที่เชื่อมต่อ";
+"USB Device" = "อุปกรณ์ USB";
+"Warning" = "เตือน";
+"%@ MB" = "%@ MB";
+
+/* Per-app volume */
+"Nothing is playing" = "ไม่มีอะไรกำลังเล่น";
+"Nothing is using the microphone" = "ไม่มีอะไรใช้ไมโครโฟน";
+"Reset to 100%" = "รีเซ็ตเป็น 100%";
+"Play On" = "เล่นบน";
+"Play on Default Output" = "เล่นบนเอาต์พุตเริ่มต้น";
+"Stop playing to this device" = "หยุดเล่นไปยังอุปกรณ์นี้";
+"Options" = "ตัวเลือก";
+"Allow CbarDuo to adjust app volumes" = "อนุญาตให้ CbarDuo ปรับระดับเสียงแอป";
+"macOS needs your permission for CbarDuo to process app audio. Audio never leaves your Mac." = "macOS ต้องได้รับอนุญาตจากคุณเพื่อให้ CbarDuo ประมวลผลเสียงของแอป เสียงจะไม่ออกจาก Mac ของคุณ";
+"Open Privacy Settings" = "เปิดการตั้งค่าความเป็นส่วนตัว";
+
+/* Network tab */
+"Download" = "ดาวน์โหลด";
+"Upload" = "อัปโหลด";
+"Connection" = "การเชื่อมต่อ";
+"IP Address" = "ที่อยู่ IP";
+"Network Name" = "ชื่อเครือข่าย";
+"%@ KB/s" = "%@ KB/s";
+"%@ MB/s" = "%@ MB/s";
+"%@ GB/s" = "%@ GB/s";
+
+/* Battery tab power */
+"Battery temperature" = "อุณหภูมิแบตเตอรี่";
+"Adapter" = "อะแดปเตอร์";
+"%@ max" = "สูงสุด %@";
+"Plugged in" = "เสียบปลั๊กอยู่";
+"Apps using significant energy" = "แอปที่ใช้พลังงานมาก";
+"No apps using significant energy" = "ไม่มีแอปที่ใช้พลังงานมาก";
+"%@ W" = "%@ W";
+"No apps using the GPU" = "ไม่มีแอปที่ใช้ GPU";

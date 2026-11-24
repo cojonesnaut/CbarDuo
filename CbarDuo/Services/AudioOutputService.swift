@@ -1,3 +1,4 @@
+import AudioToolbox
 @preconcurrency import CoreAudio
 import Foundation
 
@@ -21,6 +22,15 @@ final class AudioOutputService {
     private var currentDefaultDeviceID = AudioDeviceID(kAudioObjectUnknown)
     private var currentVolumeAddresses: [AudioObjectPropertyAddress] = []
     private var currentMuteAddress: AudioObjectPropertyAddress?
+    private var currentDefaultInputID = AudioDeviceID(kAudioObjectUnknown)
+    private var currentInputVolumeAddresses: [AudioObjectPropertyAddress] = []
+    private var inputDeviceListeners: [ListenerRegistration] = []
+    private lazy var outputWriter = VolumeWriteCoalescer(label: "com.cojonesnaut.cbarduo.output-volume") { [weak self] in
+        Task { @MainActor in self?.refreshVolumes() }
+    }
+    private lazy var inputWriter = VolumeWriteCoalescer(label: "com.cojonesnaut.cbarduo.input-volume") { [weak self] in
+        Task { @MainActor in self?.refreshVolumes() }
+    }
     private var lastStatus: AudioStatus?
     private var isStarted = false
 
@@ -38,30 +48,22 @@ final class AudioOutputService {
         refresh(rebindDeviceListeners: false)
     }
 
+    /// Sets the output level. The write happens on a background queue (only
+    /// the latest level is applied), so dragging never waits on the hardware.
     @discardableResult
     func setVolume(_ level: Double) -> Bool {
         guard currentDefaultDeviceID != kAudioObjectUnknown,
               !currentVolumeAddresses.isEmpty,
-              currentVolumeAddresses.allSatisfy({ isSettable(objectID: currentDefaultDeviceID, address: $0) })
+              lastStatus?.volume.isSettable
+                ?? currentVolumeAddresses.allSatisfy({ isSettable(objectID: currentDefaultDeviceID, address: $0) })
         else { return false }
 
-        var scalar = Float32(min(max(level, 0), 1))
-        for var address in currentVolumeAddresses {
-            let result = AudioObjectSetPropertyData(
-                currentDefaultDeviceID,
-                &address,
-                0,
-                nil,
-                UInt32(MemoryLayout<Float32>.size),
-                &scalar
-            )
-            guard result == noErr else {
-                refresh()
-                return false
-            }
-        }
+        let scalar = Float32(min(max(level, 0), 1))
+        outputWriter.submit(.init(device: currentDefaultDeviceID, addresses: currentVolumeAddresses, level: scalar))
 
+        // Raising the level unmutes, written once rather than on every step.
         if scalar > 0,
+           lastStatus?.volume.isMuted == true,
            var muteAddress = currentMuteAddress,
            isSettable(objectID: currentDefaultDeviceID, address: muteAddress) {
             var unmuted: UInt32 = 0
@@ -74,8 +76,21 @@ final class AudioOutputService {
                 &unmuted
             )
         }
+        return true
+    }
 
-        refresh()
+    /// Sets the default input device's level (0–1), like the Input slider in
+    /// Sound settings. Written on a background queue, latest level only.
+    @discardableResult
+    func setInputVolume(_ level: Double) -> Bool {
+        guard currentDefaultInputID != kAudioObjectUnknown,
+              !currentInputVolumeAddresses.isEmpty,
+              lastStatus?.inputVolume.isSettable
+                ?? currentInputVolumeAddresses.allSatisfy({ isSettable(objectID: currentDefaultInputID, address: $0) })
+        else { return false }
+
+        let scalar = Float32(min(max(level, 0), 1))
+        inputWriter.submit(.init(device: currentDefaultInputID, addresses: currentInputVolumeAddresses, level: scalar))
         return true
     }
 
@@ -95,7 +110,7 @@ final class AudioOutputService {
             UInt32(MemoryLayout<UInt32>.size),
             &value
         )
-        refresh()
+        refreshVolumes()
         return result == noErr
     }
 
@@ -164,6 +179,19 @@ final class AudioOutputService {
         return result == noErr && readDefaultInputDeviceID() == deviceID
     }
 
+    /// Re-reads only the output and input levels. Used while a slider is
+    /// dragged and for volume/mute notifications, so each step does not
+    /// re-enumerate every audio device.
+    private func refreshVolumes() {
+        guard var status = lastStatus else {
+            refresh()
+            return
+        }
+        status.volume = readVolumeStatus(deviceID: currentDefaultDeviceID)
+        status.inputVolume = readVolumeStatus(deviceID: currentDefaultInputID, scope: kAudioDevicePropertyScopeInput)
+        publish(status)
+    }
+
     private func refresh(rebindDeviceListeners: Bool) {
         let defaultDeviceID = readDefaultOutputDeviceID()
         if rebindDeviceListeners || defaultDeviceID != currentDefaultDeviceID {
@@ -181,6 +209,11 @@ final class AudioOutputService {
         let volume = readVolumeStatus(deviceID: defaultDeviceID)
         let inputDevices = selectableInputDevices()
         let defaultInputID = readDefaultInputDeviceID()
+        if rebindDeviceListeners || defaultInputID != currentDefaultInputID {
+            currentDefaultInputID = defaultInputID
+            bindDefaultInputListeners()
+        }
+        let inputVolume = readVolumeStatus(deviceID: defaultInputID, scope: kAudioDevicePropertyScopeInput)
         let defaultInputUID = makeDeviceStatus(defaultInputID)?.uid
         let defaultInput = inputDevices.first { $0.uid == defaultInputUID }
         publish(
@@ -191,7 +224,8 @@ final class AudioOutputService {
                 connectedBluetoothOutputs: bluetoothOutputs,
                 availableOutputs: outputDevices,
                 defaultInput: defaultInput,
-                availableInputs: inputDevices
+                availableInputs: inputDevices,
+                inputVolume: inputVolume
             )
         )
     }
@@ -222,23 +256,45 @@ final class AudioOutputService {
 
         var addresses = currentVolumeAddresses
         if let currentMuteAddress { addresses.append(currentMuteAddress) }
-        addresses.append(
-            AudioObjectPropertyAddress(
-                mSelector: kAudioDevicePropertyDeviceIsAlive,
-                mScope: kAudioObjectPropertyScopeGlobal,
-                mElement: kAudioObjectPropertyElementMain
-            )
+        let aliveAddress = AudioObjectPropertyAddress(
+            mSelector: kAudioDevicePropertyDeviceIsAlive,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
         )
+        addresses.append(aliveAddress)
 
         for var address in addresses {
+            let levelOnly = address.mSelector != kAudioDevicePropertyDeviceIsAlive
             let listener: PropertyListener = { [weak self] _, _ in
-                Task { @MainActor in self?.refresh() }
+                Task { @MainActor in
+                    if levelOnly { self?.refreshVolumes() } else { self?.refresh() }
+                }
             }
             guard AudioObjectAddPropertyListenerBlock(currentDefaultDeviceID, &address, listenerQueue, listener) == noErr else {
                 continue
             }
             deviceListeners.append(
                 ListenerRegistration(objectID: currentDefaultDeviceID, address: address, listener: listener)
+            )
+        }
+    }
+
+    /// Keeps the input level current when it changes elsewhere (Sound settings,
+    /// another app).
+    private func bindDefaultInputListeners() {
+        removeListeners(&inputDeviceListeners)
+        currentInputVolumeAddresses = []
+        guard currentDefaultInputID != kAudioObjectUnknown else { return }
+        currentInputVolumeAddresses = volumeAddresses(deviceID: currentDefaultInputID, scope: kAudioDevicePropertyScopeInput)
+        for var address in currentInputVolumeAddresses {
+            let listener: PropertyListener = { [weak self] _, _ in
+                Task { @MainActor in self?.refreshVolumes() }
+            }
+            guard AudioObjectAddPropertyListenerBlock(currentDefaultInputID, &address, listenerQueue, listener) == noErr else {
+                continue
+            }
+            inputDeviceListeners.append(
+                ListenerRegistration(objectID: currentDefaultInputID, address: address, listener: listener)
             )
         }
     }
@@ -278,7 +334,15 @@ final class AudioOutputService {
         let result = devices.withUnsafeMutableBytes { bytes in
             AudioObjectGetPropertyData(Self.systemObject, &address, 0, nil, &dataSize, bytes.baseAddress!)
         }
-        return result == noErr ? devices : []
+        // Per-app volume's private taps and aggregates are not devices to offer.
+        return result == noErr ? devices.filter { !Self.isOwnPlumbing($0) } : []
+    }
+
+    private static func isOwnPlumbing(_ deviceID: AudioDeviceID) -> Bool {
+        var transport: UInt32 = 0
+        try? deviceID.read(kAudioDevicePropertyTransportType, into: &transport)
+        guard transport == kAudioDeviceTransportTypeAggregate else { return false }
+        return (try? deviceID.readString(kAudioObjectPropertyName))?.hasPrefix(PerAppAudio.plumbingNamePrefix) == true
     }
 
     private func selectableOutputDevices() -> [AudioDeviceStatus] {
@@ -436,9 +500,12 @@ final class AudioOutputService {
         return .unavailable
     }
 
-    private func readVolumeStatus(deviceID: AudioDeviceID) -> OutputVolumeStatus {
+    private func readVolumeStatus(
+        deviceID: AudioDeviceID,
+        scope: AudioObjectPropertyScope = kAudioDevicePropertyScopeOutput
+    ) -> OutputVolumeStatus {
         guard deviceID != kAudioObjectUnknown else { return .unavailable }
-        let addresses = volumeAddresses(deviceID: deviceID)
+        let addresses = volumeAddresses(deviceID: deviceID, scope: scope)
         let levels = addresses.compactMap { address -> Float32? in
             var address = address
             return readFloat32(objectID: deviceID, address: &address)
@@ -447,7 +514,7 @@ final class AudioOutputService {
 
         let level = levels.reduce(0, +) / Float32(levels.count)
         let muted: Bool
-        if var address = muteAddress(deviceID: deviceID) {
+        if var address = muteAddress(deviceID: deviceID, scope: scope) {
             muted = readUInt32(objectID: deviceID, address: &address).map { $0 != 0 } ?? false
         } else {
             muted = false
@@ -457,38 +524,53 @@ final class AudioOutputService {
             level: min(max(Double(level), 0), 1),
             isMuted: muted,
             isSettable: addresses.allSatisfy { isSettable(objectID: deviceID, address: $0) },
-            isMuteSettable: muteAddress(deviceID: deviceID).map {
+            isMuteSettable: muteAddress(deviceID: deviceID, scope: scope).map {
                 isSettable(objectID: deviceID, address: $0)
             } ?? false
         )
     }
 
-    private func volumeAddresses(deviceID: AudioDeviceID) -> [AudioObjectPropertyAddress] {
+    private func volumeAddresses(
+        deviceID: AudioDeviceID,
+        scope: AudioObjectPropertyScope = kAudioDevicePropertyScopeOutput
+    ) -> [AudioObjectPropertyAddress] {
+        // The virtual main volume is what Control Center and the volume keys
+        // use: a single continuous control that preserves left/right balance.
+        let virtualMain = AudioObjectPropertyAddress(
+            mSelector: kAudioHardwareServiceDeviceProperty_VirtualMainVolume,
+            mScope: scope,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        if hasProperty(objectID: deviceID, address: virtualMain) { return [virtualMain] }
+
         let main = AudioObjectPropertyAddress(
             mSelector: kAudioDevicePropertyVolumeScalar,
-            mScope: kAudioDevicePropertyScopeOutput,
+            mScope: scope,
             mElement: kAudioObjectPropertyElementMain
         )
         if hasProperty(objectID: deviceID, address: main) { return [main] }
 
-        var channelElements = preferredStereoChannels(deviceID: deviceID)
+        var channelElements = preferredStereoChannels(deviceID: deviceID, scope: scope)
         if channelElements.isEmpty { channelElements = Array(1...32) }
         var seen: Set<UInt32> = []
         return channelElements.compactMap { element in
             guard element > 0, seen.insert(element).inserted else { return nil }
             let address = AudioObjectPropertyAddress(
                 mSelector: kAudioDevicePropertyVolumeScalar,
-                mScope: kAudioDevicePropertyScopeOutput,
+                mScope: scope,
                 mElement: element
             )
             return hasProperty(objectID: deviceID, address: address) ? address : nil
         }
     }
 
-    private func preferredStereoChannels(deviceID: AudioDeviceID) -> [UInt32] {
+    private func preferredStereoChannels(
+        deviceID: AudioDeviceID,
+        scope: AudioObjectPropertyScope = kAudioDevicePropertyScopeOutput
+    ) -> [UInt32] {
         var address = AudioObjectPropertyAddress(
             mSelector: kAudioDevicePropertyPreferredChannelsForStereo,
-            mScope: kAudioDevicePropertyScopeOutput,
+            mScope: scope,
             mElement: kAudioObjectPropertyElementMain
         )
         var channels: [UInt32] = [0, 0]
@@ -499,10 +581,13 @@ final class AudioOutputService {
         return result == noErr ? channels : []
     }
 
-    private func muteAddress(deviceID: AudioDeviceID) -> AudioObjectPropertyAddress? {
+    private func muteAddress(
+        deviceID: AudioDeviceID,
+        scope: AudioObjectPropertyScope = kAudioDevicePropertyScopeOutput
+    ) -> AudioObjectPropertyAddress? {
         let address = AudioObjectPropertyAddress(
             mSelector: kAudioDevicePropertyMute,
-            mScope: kAudioDevicePropertyScopeOutput,
+            mScope: scope,
             mElement: kAudioObjectPropertyElementMain
         )
         return hasProperty(objectID: deviceID, address: address) ? address : nil
@@ -600,7 +685,7 @@ final class AudioOutputService {
     }
 
     deinit {
-        for registration in deviceListeners + systemListeners {
+        for registration in deviceListeners + inputDeviceListeners + systemListeners {
             var address = registration.address
             AudioObjectRemovePropertyListenerBlock(
                 registration.objectID,
