@@ -352,7 +352,7 @@ struct DesktopWidgetView: View {
         .onDisappear {
             adaptiveRingMonitor.release(owner: monitorOwner)
         }
-        .onChange(of: mode) { newMode in
+        .onChange(of: mode) { _, newMode in
             if needsMonitor {
                 acquireMonitor()
             } else {
@@ -360,7 +360,7 @@ struct DesktopWidgetView: View {
             }
             flashModeName(newMode)
         }
-        .onChange(of: adaptiveRingMonitor.state) { newState in
+        .onChange(of: adaptiveRingMonitor.state) { _, newState in
             guard mode == .adaptive else { return }
             var presentation = adaptivePresentationBinding.wrappedValue
             let transition = presentation.retarget(to: newState)

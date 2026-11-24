@@ -6,14 +6,17 @@ final class MenuBarController: NSObject {
     private static let hoverCloseDelay: TimeInterval = 0.25
 
     private let statusItem: NSStatusItem
-    private var panel: PopoverPanel?
+    private var popover: NSPopover?
+    private var popoverResignObserver: NSObjectProtocol?
     private var hostingController: NSHostingController<StatusPopoverView>?
     private var isClosing = false
     private var closeWorkItem: DispatchWorkItem?
-    private var isPanelVisible: Bool { panel?.isVisible == true && !isClosing }
+    private var isPanelVisible: Bool { popover?.isShown == true && !isClosing }
+    private var popoverWindow: NSWindow? { popover?.contentViewController?.view.window }
     private let statusStore: SystemStatusStore
     private var hostingView: PassthroughHostingView<DuoStatusView>?
-    private var popoverTrackingView: HoverTrackingContainerView?
+    private var popoverHoverTracker: PopoverHoverTracker?
+    private var escapeKeyMonitor: Any?
     private var lengthAnimationTimer: Timer?
     private var pendingHoverClose: DispatchWorkItem?
     private var hoverCloseGeneration: UInt = 0
@@ -72,35 +75,39 @@ final class MenuBarController: NSObject {
 
     private func configurePopover() {
         let hostingController = NSHostingController(
-            rootView: StatusPopoverView(statusStore: statusStore) { [weak self] in
-                self?.closePopoverFromContent()
-            }
+            rootView: StatusPopoverView(
+                statusStore: statusStore,
+                onClose: { [weak self] in
+                    self?.closePopoverFromContent()
+                }
+            )
         )
-        let trackingView = HoverTrackingContainerView()
-        trackingView.onHoverChanged = { [weak self] isInside in
+        // Report the SwiftUI size only as the preferred content size. The
+        // default options also pin the view to its intrinsic size, which fights
+        // the popover while it animates between tabs of different heights.
+        hostingController.sizingOptions = [.preferredContentSize]
+        let hoverTracker = PopoverHoverTracker()
+        hoverTracker.onHoverChanged = { [weak self] isInside in
             guard let self else { return }
             let commands = isInside
                 ? self.hoverInteraction.popoverEntered()
                 : self.hoverInteraction.popoverExited()
             self.perform(commands)
         }
-        let contentViewController = NSViewController()
-        contentViewController.view = trackingView
-        contentViewController.addChild(hostingController)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        trackingView.addSubview(hostingController.view)
-        NSLayoutConstraint.activate([
-            hostingController.view.leadingAnchor.constraint(equalTo: trackingView.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: trackingView.trailingAnchor),
-            hostingController.view.topAnchor.constraint(equalTo: trackingView.topAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: trackingView.bottomAnchor)
-        ])
-        let panel = PopoverPanel(contentViewController: contentViewController)
-        panel.onResignKey = { [weak self] in self?.panelDidResignKey() }
-        panel.onCancel = { [weak self] in self?.handleOutsideClick() }
-        self.panel = panel
+        hoverTracker.install(on: hostingController.view)
+        // A real NSPopover: the system draws its Liquid Glass, arrow and shadow.
+        // Closing stays with this controller (outside clicks, hover, other
+        // windows), so AppKit's own transient behavior is off.
+        // The SwiftUI controller is the popover's content directly, so AppKit
+        // resizes (and animates) the popover from its preferred content size.
+        let popover = NSPopover()
+        popover.contentViewController = hostingController
+        popover.behavior = .applicationDefined
+        popover.animates = true
+        popover.delegate = self
+        self.popover = popover
         self.hostingController = hostingController
-        popoverTrackingView = trackingView
+        popoverHoverTracker = hoverTracker
     }
 
     @objc private func togglePopover() {
@@ -112,29 +119,19 @@ final class MenuBarController: NSObject {
     }
 
     private func showPopover() {
-        guard !isPanelVisible, let panel, let hostingController, let button = statusItem.button else { return }
+        guard !isPanelVisible, let popover, let hostingController, let button = statusItem.button else { return }
 
         NSApp.activate(ignoringOtherApps: true)
         hostingController.view.layoutSubtreeIfNeeded()
-        var size = hostingController.view.fittingSize
-        if size.width < 1 || size.height < 1 { size = NSSize(width: 304, height: 352) }
         closeWorkItem?.cancel()
         closeWorkItem = nil
         isClosing = false
-        // A panel that is still fading out keeps its current look and fades
-        // back in; a fresh open starts from the hidden (blurred, clear) state.
-        let reopeningDuringClose = panel.isVisible
-        if !reopeningDuringClose {
-            PopoverPresentationState.shared.prepareToShow()
-        }
-        panel.present(below: button, size: size)
-        // One runloop turn later so SwiftUI has rendered the hidden state and
-        // the change below animates instead of snapping.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.016) {
-            Task { @MainActor in
-                PopoverPresentationState.shared.show()
-            }
-        }
+        popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        popoverWindow?.makeKey()
+        button.highlight(true)
+        observePopoverResignKey()
+        installEscapeKeyMonitor()
+        PopoverPresentationState.shared.show()
         installOutsideClickMonitors()
         statusStore.setPopoverActive(true)
         // Let the accessory app finish activating and the popover become key
@@ -195,7 +192,7 @@ final class MenuBarController: NSObject {
     /// True while a sheet (Wi-Fi password) or a nested popover (Nearby
     /// Networks) is attached to the popover window.
     private var popoverHasAttachedWindows: Bool {
-        guard let window = panel else { return false }
+        guard let window = popoverWindow else { return false }
         if window.attachedSheet != nil { return true }
         return window.childWindows?.contains(where: { $0.isVisible }) ?? false
     }
@@ -336,8 +333,9 @@ final class MenuBarController: NSObject {
         cancelHoverClose()
         lengthAnimationTimer?.invalidate()
         lengthAnimationTimer = nil
-        panel?.orderOut(nil)
-        panel = nil
+        removePopoverResignObserver()
+        popover?.close()
+        popover = nil
         hostingController = nil
         if let defaultsObserver {
             NotificationCenter.default.removeObserver(defaultsObserver)
@@ -347,8 +345,8 @@ final class MenuBarController: NSObject {
             NotificationCenter.default.removeObserver(applicationResignObserver)
             self.applicationResignObserver = nil
         }
-        popoverTrackingView?.removeFromSuperview()
-        popoverTrackingView = nil
+        removeEscapeKeyMonitor()
+        popoverHoverTracker = nil
         hostingView?.removeFromSuperview()
         hostingView = nil
         NSStatusBar.system.removeStatusItem(statusItem)
@@ -366,6 +364,12 @@ final class MenuBarController: NSObject {
         if let applicationResignObserver {
             NotificationCenter.default.removeObserver(applicationResignObserver)
         }
+        if let popoverResignObserver {
+            NotificationCenter.default.removeObserver(popoverResignObserver)
+        }
+        if let escapeKeyMonitor {
+            NSEvent.removeMonitor(escapeKeyMonitor)
+        }
         if !isInvalidated {
             NSStatusBar.system.removeStatusItem(statusItem)
         }
@@ -373,27 +377,64 @@ final class MenuBarController: NSObject {
 }
 
 extension MenuBarController {
-    /// Hides the panel and runs the cleanup the popover delegate used to do.
+    /// Closes the popover and runs the cleanup; `popoverDidClose` finishes it.
     func dismissPanel() {
         guard isPanelVisible else { return }
         closeWorkItem?.cancel()
+        closeWorkItem = nil
         // Set before anything else so re-entrant close requests (for example
-        // from `perform` below) see the panel as already closing.
+        // from `perform` below) see the popover as already closing.
         isClosing = true
         removeOutsideClickMonitors()
+        removeEscapeKeyMonitor()
         statusStore.setPopoverActive(false)
         perform(hoverInteraction.popoverClosedExternally())
         PopoverPresentationState.shared.hide()
-        let workItem = DispatchWorkItem { [weak self] in
-            Task { @MainActor in
-                guard let self else { return }
-                self.isClosing = false
-                self.closeWorkItem = nil
-                self.panel?.orderOut(nil)
-            }
+        statusItem.button?.highlight(false)
+        // `close()` rather than `performClose(_:)`: an attached sheet or the
+        // nested Nearby Networks popover can make `performClose` a no-op.
+        popover?.close()
+    }
+
+    /// Key moving to another window of this app (for example Settings) closes
+    /// the popover, like `.transient` would.
+    func observePopoverResignKey() {
+        removePopoverResignObserver()
+        guard let window = popoverWindow else { return }
+        popoverResignObserver = NotificationCenter.default.addObserver(
+            forName: NSWindow.didResignKeyNotification,
+            object: window,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.panelDidResignKey() }
         }
-        closeWorkItem = workItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + PopoverMotion.closeDuration, execute: workItem)
+    }
+
+    /// Escape pressed in the popover closes it. Only events for the popover's
+    /// own window are taken, so Escape in the Wi-Fi password sheet still
+    /// cancels the sheet.
+    func installEscapeKeyMonitor() {
+        removeEscapeKeyMonitor()
+        weak var popoverWindow = self.popoverWindow
+        escapeKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            guard event.keyCode == 53, let popoverWindow, event.window === popoverWindow else { return event }
+            Task { @MainActor in self?.handleOutsideClick() }
+            return nil
+        }
+    }
+
+    func removeEscapeKeyMonitor() {
+        if let escapeKeyMonitor {
+            NSEvent.removeMonitor(escapeKeyMonitor)
+            self.escapeKeyMonitor = nil
+        }
+    }
+
+    func removePopoverResignObserver() {
+        if let popoverResignObserver {
+            NotificationCenter.default.removeObserver(popoverResignObserver)
+            self.popoverResignObserver = nil
+        }
     }
 
     /// Stands in for `.transient`: closes when key moves to another window of
@@ -409,10 +450,29 @@ extension MenuBarController {
             // A click on the status item is handled by its own action.
             guard !self.hoverInteraction.isPointerOverStatusItem else { return }
             guard NSApp.isActive,
-                  self.panel?.isKeyWindow != true,
+                  self.popoverWindow?.isKeyWindow != true,
                   !self.popoverHasAttachedWindows else { return }
             self.handleOutsideClick()
         }
+    }
+}
+
+extension MenuBarController: NSPopoverDelegate {
+    nonisolated func popoverDidClose(_ notification: Notification) {
+        Task { @MainActor in self.popoverFinishedClosing() }
+    }
+
+    private func popoverFinishedClosing() {
+        let closedByController = isClosing
+        isClosing = false
+        removePopoverResignObserver()
+        statusItem.button?.highlight(false)
+        removeEscapeKeyMonitor()
+        guard !closedByController, !isInvalidated else { return }
+        removeOutsideClickMonitors()
+        statusStore.setPopoverActive(false)
+        perform(hoverInteraction.popoverClosedExternally())
+        PopoverPresentationState.shared.hide()
     }
 }
 
@@ -447,22 +507,27 @@ private final class PassthroughHostingView<Content: View>: NSHostingView<Content
     }
 }
 
-final class HoverTrackingContainerView: NSView {
+/// Reports the pointer entering and leaving the popover content through a
+/// tracking area on the content view itself (no wrapper view, which would
+/// break the popover's automatic sizing).
+final class PopoverHoverTracker: NSResponder {
     var onHoverChanged: ((Bool) -> Void)?
-    private var hoverTrackingArea: NSTrackingArea?
+    private(set) var trackingArea: NSTrackingArea?
 
-    override func updateTrackingAreas() {
-        super.updateTrackingAreas()
-        if let hoverTrackingArea {
-            removeTrackingArea(hoverTrackingArea)
+    func install(on view: NSView) {
+        if let trackingArea {
+            view.removeTrackingArea(trackingArea)
         }
-        let trackingArea = NSTrackingArea(
+        // `.inVisibleRect` keeps the area matched to the view as the popover
+        // resizes, so it never needs to be rebuilt.
+        let area = NSTrackingArea(
             rect: .zero,
             options: [.mouseEnteredAndExited, .activeAlways, .inVisibleRect],
-            owner: self
+            owner: self,
+            userInfo: nil
         )
-        addTrackingArea(trackingArea)
-        hoverTrackingArea = trackingArea
+        view.addTrackingArea(area)
+        trackingArea = area
     }
 
     override func mouseEntered(with event: NSEvent) {
@@ -472,5 +537,4 @@ final class HoverTrackingContainerView: NSView {
     override func mouseExited(with event: NSEvent) {
         onHoverChanged?(false)
     }
-
 }

@@ -2,9 +2,13 @@ import XCTest
 @testable import CbarDuo
 
 final class BatteryRingPresentationTests: XCTestCase {
-    func testColorCodingDefaultsToMonochrome() {
+    func testColorCodingDefaultsToMonochromeOnBattery() {
         XCTAssertEqual(presentation(percentage: 10, colorCoding: false).colorRole, .monochrome)
-        XCTAssertEqual(presentation(percentage: 10, charging: true, colorCoding: false).colorRole, .monochrome)
+    }
+
+    func testExternalPowerIsGreenEvenWithColorCodingOff() {
+        XCTAssertEqual(presentation(percentage: 10, charging: true, colorCoding: false).colorRole, .charging)
+        XCTAssertEqual(presentation(percentage: 80, pluggedIn: true, colorCoding: false).colorRole, .charging)
     }
 
     func testMissingOrCorruptedColorCodingPreferenceIsSafelyOff() {
@@ -21,11 +25,10 @@ final class BatteryRingPresentationTests: XCTestCase {
         XCTAssertEqual(presentation(percentage: 15, charging: true, lowPowerMode: true).colorRole, .charging)
     }
 
-    func testAuthoritativeFullSuppressesChargingColor() {
-        XCTAssertEqual(
-            presentation(percentage: 100, charging: true, pluggedIn: true, fullyCharged: true).colorRole,
-            .monochrome
-        )
+    func testAuthoritativeFullWhilePluggedInStaysGreenWithoutBolt() {
+        let full = presentation(percentage: 100, charging: true, pluggedIn: true, fullyCharged: true, colorCoding: false)
+        XCTAssertEqual(full.colorRole, .charging)
+        XCTAssertEqual(full.boltPlacement, .none)
     }
 
     func testLowPowerModeIsYellowSemanticRoleAtAnyLevel() {
@@ -49,7 +52,7 @@ final class BatteryRingPresentationTests: XCTestCase {
         )
         XCTAssertEqual(
             presentation(percentage: 50, pluggedIn: true, colorCoding: false),
-            BatteryRingPresentation(boltPlacement: .topGap, colorRole: .monochrome)
+            BatteryRingPresentation(boltPlacement: .topGap, colorRole: .charging)
         )
         XCTAssertEqual(
             presentation(percentage: 15, pluggedIn: true, lowPowerMode: true, colorCoding: true),
@@ -57,14 +60,14 @@ final class BatteryRingPresentationTests: XCTestCase {
         )
         XCTAssertEqual(
             presentation(percentage: 15, pluggedIn: true, lowPowerMode: true, colorCoding: false),
-            BatteryRingPresentation(boltPlacement: .topGap, colorRole: .monochrome)
+            BatteryRingPresentation(boltPlacement: .topGap, colorRole: .charging)
         )
         XCTAssertEqual(presentation(percentage: 15, lowPowerMode: true).colorRole, .lowPowerMode)
         XCTAssertEqual(presentation(percentage: 15).colorRole, .lowBattery)
         XCTAssertEqual(presentation(percentage: 100, pluggedIn: true).colorRole, .charging)
         XCTAssertEqual(
             presentation(percentage: 100, pluggedIn: true, colorCoding: false).colorRole,
-            .monochrome
+            .charging
         )
         XCTAssertEqual(presentation(percentage: 100).boltPlacement, .none)
     }

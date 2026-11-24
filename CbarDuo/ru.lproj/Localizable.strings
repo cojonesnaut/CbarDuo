@@ -101,33 +101,10 @@
 "Bluetooth Settings…" = "Настройки Bluetooth…";
 "Unable to Switch Output" = "Не удалось переключить аудиовыход";
 "Select audio output" = "Выбрать аудиовыход";
-"Open Wi-Fi Settings" = "Открыть настройки Wi‑Fi";
-"Open Network Settings" = "Открыть настройки сети";
 "Open Battery Settings" = "Открыть настройки аккумулятора";
 "No output devices" = "Нет устройств вывода";
-"Nearby Networks" = "Сети рядом";
-"Browse nearby Wi-Fi networks" = "Просмотреть доступные сети Wi-Fi";
-"Scanning…" = "Поиск…";
 "Refresh" = "Обновить";
 "Network Settings…" = "Настройки сети…";
-"Wi-Fi is Off" = "Wi-Fi выключен";
-"Wi-Fi unavailable" = "Wi-Fi недоступен";
-"Unable to Scan" = "Не удалось найти сети";
-"No Networks Found" = "Сети не найдены";
-"Secured network" = "Защищённая сеть";
-"Current Network" = "Текущая сеть";
-"Joining…" = "Подключение…";
-"Join network" = "Подключиться к сети";
-"Strong signal" = "Сильный сигнал";
-"Medium signal" = "Средний сигнал";
-"Weak signal" = "Слабый сигнал";
-"Signal unavailable" = "Сигнал недоступен";
-"Password" = "Пароль";
-"Cancel" = "Отмена";
-"Join" = "Подключиться";
-"Unable to Join" = "Не удалось подключиться";
-"Location access is needed to show Wi-Fi network names." = "Доступ к геопозиции нужен для отображения названий сетей Wi-Fi.";
-"Open System Settings…" = "Открыть Системные настройки…";
 "Audio Input" = "Аудиовход";
 "No input device" = "Нет устройства ввода";
 "No input devices" = "Нет устройств ввода";
@@ -135,3 +112,148 @@
 "Select audio input" = "Выбрать устройство ввода звука";
 "Extra Large" = "Очень большой";
 "Battery Percentage" = "Процент заряда";
+
+/* Settings window */
+"Appearance" = "Оформление";
+"Automatically check for updates" = "Автоматически проверять обновления";
+"Behavior" = "Поведение";
+"Check for Updates…" = "Проверить обновления…";
+"Content" = "Содержимое";
+"Custom Mode Center" = "Центр (свой режим)";
+"Custom Mode Dots" = "Точки (свой режим)";
+"Custom Mode Ring" = "Кольцо (свой режим)";
+"Custom Mode" = "Свой режим";
+"Dark" = "Тёмное";
+"Desktop Widget" = "Виджет на рабочем столе";
+"Fine-tune" = "Точная настройка";
+"Icon" = "Значок";
+"Indicator" = "Индикатор";
+"Language" = "Язык";
+"Light" = "Светлое";
+"Live" = "Сейчас";
+"Low" = "Низкий";
+"Popover" = "Панель";
+"Preview" = "Предпросмотр";
+"Ring" = "Кольцо";
+"Show CbarDuo on the desktop. Click it to switch modes, drag it to move it." = "Показывать CbarDuo на рабочем столе. Нажмите, чтобы сменить режим, перетащите, чтобы переместить.";
+"Show Percentage" = "Показывать процент";
+"Show on Desktop" = "Показывать на рабочем столе";
+"Show the battery level above the menu bar icon." = "Показывать заряд над значком в строке меню.";
+"Startup" = "Запуск";
+"System" = "Системное";
+"Updates" = "Обновления";
+"Version %@" = "Версия %@";
+"Widget Size" = "Размер виджета";
+"Yellow in Low Power Mode and red below 20%. The ring is always green on power." = "Жёлтое в режиме энергосбережения и красное ниже 20%. При подключённом питании кольцо всегда зелёное.";
+
+/* Popover */
+"Sound" = "Звук";
+"Quit" = "Выйти";
+"Microphone" = "Микрофон";
+"On" = "Вкл.";
+"Output" = "Выход";
+"No Bluetooth audio devices connected" = "Нет подключённых аудиоустройств Bluetooth";
+
+/* Battery page */
+"Power Source" = "Источник питания";
+"Power Adapter" = "Адаптер питания";
+"Energy Mode" = "Режим энергопотребления";
+"Battery Health" = "Состояние аккумулятора";
+"Maximum Capacity" = "Максимальная ёмкость";
+"Cycle Count" = "Количество циклов";
+"Battery Settings…" = "Настройки аккумулятора…";
+"Back" = "Назад";
+"Show battery details" = "Показать сведения об аккумуляторе";
+
+/* Audio devices */
+"Input" = "Вход";
+"Input volume" = "Громкость входа";
+
+/* Icon thickness */
+"Thickness" = "Толщина";
+"Thin" = "Тонкая";
+"Regular" = "Обычная";
+"Bold" = "Жирная";
+"Ring thickness" = "Толщина кольца";
+
+/* Indicator bar */
+"Bar" = "Полоса";
+"Slot" = "Показатель";
+"Style" = "Стиль";
+"Fill Style" = "Заполнение";
+"Dotted" = "Точки";
+"Solid" = "Сплошная";
+"Segmented" = "Сегменты";
+"Classic" = "Классика";
+"Fade" = "Плавно";
+"Grow" = "Рост";
+"Snap" = "Резко";
+"Network Activity" = "Сетевая активность";
+"Memory" = "Память";
+"Disk" = "Диск";
+"The bar under the ring. Network Activity, Memory and Disk are measured only while chosen." = "Полоса под кольцом. Сетевая активность, память и диск измеряются, только пока выбраны.";
+
+/* Memory and popover rows */
+"Rows" = "Разделы";
+"Choose which sections the popover shows." = "Выберите, какие разделы показывает панель.";
+"At least one section stays visible." = "Хотя бы один раздел остаётся видимым.";
+"Memory Used" = "Использовано памяти";
+"%@ of %@" = "%@ из %@";
+"App Memory" = "Память приложений";
+"Wired Memory" = "Зарезервированная память";
+"Compressed" = "Сжатая";
+"Cached Files" = "Кэшированные файлы";
+"Activity Monitor…" = "Мониторинг системы…";
+"%@ GB" = "%@ ГБ";
+
+/* System tab */
+"Temperatures" = "Температуры";
+"CPU" = "ЦП";
+"GPU" = "ГП";
+"%d °C" = "%d °C";
+"Hardware usage" = "Загрузка оборудования";
+"%@%%" = "%@%%";
+"Pressure" = "Нагрузка";
+"%@ / %@" = "%@ / %@";
+"Cached files" = "Кэшированные файлы";
+"Swap used" = "Использовано подкачки";
+"Up for %@" = "Работает %@";
+"%dd %dh" = "%d д %d ч";
+"%dh %dm" = "%d ч %d мин";
+"%dm" = "%d мин";
+"Connected Devices" = "Подключённые устройства";
+"USB Device" = "USB-устройство";
+"Warning" = "Внимание";
+"%@ MB" = "%@ МБ";
+
+/* Per-app volume */
+"Nothing is playing" = "Ничего не воспроизводится";
+"Nothing is using the microphone" = "Микрофон никто не использует";
+"Reset to 100%" = "Сбросить до 100%";
+"Play On" = "Воспроизводить на";
+"Play on Default Output" = "Воспроизводить на устройстве по умолчанию";
+"Stop playing to this device" = "Не воспроизводить на этом устройстве";
+"Options" = "Параметры";
+"Allow CbarDuo to adjust app volumes" = "Разрешите CbarDuo менять громкость приложений";
+"macOS needs your permission for CbarDuo to process app audio. Audio never leaves your Mac." = "macOS требуется ваше разрешение, чтобы CbarDuo обрабатывал звук приложений. Звук не покидает ваш Mac.";
+"Open Privacy Settings" = "Открыть настройки конфиденциальности";
+
+/* Network tab */
+"Download" = "Загрузка";
+"Upload" = "Отправка";
+"Connection" = "Подключение";
+"IP Address" = "IP-адрес";
+"Network Name" = "Имя сети";
+"%@ KB/s" = "%@ КБ/с";
+"%@ MB/s" = "%@ МБ/с";
+"%@ GB/s" = "%@ ГБ/с";
+
+/* Battery tab power */
+"Battery temperature" = "Температура аккумулятора";
+"Adapter" = "Адаптер";
+"%@ max" = "макс. %@";
+"Plugged in" = "Подключён";
+"Apps using significant energy" = "Приложения, потребляющие много энергии";
+"No apps using significant energy" = "Нет приложений, потребляющих много энергии";
+"%@ W" = "%@ Вт";
+"No apps using the GPU" = "Нет приложений, использующих GPU";

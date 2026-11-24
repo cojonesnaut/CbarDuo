@@ -48,6 +48,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         self.instanceLock = instanceLock
 
         applyDockPolicy()
+        AppAppearance.applyCurrent()
         dockPreferenceObserver = NotificationCenter.default.addObserver(
             forName: UserDefaults.didChangeNotification,
             object: nil,
@@ -56,6 +57,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             Task { @MainActor in
                 self?.applyDockPolicy()
                 self?.applyDesktopWidgetPolicy()
+                AppAppearance.applyCurrent()
             }
         }
         // The SwiftUI Settings scene creates its window outside our control
@@ -94,6 +96,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         let statusStore = SystemStatusStore()
         self.statusStore = statusStore
+        SettingsPresenter.statusStore = statusStore
+        SystemUsageMonitor.shared.start()
+        SystemTabMonitor.shared.startHistory()
+        let network = statusStore.status.network
+        NetworkTrafficMonitor.shared.setInterface(network.isConnected ? network.interfaceName : nil)
+        NetworkTrafficMonitor.shared.start()
+        PowerMonitor.shared.start()
+        PerAppVolumeEngine.shared.start()
         desktopWidgetController = DesktopWidgetController(statusStore: statusStore)
         applyDesktopWidgetPolicy()
 
@@ -196,6 +206,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ notification: Notification) {
+        // Ramp adjusted apps back to full before their taps go, so none jumps.
+        PerAppVolumeEngine.shared.fadeOutAndStop()
         #if DEBUG
         if let marketingCaptureObserver {
             DistributedNotificationCenter.default().removeObserver(marketingCaptureObserver)

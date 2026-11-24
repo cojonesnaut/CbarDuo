@@ -28,7 +28,7 @@ final class DuoGlyphStateTests: XCTestCase {
 
         XCTAssertFalse(state.isCharging)
         XCTAssertEqual(state.batteryPresentation.boltPlacement, .none)
-        XCTAssertEqual(state.batteryPresentation.colorRole, .monochrome)
+        XCTAssertEqual(state.batteryPresentation.colorRole, .charging) // still on power, so the ring stays green
     }
 
     func testAdaptiveBrightnessOverrideUsesSunSymbolAndRestoresLiveNetwork() {

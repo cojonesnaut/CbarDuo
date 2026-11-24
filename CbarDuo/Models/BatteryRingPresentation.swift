@@ -27,38 +27,30 @@ struct BatteryRingPresentation: Equatable, Sendable {
             return BatteryRingPresentation(boltPlacement: .none, colorRole: .monochrome)
         }
 
-        // IOPowerSources' authoritative full flag wins over a concurrent or
-        // stale charging flag. Fully charged must not retain charging bolt or
-        // green charging semantics.
-        if battery.isFullyCharged {
-            return BatteryRingPresentation(boltPlacement: .none, colorRole: .monochrome)
-        }
-
-        let boltPlacement: BatteryBoltPlacement = battery.isPluggedIn ? .topGap : .none
-        let boltDimmed = boltPlacement == .topGap && (battery.percentage ?? 0) >= 100
-
-        guard colorCodingEnabled else {
+        // Connected to power: the ring is always green, whether the battery is
+        // charging, paused by macOS, or full, and regardless of color coding.
+        // IOPowerSources' authoritative full flag still hides the charging bolt.
+        if battery.isPluggedIn {
+            let boltPlacement: BatteryBoltPlacement = battery.isFullyCharged ? .none : .topGap
             return BatteryRingPresentation(
                 boltPlacement: boltPlacement,
-                colorRole: .monochrome,
-                boltDimmed: boltDimmed
+                colorRole: .charging,
+                boltDimmed: boltPlacement == .topGap && (battery.percentage ?? 0) >= 100
             )
         }
 
+        guard colorCodingEnabled, !battery.isFullyCharged else {
+            return BatteryRingPresentation(boltPlacement: .none, colorRole: .monochrome)
+        }
+
         let colorRole: BatteryRingColorRole
-        if battery.isPluggedIn {
-            colorRole = .charging
-        } else if battery.isLowPowerModeEnabled {
+        if battery.isLowPowerModeEnabled {
             colorRole = .lowPowerMode
         } else if let percentage = battery.percentage, percentage < 20 {
             colorRole = .lowBattery
         } else {
             colorRole = .monochrome
         }
-        return BatteryRingPresentation(
-            boltPlacement: boltPlacement,
-            colorRole: colorRole,
-            boltDimmed: boltDimmed
-        )
+        return BatteryRingPresentation(boltPlacement: .none, colorRole: colorRole)
     }
 }

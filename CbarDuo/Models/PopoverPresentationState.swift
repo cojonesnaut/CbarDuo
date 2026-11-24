@@ -10,6 +10,7 @@ final class PopoverPresentationState: ObservableObject {
 
     @Published private(set) var isShown = false
 
+
     /// Blur radius (pt) of the hidden state: the content sharpens from this
     /// radius while it fades in, and softens back to it while it fades out.
     let hiddenBlur: CGFloat = PopoverMotion.hiddenBlur

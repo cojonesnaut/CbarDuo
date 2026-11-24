@@ -10,7 +10,7 @@
 
 [**ดาวน์โหลด CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [**รุ่นทั้งหมด**](https://github.com/Mikeli7666/DuoBar/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/Mikeli7666/DuoBar/issues)
 
-CbarDuo 1.4.2 (Build 11) · macOS 13+ · Apple Silicon หรือ Intel · Universal 2 · ฟรีและโอเพนซอร์ส
+CbarDuo 1.4.2 (Build 11) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
 
 > **หมายเหตุ:** นี่คือ CbarDuo ฟรีแบบโอเพนซอร์สโดย Mikeli7666 มีให้เฉพาะบน GitHub เท่านั้น แอปอื่นที่มีชื่อเดียวกันจำหน่ายบน Mac App Store ซึ่งเป็นแอปแยกต่างหากแบบปิดซอร์สโดยนักพัฒนาอีกราย และไม่เกี่ยวข้องกับโปรเจกต์นี้
 
@@ -67,14 +67,14 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 - ป็อปโอเวอร์แบบ Liquid Glass บน macOS 26 ขึ้นไป (ปิดได้ในการตั้งค่าเพื่อกลับไปใช้แบบคลาสสิก)
 - โหมดสว่างและโหมดมืด
 - เปิดเมื่อเข้าสู่ระบบ
-- Universal 2: รองรับ Apple Silicon และ Intel บน macOS 13+
+- บิลด์ Apple Silicon (arm64) แบบเนทีฟสำหรับ macOS 15+
 - Swift, SwiftUI และ AppKit ดั้งเดิม
 - ไอคอน Dock แบบเลือกเปิดได้ (ปิดเป็นค่าเริ่มต้น) คลิกเพื่อเปิดการตั้งค่า
 
 ## ความต้องการของระบบ
 
-**macOS 13.0+**<br>
-**Apple Silicon หรือ Intel**
+**macOS 15.0+**<br>
+**เฉพาะ Apple Silicon (ชิป M)**
 
 ## การติดตั้ง
 
@@ -87,7 +87,7 @@ CbarDuo 1.4.2 ใช้การลงนาม Developer ID, Hardened Runtime �
 
 SHA-256: `97c1e565f07944ca94884ebefc30a93afaa6b6a6e1fb28d70e2d01081a7cbfef`
 
-งานสร้างและความเข้ากันได้/ความน่าเชื่อถือได้รับการตรวจสอบโดยใช้ Xcode 27 และ macOS 27 SDK ในขณะที่ยังคงรองรับ macOS 13+ ต่อไป ซึ่งไม่ได้อ้างถึงการตรวจสอบฮาร์ดแวร์ macOS 27
+งานสร้างและความเข้ากันได้/ความน่าเชื่อถือได้รับการตรวจสอบโดยใช้ Xcode 27 และ macOS 27 SDK โดยต้องใช้ macOS 15 ขึ้นไป ซึ่งไม่ได้อ้างถึงการตรวจสอบฮาร์ดแวร์ macOS 27
 
 ## สิทธิ์การเข้าถึง
 

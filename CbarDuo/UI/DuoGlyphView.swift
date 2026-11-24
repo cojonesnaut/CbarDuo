@@ -27,12 +27,15 @@ struct DuoGlyphView: View {
     var usesCustomRingTransition = false
     var ringColorOverride: Color?
     var batteryColorCodingEnabled = false; var showBatteryPercentage = false
+    /// What the bar under the ring shows; nil shows volume.
+    var barValue: IndicatorBarValue?
     var chargingBoltProgressOverride: CGFloat?
     var chargingTrackProgressOverride: CGFloat?
     var chargingColorMixOverride: CGFloat?
     var chargingGapProgressOverride: CGFloat?
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @AppStorage(PreferenceKeys.iconThickness) private var iconThicknessRaw = IconThickness.regular.rawValue
     @State private var centerPulseScale: CGFloat = 1
     @State private var chargingBoltProgress: CGFloat
     @State private var chargingTrackProgress: CGFloat
@@ -55,8 +58,10 @@ struct DuoGlyphView: View {
         chargingTrackProgressOverride: CGFloat? = nil,
         chargingColorMixOverride: CGFloat? = nil,
         chargingGapProgressOverride: CGFloat? = nil,
-        showBatteryPercentage: Bool = false
+        showBatteryPercentage: Bool = false,
+        barValue: IndicatorBarValue? = nil
     ) {
+        self.barValue = barValue
         self.chargingGapProgressOverride = chargingGapProgressOverride
         self.status = status
         self.presentation = presentation
@@ -190,7 +195,10 @@ struct DuoGlyphView: View {
             .offset(y: metrics.wifiYOffset)
 
             DuoDotRow(
-                activeCount: glyphState.volumeActiveDotCount,
+                value: barValue ?? IndicatorBarValue(
+                    level: status.audio.volume.level.map { status.audio.volume.isMuted ? 0 : $0 },
+                    steps: glyphState.volumeActiveDotCount
+                ),
                 diameter: metrics.dotDiameter,
                 ringDiameter: metrics.ringDiameter,
                 rowCenterYOffset: metrics.ringYOffset,
@@ -227,7 +235,7 @@ struct DuoGlyphView: View {
                 $centerPulseScale.wrappedValue = 1
             }
         }
-        .onChange(of: chargingPresentationTarget) { target in
+        .onChange(of: chargingPresentationTarget) { _, target in
             let showing = target > 0
             if chargingBoltProgressOverride == nil {
                 withAnimation(boltAnimation(showing: showing)) {
@@ -240,7 +248,7 @@ struct DuoGlyphView: View {
                 }
             }
         }
-        .onChange(of: glyphState.batteryPresentation.boltDimmed) { dimmed in
+        .onChange(of: glyphState.batteryPresentation.boltDimmed) { _, dimmed in
             let target: CGFloat = dimmed ? 1 : 0
             withAnimation(boltDimAnimation) {
                 $chargingBoltDim.wrappedValue = target
@@ -263,7 +271,7 @@ struct DuoGlyphView: View {
             }
         }
         #if DEBUG
-        .onChange(of: glyphState.centerState) { centerState in
+        .onChange(of: glyphState.centerState) { _, centerState in
             if centerState == .adaptiveEntry {
                 NSLog("%@", "[CbarDuo Adaptive QA] sparkles displayed")
             }
@@ -275,9 +283,14 @@ struct DuoGlyphView: View {
         animationsEnabled && !reduceMotion
     }
 
+    /// The ring is drawn 10% heavier than the reference stroke in every state
+    /// (battery, charging, color-coded, adaptive).
+    static let ringWeightScale: CGFloat = 1.10
+
     private var ringStrokeStyle: StrokeStyle {
         StrokeStyle(
-            lineWidth: metrics.arcLineWidth,
+            lineWidth: metrics.arcLineWidth * Self.ringWeightScale
+                * IconThickness.resolve(iconThicknessRaw).ringWidthMultiplier,
             lineCap: .round,
             lineJoin: .round
         )
@@ -532,7 +545,7 @@ struct DuoCenterTransitionView: View {
             ),
             usesSpatialMotion: !reduceMotion
         )
-        .onChange(of: targetState) { newState in
+        .onChange(of: targetState) { _, newState in
             transition(to: newState)
         }
         .task(id: targetState) {
@@ -893,36 +906,196 @@ private extension DuoCenterState {
     }
 }
 
+/// The bar under the ring: volume by default, or network activity, memory or
+/// disk (Settings → Indicator → Bar), drawn dotted, solid or segmented.
 struct DuoDotRow: View {
-    let activeCount: Int?
+    let value: IndicatorBarValue
     let diameter: CGFloat
     let ringDiameter: CGFloat
     let rowCenterYOffset: CGFloat
     let animationsEnabled: Bool
+    /// Fixed style/fill (previews, tests); nil follows the preferences.
+    var styleOverride: IndicatorBarStyle?
+    var fillOverride: IndicatorBarFill?
+
+    @AppStorage(PreferenceKeys.barStyle) private var styleRaw = IndicatorBarStyle.dotted.rawValue
+    @AppStorage(PreferenceKeys.barFill) private var fillRaw = IndicatorBarFill.classic.rawValue
+
+    init(
+        value: IndicatorBarValue,
+        diameter: CGFloat,
+        ringDiameter: CGFloat,
+        rowCenterYOffset: CGFloat,
+        animationsEnabled: Bool,
+        styleOverride: IndicatorBarStyle? = nil,
+        fillOverride: IndicatorBarFill? = nil
+    ) {
+        self.value = value
+        self.diameter = diameter
+        self.ringDiameter = ringDiameter
+        self.rowCenterYOffset = rowCenterYOffset
+        self.animationsEnabled = animationsEnabled
+        self.styleOverride = styleOverride
+        self.fillOverride = fillOverride
+    }
+
+    /// The original four volume dots for a step count.
+    init(activeCount: Int?, diameter: CGFloat, ringDiameter: CGFloat, rowCenterYOffset: CGFloat, animationsEnabled: Bool) {
+        self.init(
+            value: IndicatorBarValue(level: activeCount.map { Double($0) / 4 }, steps: activeCount),
+            diameter: diameter,
+            ringDiameter: ringDiameter,
+            rowCenterYOffset: rowCenterYOffset,
+            animationsEnabled: animationsEnabled,
+            styleOverride: .dotted,
+            fillOverride: .classic
+        )
+    }
+
+    private var style: IndicatorBarStyle {
+        styleOverride ?? IndicatorBarStyle(rawValue: styleRaw) ?? .dotted
+    }
+
+    private var fill: IndicatorBarFill {
+        fillOverride ?? IndicatorBarFill(rawValue: fillRaw) ?? .classic
+    }
 
     var body: some View {
         ZStack {
-            ForEach(0..<4, id: \.self) { index in
-                Circle()
-                    .frame(width: diameter, height: diameter)
-                    .opacity(opacity(for: index))
-                    .offset(
-                        x: ringDiameter * DuoVolumeIndicatorGeometry.centerXOffsets[index],
-                        y: rowCenterYOffset
-                            + ringDiameter * DuoVolumeIndicatorGeometry.centerYOffsets[index]
-                    )
+            switch style {
+            case .dotted:
+                ForEach(0..<IndicatorBarValue.segmentCount, id: \.self) { dot($0) }
+            case .segmented:
+                ForEach(0..<IndicatorBarValue.segmentCount, id: \.self) { segment($0) }
+            case .solid:
+                solid
             }
         }
         .frame(width: ringDiameter, height: ringDiameter)
         .foregroundStyle(.primary)
-        .animation(animationsEnabled ? AnimationConstants.content : nil, value: activeCount)
+        .animation(animationsEnabled ? fill.animation : nil, value: value)
     }
 
+    /// Opacity of segment `index`: full when filled, faint when empty, and in
+    /// between for the partly filled one with the Fade style.
     func opacity(for index: Int) -> Double {
-        guard let activeCount else { return DuoVolumeIndicatorGeometry.unknownOpacity }
-        return index < activeCount
-            ? DuoVolumeIndicatorGeometry.activeOpacity
-            : DuoVolumeIndicatorGeometry.inactiveOpacity
+        guard let progress = value.progress(ofSegment: index, fill: fill) else {
+            return DuoVolumeIndicatorGeometry.unknownOpacity
+        }
+        let active = DuoVolumeIndicatorGeometry.activeOpacity
+        let inactive = DuoVolumeIndicatorGeometry.inactiveOpacity
+        if fill == .grow { return inactive }
+        return inactive + (active - inactive) * progress
+    }
+
+    private var unknown: Bool { value.level == nil && value.steps == nil }
+
+    // MARK: Dotted
+
+    private func dot(_ index: Int) -> some View {
+        let center = CGSize(
+            width: ringDiameter * DuoVolumeIndicatorGeometry.centerXOffsets[index],
+            height: rowCenterYOffset + ringDiameter * DuoVolumeIndicatorGeometry.centerYOffsets[index]
+        )
+        let growth = fill == .grow ? (value.progress(ofSegment: index, fill: fill) ?? 0) : 0
+        return ZStack {
+            Circle()
+                .frame(width: diameter, height: diameter)
+                .opacity(opacity(for: index))
+            if fill == .grow {
+                Circle()
+                    .frame(width: diameter, height: diameter)
+                    .scaleEffect(growth)
+                    .opacity(growth > 0 ? DuoVolumeIndicatorGeometry.activeOpacity : 0)
+            }
+        }
+        .offset(center)
+    }
+
+    // MARK: Arc styles
+
+    /// Segments span the same width the dots cover (centre line plus half a
+    /// dot at each end), as square-ended dashes with small even gaps.
+    private func segmentBounds(_ index: Int) -> (start: CGFloat, end: CGFloat) {
+        let arcLength = max(DuoBarArc.length(ringDiameter: ringDiameter), 1)
+        let overhang = (diameter * 0.5) / arcLength
+        let gap = (diameter * 0.6) / arcLength
+        let count = CGFloat(IndicatorBarValue.segmentCount)
+        let span = 1 + 2 * overhang
+        let start = -overhang + CGFloat(index) * span / count + gap / 2
+        let end = -overhang + CGFloat(index + 1) * span / count - gap / 2
+        return (start, max(end, start + 0.01))
+    }
+
+    private func segment(_ index: Int) -> some View {
+        let (start, end) = segmentBounds(index)
+        let progress = value.progress(ofSegment: index, fill: fill) ?? 0
+        let filledEnd = fill == .grow ? start + (end - start) * progress : end
+        return ZStack {
+            arc(from: start, to: end, cap: .butt)
+                .opacity(fill == .grow || unknown
+                         ? (unknown ? DuoVolumeIndicatorGeometry.unknownOpacity : DuoVolumeIndicatorGeometry.inactiveOpacity)
+                         : opacity(for: index))
+            if fill == .grow, progress > 0 {
+                arc(from: start, to: filledEnd, cap: .butt)
+            }
+        }
+    }
+
+    private var solid: some View {
+        let fraction = CGFloat(value.fraction(fill: fill) ?? 0)
+        return ZStack {
+            arc(from: 0, to: 1)
+                .opacity(unknown ? DuoVolumeIndicatorGeometry.unknownOpacity : DuoVolumeIndicatorGeometry.inactiveOpacity)
+            if fraction > 0 {
+                arc(from: 0, to: fraction)
+            }
+        }
+    }
+
+    private func arc(from start: CGFloat, to end: CGFloat, cap: CGLineCap = .round) -> some View {
+        DuoBarArc(from: start, to: end, rowCenterYOffset: rowCenterYOffset)
+            .stroke(style: StrokeStyle(lineWidth: cap == .butt ? diameter * 0.85 : diameter, lineCap: cap))
+    }
+}
+
+/// The curve the four dots sit on, from the leftmost to the rightmost dot,
+/// as a trimmable shape (0 = left end, 1 = right end).
+struct DuoBarArc: Shape {
+    var from: CGFloat
+    var to: CGFloat
+    var rowCenterYOffset: CGFloat
+
+    var animatableData: AnimatablePair<CGFloat, CGFloat> {
+        get { AnimatablePair(from, to) }
+        set { from = newValue.first; to = newValue.second }
+    }
+
+    static func length(ringDiameter: CGFloat) -> CGFloat {
+        let radius = DuoVolumeIndicatorGeometry.centerRadiusRatio * ringDiameter
+        return radius * CGFloat(2 * DuoVolumeIndicatorGeometry.outerAngleDegrees * .pi / 180)
+    }
+
+    func path(in rect: CGRect) -> Path {
+        let ringDiameter = min(rect.width, rect.height)
+        let radius = DuoVolumeIndicatorGeometry.centerRadiusRatio * ringDiameter
+        let center = CGPoint(x: rect.midX, y: rect.midY + rowCenterYOffset)
+        let span = DuoVolumeIndicatorGeometry.outerAngleDegrees * .pi / 180
+        // Slightly beyond 0…1 so segments can reach the outer dots' edges.
+        let lower = min(max(from, -0.3), 1.3), upper = min(max(to, -0.3), 1.3)
+        guard upper > lower else { return Path() }
+        func point(_ t: CGFloat) -> CGPoint {
+            // Angle measured from straight down; negative is left of centre.
+            let angle = -span + 2 * span * Double(t)
+            return CGPoint(x: center.x + CGFloat(sin(angle)) * radius, y: center.y + CGFloat(cos(angle)) * radius)
+        }
+        var path = Path()
+        let samples = 24
+        path.move(to: point(lower))
+        for step in 1...samples {
+            path.addLine(to: point(lower + (upper - lower) * CGFloat(step) / CGFloat(samples)))
+        }
+        return path
     }
 }
 

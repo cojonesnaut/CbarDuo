@@ -11,8 +11,8 @@ enum SettingsWindowPolicy {
     static func configure(_ window: NSWindow) {
         window.styleMask.insert(.resizable)
         window.styleMask.insert(.miniaturizable)
-        window.minSize = NSSize(width: 420, height: 340)
-        window.contentMinSize = NSSize(width: 420, height: 340)
+        window.minSize = SettingsPresenter.minimumSize
+        window.contentMinSize = SettingsPresenter.minimumSize
         window.contentMaxSize = NSSize(
             width: CGFloat.greatestFiniteMagnitude,
             height: CGFloat.greatestFiniteMagnitude
@@ -27,7 +27,17 @@ enum SettingsWindowPolicy {
         // all; the frame minimums above remain the only floor.
         if let hosting = window.contentViewController as? NSHostingController<SettingsView> {
             hosting.sizingOptions = []
+            applyChrome(to: window)
         }
+    }
+
+    /// No visible title: the sidebar runs under the traffic lights. Re-applied with the
+    /// rest of the policy because SwiftUI can restore a visible title on re-render.
+    static func applyChrome(to window: NSWindow) {
+        window.styleMask.insert(.fullSizeContentView)
+        window.titlebarAppearsTransparent = true
+        window.titleVisibility = .hidden
+        window.toolbar = nil
     }
 }
 
@@ -43,6 +53,11 @@ enum SettingsWindowPolicy {
 /// the declared Settings scene remains only as structural plumbing.
 @MainActor
 enum SettingsPresenter {
+    static let minimumSize = NSSize(width: 640, height: 460)
+    static let defaultSize = NSSize(width: 720, height: 580)
+
+    /// The app's live status, handed to the Indicator preview. Set once at launch.
+    static weak var statusStore: SystemStatusStore?
     private static var window: NSWindow?
 
     static func show() {
@@ -51,20 +66,19 @@ enum SettingsPresenter {
             window.makeKeyAndOrderFront(nil)
             return
         }
-        let hosting = NSHostingController(rootView: SettingsView())
+        let hosting = NSHostingController(rootView: SettingsView(statusStore: statusStore))
         let window = NSWindow(contentViewController: hosting)
         window.title = localized("CbarDuo Settings")
         window.styleMask = [.titled, .closable, .miniaturizable, .resizable]
-        window.minSize = NSSize(width: 420, height: 340)
+        SettingsWindowPolicy.applyChrome(to: window)
+        window.isMovableByWindowBackground = true
+        window.minSize = minimumSize
         window.isReleasedWhenClosed = false
-        let fitting = hosting.view.fittingSize
-        if fitting.width >= 420, fitting.height >= 340 {
-            window.setContentSize(fitting)
-        }
-        if !window.setFrameUsingName("CbarDuoSettingsWindow") {
+        window.setContentSize(defaultSize)
+        if !window.setFrameUsingName("CbarDuoSettingsWindowV2") {
             window.center()
         }
-        window.setFrameAutosaveName("CbarDuoSettingsWindow")
+        window.setFrameAutosaveName("CbarDuoSettingsWindowV2")
         self.window = window
         window.makeKeyAndOrderFront(nil)
     }

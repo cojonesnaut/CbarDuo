@@ -13,7 +13,6 @@ final class SystemStatusStore: ObservableObject {
     let priorityController = StatusPriorityController()
     let deviceContext: DeviceContext
     let laptopRingModeController: LaptopRingModeController
-    let nearbyWiFiController: NearbyWiFiController
 
     private let batteryService: BatteryService
     private let networkService: NetworkService
@@ -21,6 +20,9 @@ final class SystemStatusStore: ObservableObject {
     private let bluetoothService: BluetoothService
     private let networkSpeedService = NetworkSpeedService()
     private var batteryTimeTimer: Timer?
+    private var isPopoverActive = false
+    private var barNeedsNetwork = false
+    private var barSlotObserver: NSObjectProtocol?
 
     #if DEBUG
     private var debugBatteryOverride: BatteryStatus?
@@ -33,8 +35,7 @@ final class SystemStatusStore: ObservableObject {
     init(
         startServices: Bool = true,
         deviceContext: DeviceContext? = nil,
-        laptopRingModeController: LaptopRingModeController? = nil,
-        nearbyWiFiProvider: (any NearbyWiFiProviding)? = nil
+        laptopRingModeController: LaptopRingModeController? = nil
     ) {
         batteryService = BatteryService()
         networkService = NetworkService()
@@ -47,9 +48,6 @@ final class SystemStatusStore: ObservableObject {
             fullChargeDelay: Self.developmentFullChargeDelay
         )
         self.laptopRingModeController = resolvedLaptopRingModeController
-        nearbyWiFiController = NearbyWiFiController(
-            provider: nearbyWiFiProvider ?? CoreWLANNearbyWiFiProvider()
-        )
         wifiSSIDAuthorization = networkService.currentSSIDAuthorization
         laptopRingModeState = resolvedLaptopRingModeController.state
 
@@ -83,6 +81,7 @@ final class SystemStatusStore: ObservableObject {
             #endif
             self?.mutate { $0.network = value }
             self?.networkSpeedService.setInterface(value.isConnected ? value.interfaceName : nil)
+            NetworkTrafficMonitor.shared.setInterface(value.isConnected ? value.interfaceName : nil)
         }
         networkSpeedService.onSpeedChange = { [weak self] speed in
             #if DEBUG
@@ -94,11 +93,7 @@ final class SystemStatusStore: ObservableObject {
             self?.networkSpeed = speed
         }
         networkService.onSSIDAuthorizationChange = { [weak self] authorization in
-            guard let self else { return }
-            self.wifiSSIDAuthorization = authorization
-            if authorization == .authorized, self.nearbyWiFiController.hasRequestedScan {
-                self.nearbyWiFiController.refreshAfterCurrentRequest()
-            }
+            self?.wifiSSIDAuthorization = authorization
         }
         audioOutputService.onStatusChange = { [weak self] value in
             #if DEBUG
@@ -118,6 +113,35 @@ final class SystemStatusStore: ObservableObject {
             networkService.start()
             audioOutputService.start()
             bluetoothService.start()
+            followBarSlot()
+        }
+    }
+
+    /// Network speed is also measured whenever the indicator bar shows
+    /// Network Activity, not only while the popover is open.
+    private func followBarSlot() {
+        barSlotObserver = NotificationCenter.default.addObserver(
+            forName: UserDefaults.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.updateBarNetworkNeed() }
+        }
+        updateBarNetworkNeed()
+    }
+
+    private func updateBarNetworkNeed() {
+        let needed = IndicatorBarSlot.current == .network
+        guard needed != barNeedsNetwork else { return }
+        barNeedsNetwork = needed
+        updateNetworkSampling()
+    }
+
+    private func updateNetworkSampling() {
+        if isPopoverActive || barNeedsNetwork {
+            networkSpeedService.start()
+        } else {
+            networkSpeedService.stop()
         }
     }
 
@@ -133,11 +157,11 @@ final class SystemStatusStore: ObservableObject {
 
     /// Live details (network speed, battery time estimate) are only sampled while the popover is open.
     func setPopoverActive(_ active: Bool) {
+        isPopoverActive = active
+        updateNetworkSampling()
         if active {
-            networkSpeedService.start()
             startBatteryTimeUpdates()
         } else {
-            networkSpeedService.stop()
             stopBatteryTimeUpdates()
         }
     }
@@ -194,25 +218,6 @@ final class SystemStatusStore: ObservableObject {
         case .unavailable:
             wifiPowerControlError = localized("Wi-Fi control unavailable")
         }
-    }
-
-    func scanNearbyWiFiIfNeeded() async {
-        requestWiFiSSIDAccess(trigger: .popoverOpened)
-        await nearbyWiFiController.scanIfNeeded()
-    }
-
-    func refreshNearbyWiFi() async {
-        requestWiFiSSIDAccess(trigger: .popoverOpened)
-        await nearbyWiFiController.refresh()
-    }
-
-    @discardableResult
-    func joinNearbyWiFi(_ network: NearbyWiFiNetwork, password: String?) async -> Bool {
-        let joined = await nearbyWiFiController.join(network, password: password)
-        guard joined else { return false }
-        networkService.refresh()
-        await nearbyWiFiController.refresh()
-        return true
     }
 
     var usesAdaptiveRing: Bool {
@@ -279,6 +284,11 @@ final class SystemStatusStore: ObservableObject {
     @discardableResult
     func setDefaultInput(uid: String) -> Bool {
         audioOutputService.setDefaultInput(uid: uid)
+    }
+
+    @discardableResult
+    func setInputVolume(_ level: Double) -> Bool {
+        audioOutputService.setInputVolume(level)
     }
 
     private func mutate(_ update: (inout SystemStatus) -> Void) {
@@ -429,6 +439,12 @@ final class SystemStatusStore: ObservableObject {
         if audio.defaultOutput == nil {
             audio.defaultOutput = DebugAudioDeviceState.builtIn.status.defaultOutput
         }
+        debugAudioOverride = audio
+        mutate { $0.audio = audio }
+    }
+
+    /// Debug/preview only: replaces the whole audio status.
+    func applyDebugAudioOverride(_ audio: AudioStatus) {
         debugAudioOverride = audio
         mutate { $0.audio = audio }
     }

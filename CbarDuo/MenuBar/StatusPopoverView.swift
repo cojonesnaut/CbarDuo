@@ -6,43 +6,149 @@ struct StatusPopoverView: View {
     @ObservedObject private var presentation = PopoverPresentationState.shared
     @AppStorage(PreferenceKeys.showBatteryPercentage) private var showBatteryPercentage = true
     @AppStorage(PreferenceKeys.batteryColorCoding) private var batteryColorCoding = false
+    @AppStorage(PreferenceKeys.popoverTab) private var tabRaw = PopoverTab.network.rawValue
+    @AppStorage(PreferenceKeys.popoverHiddenTabs) private var hiddenTabsRaw = ""
+    @State private var showingBatteryDetail = false
+    @AppStorage(PreferenceKeys.barSlot) private var barSlotRaw = IndicatorBarSlot.volume.rawValue
+    @ObservedObject private var usageMonitor = SystemUsageMonitor.shared
     private let onClose: () -> Void
 
-    init(statusStore: SystemStatusStore, onClose: @escaping () -> Void) {
+    init(
+        statusStore: SystemStatusStore,
+        initialTab: PopoverTab? = nil,
+        onClose: @escaping () -> Void
+    ) {
         self.statusStore = statusStore
         self.onClose = onClose
+        if let initialTab {
+            _tabRaw = AppStorage(wrappedValue: initialTab.rawValue, PreferenceKeys.popoverTab)
+            UserDefaults.standard.set(initialTab.rawValue, forKey: PreferenceKeys.popoverTab)
+        }
+    }
+
+    private var visibleTabs: [PopoverTab] {
+        PopoverTab.visible(hiddenRaw: hiddenTabsRaw)
+    }
+
+    /// The selected tab, falling back to the first visible one when the
+    /// saved tab has been hidden in Settings.
+    private var tab: Binding<PopoverTab> {
+        Binding(
+            get: {
+                let saved = PopoverTab(rawValue: tabRaw) ?? .network
+                return visibleTabs.contains(saved) ? saved : visibleTabs[0]
+            },
+            set: { tabRaw = $0.rawValue }
+        )
     }
 
     var body: some View {
-        PopoverGlassContainer {
-            panelContent
-        }
-        .opacity(presentation.isShown ? 1 : 0)
-        .animation(presentation.isShown ? PopoverMotion.openOpacity : PopoverMotion.close, value: presentation.isShown)
-        .blur(radius: presentation.isShown ? 0 : presentation.hiddenBlur)
-        .animation(presentation.isShown ? PopoverMotion.openBlur : PopoverMotion.close, value: presentation.isShown)
+        // The NSPopover draws the glass and animates opening and closing.
+        // Pinned to the top: switching tabs changes the content height at once
+        // while the popover animates its size, and a centered layout would
+        // make the header and icon bar jump during that animation.
+        panelContent
+            .focusRingsDisabled()
+            // Every open starts on the tabs, not on a page left open last time.
+            .onChange(of: presentation.isShown) { _, isShown in
+                if !isShown { showingBatteryDetail = false }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 
     private var panelContent: some View {
-        VStack(spacing: 8) {
-            StatusRow(
-                symbol: networkSymbol,
-                title: localized("Network"),
-                detail: networkDetail,
-                speedText: networkSpeedText,
-                stateText: networkState,
-                tint: .primary,
-                accessory: .disclosure,
-                trailing: wifiPowerToggle,
-                onActivate: openNetworkSettings,
-                activationHint: networkSettingsHint
-            )
+        VStack(spacing: PopoverStyle.spacing) {
+            if showingBatteryDetail {
+                BatteryDetailView(
+                    battery: statusStore.status.battery,
+                    timeEstimate: statusStore.batteryTimeEstimate,
+                    onBack: { showingBatteryDetail = false },
+                    onOpenBatterySettings: openBatterySettings
+                )
+            } else {
+                tabsContent
+            }
+        }
+        .padding(.horizontal, PopoverStyle.padding)
+        .padding(.bottom, PopoverStyle.padding)
+        .padding(.top, PopoverStyle.padding)
+        .frame(width: PopoverStyle.width)
+        .fixedSize(horizontal: false, vertical: true)
+        .onAppear {
+            NSApp.activate(ignoringOtherApps: true)
+        }
+    }
 
-            NearbyWiFiButton(
+    @ViewBuilder
+    private var tabsContent: some View {
+        header
+
+        PopoverTabBar(selection: tab, tabs: visibleTabs)
+
+        switch tab.wrappedValue {
+        // Audio tabs carry their own "Output" / "Input" card, like Fader.
+        case .volume: volumeContent
+        case .mic: micContent
+        // DuoBar-style page with its own title row and graph card.
+        case .network:
+            NetworkDetailView(
                 statusStore: statusStore,
-                onOpenSettings: openWiFiSettings
+                onOpenNetworkSettings: openNetworkSettings
             )
+        // Vorssaint-style card with its own type scale.
+        case .system:
+            SystemDetailView(onOpenActivityMonitor: openActivityMonitor)
+        case .battery, .bluetooth:
+            PopoverSection(title: tab.wrappedValue.title) {
+                switch tab.wrappedValue {
+                case .battery:
+                    batteryContent
+                    PopoverDivider()
+                    PowerDetailsView()
+                default: bluetoothContent
+                }
+            }
+        }
 
+        #if DEBUG
+        if !FilmTimelinePlayer.captureConfigured {
+            DebugStatusSimulatorView(statusStore: statusStore)
+        }
+        #endif
+
+        // Development diagnostics belong in the dedicated DEBUG diagnostics
+        // surface, never in the production status-card hierarchy.
+        HStack(spacing: 8) {
+            settingsAction
+            PopoverFooterButton(title: localized("Quit"), symbol: "power") {
+                NSApp.terminate(nil)
+            }
+            .accessibilityLabel(localized("Quit CbarDuo"))
+        }
+        .padding(.top, 2)
+    }
+
+    // MARK: Tab content
+
+    private var volumeContent: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            outputPanel
+            PopoverDivider()
+            AppMixerSection()
+        }
+    }
+
+    private var outputPanel: some View {
+        AudioDevicePanel(
+            title: localized("Output"),
+            current: statusStore.status.audio.defaultOutput,
+            devices: statusStore.status.audio.selectableOutputs,
+            isInput: false,
+            emptyText: localized("No output device"),
+            failureText: localized("Unable to Switch Output"),
+            onSelect: { statusStore.setDefaultOutput(uid: $0) },
+            onOpenSoundSettings: openSoundSettings
+        ) {
             VolumeStatusRow(
                 volume: statusStore.status.audio.volume,
                 hasOutputDevice: statusStore.status.audio.defaultOutput != nil,
@@ -50,101 +156,129 @@ struct StatusPopoverView: View {
                 onSetVolume: statusStore.setVolume,
                 onSetMuted: statusStore.setMuted
             )
+        }
+    }
 
-            Button(action: openBatterySettings) {
-                BatteryStatusRow(
-                    battery: statusStore.status.battery,
-                    showPercentage: showBatteryPercentage,
-                    showsDisclosure: true,
-                    timeEstimate: statusStore.batteryTimeEstimate
+    private var micContent: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            inputPanel
+            PopoverDivider()
+            RecordingAppsSection()
+        }
+    }
+
+    private var inputPanel: some View {
+        AudioDevicePanel(
+            title: localized("Input"),
+            current: statusStore.status.audio.defaultInput,
+            devices: statusStore.status.audio.selectableInputs,
+            isInput: true,
+            emptyText: localized("No input device"),
+            failureText: localized("Unable to Switch Input"),
+            onSelect: { statusStore.setDefaultInput(uid: $0) },
+            onOpenSoundSettings: openSoundSettings
+        ) {
+            let inputVolume = statusStore.status.audio.inputVolume
+            if inputVolume.isSettable, let level = inputVolume.level {
+                FaderSlider(
+                    level: level,
+                    symbol: level > 0 ? "mic.fill" : "mic.slash.fill",
+                    onChange: { _ = statusStore.setInputVolume($0) }
                 )
+                .accessibilityLabel(localized("Input volume"))
+                .accessibilityValue(localized("%d%%", Int((level * 100).rounded())))
+            } else if statusStore.status.audio.defaultInput != nil {
+                Text(localized("Controlled by device"))
+                    .font(PopoverFont.detail)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, minHeight: 24, alignment: .leading)
             }
-            .buttonStyle(.plain)
-            .frame(maxWidth: .infinity)
-            .accessibilityHint(localized("Open Battery Settings"))
+        }
+    }
 
-            AudioOutputRow(
-                symbol: audioOutputSymbol,
-                title: localized("Audio Output"),
-                detail: audioOutputDetail,
-                stateText: audioOutputState,
-                outputs: statusStore.status.audio.selectableOutputs,
-                selectedUID: statusStore.status.audio.defaultOutput?.uid,
-                onSelect: { statusStore.setDefaultOutput(uid: $0) },
-                onOpenSoundSettings: openSoundSettings,
-                onOpenBluetoothSettings: { SystemSettingsOpener.open(.bluetooth) }
+    private var batteryContent: some View {
+        Button { showingBatteryDetail = true } label: {
+            BatteryStatusRow(
+                battery: statusStore.status.battery,
+                showPercentage: showBatteryPercentage,
+                showsDisclosure: true,
+                timeEstimate: statusStore.batteryTimeEstimate
             )
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
+        .accessibilityHint(localized("Show battery details"))
+    }
 
-            AudioOutputRow(
-                symbol: audioInputSymbol,
-                title: localized("Audio Input"),
-                detail: audioInputDetail,
-                stateText: audioInputState,
-                outputs: statusStore.status.audio.selectableInputs,
-                selectedUID: statusStore.status.audio.defaultInput?.uid,
-                onSelect: { statusStore.setDefaultInput(uid: $0) },
-                onOpenSoundSettings: openSoundSettings,
-                onOpenBluetoothSettings: {},
-                emptyText: localized("No input devices"),
-                failureText: localized("Unable to Switch Input"),
-                hint: localized("Select audio input"),
-                showsBluetoothSettings: false
-            )
+    @ViewBuilder
+    private var bluetoothContent: some View {
+        Button(action: openBluetoothSettings) {
+            BluetoothSummaryRow(bluetooth: statusStore.status.bluetooth)
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
+        .accessibilityHint(localized("Bluetooth Settings…"))
 
-            #if DEBUG
-            if !FilmTimelinePlayer.captureConfigured {
-                DebugStatusSimulatorView(statusStore: statusStore)
-            }
-            #endif
-
-            // Development diagnostics belong in the dedicated DEBUG diagnostics
-            // surface, never in the production status-card hierarchy.
-            HStack(spacing: 6) {
-                settingsAction
-
-                Spacer()
-
-                Button(localized("Quit CbarDuo")) {
-                    NSApp.terminate(nil)
+        let devices = statusStore.status.audio.connectedBluetoothOutputs
+        if statusStore.status.bluetooth.isPoweredOn {
+            PopoverDivider()
+            if devices.isEmpty {
+                Text(localized("No Bluetooth audio devices connected"))
+                    .font(PopoverFont.detail)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 10)
+                    .frame(height: 36)
+            } else {
+                ForEach(Array(devices.enumerated()), id: \.element.uid) { index, device in
+                    if index > 0 { PopoverDivider() }
+                    BluetoothDeviceRow(
+                        device: device,
+                        isCurrentOutput: device.uid == statusStore.status.audio.defaultOutput?.uid
+                    )
                 }
-                .buttonStyle(.plain)
-                .foregroundStyle(.secondary)
             }
-            .font(.system(size: 11.5, weight: .medium))
-            .padding(.horizontal, 10)
-            .frame(height: 34)
-            .popoverCardBackground(cornerRadius: 17, fillOpacity: 0.045)
         }
-        .padding(12)
-        .frame(width: 304)
-        .onAppear {
-            NSApp.activate(ignoringOtherApps: true)
+    }
+
+    /// Header: the live menu bar indicator, the app name and a connection pill.
+    private var header: some View {
+        VStack(spacing: 6) {
+            DuoGlyphView(
+                status: statusStore.status,
+                metrics: DuoGlyphMetrics.standard.sized(40),
+                animationsEnabled: false,
+                batteryColorCodingEnabled: batteryColorCoding,
+                barValue: IndicatorBarValue.make(
+                    slot: IndicatorBarSlot(rawValue: barSlotRaw) ?? .volume,
+                    networkSpeed: statusStore.networkSpeed,
+                    memoryUsed: usageMonitor.memoryUsed,
+                    diskUsed: usageMonitor.diskUsed
+                )
+            )
+            .frame(width: 40, height: 40)
+            .padding(.top, 2)
+            .accessibilityHidden(true)
+            Text("CbarDuo")
+                .font(.headline)
+            PopoverStatusPill(
+                text: networkState,
+                isActive: statusStore.status.network.isConnected
+            )
         }
+        .frame(maxWidth: .infinity)
     }
 
     private var settingsAction: some View {
         // Deliberately not SettingsLink: the Settings scene's window
         // cannot stay resizable (the scene strips the flag), so settings
         // open in the app's own window via SettingsPresenter.
-        Button(action: openSettings) {
-            settingsLabel
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var settingsLabel: some View {
-        Label(localized("Settings"), systemImage: "gearshape")
+        PopoverFooterButton(title: localized("Settings"), symbol: "gearshape", action: openSettings)
     }
 
     private func openSettings() {
         SettingsPresenter.show()
         onClose()
-    }
-
-    private var networkSettingsHint: String {
-        SystemSettingsOpener.pane(for: statusStore.status.network) == .network
-            ? localized("Open Network Settings")
-            : localized("Open Wi-Fi Settings")
     }
 
     private func openNetworkSettings() {
@@ -159,55 +293,25 @@ struct StatusPopoverView: View {
         onClose()
     }
 
-    private func openWiFiSettings() {
-        _ = SystemSettingsOpener.open(.wifi)
+    private func openBatterySettings() {
+        _ = SystemSettingsOpener.open(.battery)
         onClose()
     }
 
-    private func openBatterySettings() {
-        _ = SystemSettingsOpener.open(.battery)
+    private func openActivityMonitor() {
+        let url = URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
+        NSWorkspace.shared.openApplication(at: url, configuration: NSWorkspace.OpenConfiguration())
+        onClose()
+    }
+
+    private func openBluetoothSettings() {
+        _ = SystemSettingsOpener.open(.bluetooth)
         onClose()
     }
 
     private func openSoundSettings() {
         _ = SystemSettingsOpener.open(.sound)
         onClose()
-    }
-
-    private var networkSymbol: String {
-        let network = statusStore.status.network
-        guard network.isConnected else { return "network.slash" }
-        switch network.transport {
-        case .wifi: return "wifi"
-        case .ethernet: return "cable.connector.horizontal"
-        case .other: return "ellipsis.circle"
-        case .none: return "network.slash"
-        }
-    }
-
-    private var networkDetail: String {
-        let network = statusStore.status.network
-        if statusStore.wifiPowerControlError != nil {
-            return localized("Unable to change Wi-Fi power")
-        }
-        guard network.isAvailable else { return localized("No network interface") }
-        guard network.isConnected else {
-            return network.isWiFiPoweredOn == false ? localized("Wi-Fi disabled") : localized("Not connected")
-        }
-        switch network.transport {
-        case .wifi: return network.ssid ?? localized("Network name unavailable")
-        case .ethernet: return network.interfaceName ?? localized("Wired connection")
-        case .other: return network.interfaceName ?? localized("Active connection")
-        case .none: return localized("Not connected")
-        }
-    }
-
-    private var networkSpeedText: String? {
-        guard statusStore.status.network.isConnected,
-              let speed = statusStore.networkSpeed else { return nil }
-        let down = NetworkSpeedFormatter.compact(speed.downloadBytesPerSecond)
-        let up = NetworkSpeedFormatter.compact(speed.uploadBytesPerSecond)
-        return "↓\(down) ↑\(up)"
     }
 
     private var networkState: String {
@@ -221,20 +325,6 @@ struct StatusPopoverView: View {
         case .other: return localized("Connected")
         case .none: return localized("Offline")
         }
-    }
-
-    private var wifiPowerToggle: AnyView? {
-        guard let wifiPowerState = statusStore.status.network.isWiFiPoweredOn else { return nil }
-        return AnyView(
-            Toggle(localized("Wi-Fi power"), isOn: Binding(
-                get: { wifiPowerState },
-                set: { statusStore.setWiFiPower($0) }
-            ))
-            .labelsHidden()
-            .toggleStyle(.switch)
-            .controlSize(.mini)
-            .accessibilityLabel(localized("Wi-Fi power"))
-        )
     }
 
     private var audioOutputSymbol: String {
@@ -586,3 +676,66 @@ private struct DebugStatusSimulatorView: View {
     }
 }
 #endif
+
+/// Bluetooth on/off summary with a disclosure to Bluetooth settings.
+private struct BluetoothSummaryRow: View {
+    let bluetooth: BluetoothStatus
+
+    var body: some View {
+        HStack(spacing: 11) {
+            BluetoothGlyph()
+                .stroke(style: StrokeStyle(lineWidth: 1.6, lineCap: .round, lineJoin: .round))
+                .frame(width: 8, height: 13)
+                .frame(width: 28, height: 28)
+                .background(.primary.opacity(0.12), in: Circle())
+
+            VStack(alignment: .leading, spacing: 1) {
+                Text(localized("Bluetooth"))
+                    .font(.system(size: 12.5, weight: .semibold))
+                Text(state)
+                    .font(.system(size: 10.5))
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 8)
+            Image(systemName: "chevron.right")
+                .font(.system(size: 9, weight: .semibold))
+                .foregroundStyle(.tertiary)
+        }
+        .padding(.horizontal, 10)
+        .frame(height: 48)
+        .contentShape(Rectangle())
+    }
+
+    private var state: String {
+        guard bluetooth.isAvailable else { return localized("Unavailable") }
+        return bluetooth.isPoweredOn ? localized("On") : localized("Off")
+    }
+}
+
+/// A connected Bluetooth audio device, marked when it is the current output.
+private struct BluetoothDeviceRow: View {
+    let device: AudioDeviceStatus
+    let isCurrentOutput: Bool
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: device.temporaryGlyph == .airPods ? "airpodspro" : "headphones")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(.secondary)
+                .frame(width: 28)
+            Text(device.name)
+                .font(.system(size: 12))
+                .lineLimit(1)
+                .truncationMode(.middle)
+            Spacer(minLength: 8)
+            if isCurrentOutput {
+                Text(localized("Output"))
+                    .font(.system(size: 10.5, weight: .medium))
+                    .foregroundStyle(SettingsStyle.accent)
+            }
+        }
+        .padding(.horizontal, 10)
+        .frame(height: 36)
+        .accessibilityElement(children: .combine)
+    }
+}

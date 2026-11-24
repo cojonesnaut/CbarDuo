@@ -101,33 +101,10 @@
 "Bluetooth Settings…" = "蓝牙设置…";
 "Unable to Switch Output" = "无法切换输出设备";
 "Select audio output" = "选择音频输出";
-"Open Wi-Fi Settings" = "打开无线局域网设置";
-"Open Network Settings" = "打开网络设置";
 "Open Battery Settings" = "打开电池设置";
 "No output devices" = "没有输出设备";
-"Nearby Networks" = "附近的网络";
-"Browse nearby Wi-Fi networks" = "浏览附近的 Wi-Fi 网络";
-"Scanning…" = "正在扫描…";
 "Refresh" = "刷新";
 "Network Settings…" = "网络设置…";
-"Wi-Fi is Off" = "Wi-Fi 已关闭";
-"Wi-Fi unavailable" = "Wi-Fi 不可用";
-"Unable to Scan" = "无法扫描";
-"No Networks Found" = "未找到网络";
-"Secured network" = "加密网络";
-"Current Network" = "当前网络";
-"Joining…" = "正在加入…";
-"Join network" = "加入网络";
-"Strong signal" = "信号强";
-"Medium signal" = "信号中等";
-"Weak signal" = "信号弱";
-"Signal unavailable" = "信号不可用";
-"Password" = "密码";
-"Cancel" = "取消";
-"Join" = "加入";
-"Unable to Join" = "无法加入";
-"Location access is needed to show Wi-Fi network names." = "需要位置权限才能显示 Wi-Fi 网络名称。";
-"Open System Settings…" = "打开系统设置…";
 "Audio Input" = "音频输入";
 "No input device" = "没有输入设备";
 "No input devices" = "没有输入设备";
@@ -135,3 +112,148 @@
 "Select audio input" = "选择音频输入";
 "Extra Large" = "超大";
 "Battery Percentage" = "电池百分比";
+
+/* Settings window */
+"Appearance" = "外观";
+"Automatically check for updates" = "自动检查更新";
+"Behavior" = "行为";
+"Check for Updates…" = "检查更新…";
+"Content" = "内容";
+"Custom Mode Center" = "自定模式中心";
+"Custom Mode Dots" = "自定模式圆点";
+"Custom Mode Ring" = "自定模式圆环";
+"Custom Mode" = "自定模式";
+"Dark" = "深色";
+"Desktop Widget" = "桌面小组件";
+"Fine-tune" = "微调";
+"Icon" = "图标";
+"Indicator" = "指示器";
+"Language" = "语言";
+"Light" = "浅色";
+"Live" = "实时";
+"Low" = "电量低";
+"Popover" = "弹出面板";
+"Preview" = "预览";
+"Ring" = "圆环";
+"Show CbarDuo on the desktop. Click it to switch modes, drag it to move it." = "在桌面上显示 CbarDuo。点按可切换模式，拖移可移动位置。";
+"Show Percentage" = "显示百分比";
+"Show on Desktop" = "在桌面上显示";
+"Show the battery level above the menu bar icon." = "在菜单栏图标上方显示电池电量。";
+"Startup" = "启动";
+"System" = "跟随系统";
+"Updates" = "更新";
+"Version %@" = "版本 %@";
+"Widget Size" = "小组件大小";
+"Yellow in Low Power Mode and red below 20%. The ring is always green on power." = "低电量模式下为黄色，低于 20% 时为红色。接通电源时圆环始终为绿色。";
+
+/* Popover */
+"Sound" = "声音";
+"Quit" = "退出";
+"Microphone" = "麦克风";
+"On" = "开";
+"Output" = "输出";
+"No Bluetooth audio devices connected" = "未连接蓝牙音频设备";
+
+/* Battery page */
+"Power Source" = "电源";
+"Power Adapter" = "电源适配器";
+"Energy Mode" = "能耗模式";
+"Battery Health" = "电池健康";
+"Maximum Capacity" = "最大容量";
+"Cycle Count" = "循环计数";
+"Battery Settings…" = "电池设置…";
+"Back" = "返回";
+"Show battery details" = "显示电池详细信息";
+
+/* Audio devices */
+"Input" = "输入";
+"Input volume" = "输入音量";
+
+/* Icon thickness */
+"Thickness" = "粗细";
+"Thin" = "细";
+"Regular" = "常规";
+"Bold" = "粗";
+"Ring thickness" = "圆环粗细";
+
+/* Indicator bar */
+"Bar" = "条";
+"Slot" = "显示内容";
+"Style" = "样式";
+"Fill Style" = "填充样式";
+"Dotted" = "点状";
+"Solid" = "实线";
+"Segmented" = "分段";
+"Classic" = "经典";
+"Fade" = "渐变";
+"Grow" = "增长";
+"Snap" = "跳变";
+"Network Activity" = "网络活动";
+"Memory" = "内存";
+"Disk" = "磁盘";
+"The bar under the ring. Network Activity, Memory and Disk are measured only while chosen." = "圆环下方的条。网络活动、内存和磁盘仅在选中时测量。";
+
+/* Memory and popover rows */
+"Rows" = "行";
+"Choose which sections the popover shows." = "选择弹出面板显示哪些部分。";
+"At least one section stays visible." = "至少保留一个部分可见。";
+"Memory Used" = "已使用内存";
+"%@ of %@" = "%@ / %@";
+"App Memory" = "App 内存";
+"Wired Memory" = "联动内存";
+"Compressed" = "已压缩";
+"Cached Files" = "缓存文件";
+"Activity Monitor…" = "活动监视器…";
+"%@ GB" = "%@ GB";
+
+/* System tab */
+"Temperatures" = "温度";
+"CPU" = "CPU";
+"GPU" = "GPU";
+"%d °C" = "%d °C";
+"Hardware usage" = "硬件使用率";
+"%@%%" = "%@%%";
+"Pressure" = "压力";
+"%@ / %@" = "%@ / %@";
+"Cached files" = "缓存文件";
+"Swap used" = "已使用交换";
+"Up for %@" = "已运行 %@";
+"%dd %dh" = "%d天%d小时";
+"%dh %dm" = "%d小时%d分钟";
+"%dm" = "%d分钟";
+"Connected Devices" = "已连接设备";
+"USB Device" = "USB 设备";
+"Warning" = "警告";
+"%@ MB" = "%@ MB";
+
+/* Per-app volume */
+"Nothing is playing" = "没有正在播放的内容";
+"Nothing is using the microphone" = "没有应用在使用麦克风";
+"Reset to 100%" = "重置为 100%";
+"Play On" = "播放到";
+"Play on Default Output" = "在默认输出上播放";
+"Stop playing to this device" = "停止在此设备上播放";
+"Options" = "选项";
+"Allow CbarDuo to adjust app volumes" = "允许 CbarDuo 调整 App 音量";
+"macOS needs your permission for CbarDuo to process app audio. Audio never leaves your Mac." = "macOS 需要你的许可，CbarDuo 才能处理 App 音频。音频不会离开你的 Mac。";
+"Open Privacy Settings" = "打开隐私设置";
+
+/* Network tab */
+"Download" = "下载";
+"Upload" = "上传";
+"Connection" = "连接";
+"IP Address" = "IP 地址";
+"Network Name" = "网络名称";
+"%@ KB/s" = "%@ KB/s";
+"%@ MB/s" = "%@ MB/s";
+"%@ GB/s" = "%@ GB/s";
+
+/* Battery tab power */
+"Battery temperature" = "电池温度";
+"Adapter" = "电源适配器";
+"%@ max" = "最大 %@";
+"Plugged in" = "已接通电源";
+"Apps using significant energy" = "耗电较多的 App";
+"No apps using significant energy" = "没有耗电较多的 App";
+"%@ W" = "%@ W";
+"No apps using the GPU" = "没有 App 正在使用 GPU";

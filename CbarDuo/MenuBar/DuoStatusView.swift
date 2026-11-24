@@ -9,6 +9,8 @@ struct DuoStatusView: View {
     @AppStorage(PreferenceKeys.batteryColorCoding) private var batteryColorCoding = false
     @AppStorage(PreferenceKeys.adaptiveRingColorCoding) private var adaptiveRingColorCoding = false
     @AppStorage(PreferenceKeys.showBatteryPercentageInMenuBar) private var showBatteryPercentageInMenuBar = false
+    @AppStorage(PreferenceKeys.barSlot) private var barSlotRaw = IndicatorBarSlot.volume.rawValue
+    @ObservedObject private var usageMonitor = SystemUsageMonitor.shared
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var adaptiveRingOwner = UUID()
     @State private var temporaryAdaptiveSource: AdaptiveRingSourceIdentity?
@@ -77,14 +79,20 @@ struct DuoStatusView: View {
             usesCustomRingTransition: usesAdaptiveRing,
             ringColorOverride: adaptiveRingColor,
             batteryColorCodingEnabled: batteryColorCoding,
-            showBatteryPercentage: showBatteryPercentageInMenuBar
+            showBatteryPercentage: showBatteryPercentageInMenuBar,
+            barValue: IndicatorBarValue.make(
+                slot: IndicatorBarSlot(rawValue: barSlotRaw) ?? .volume,
+                networkSpeed: statusStore.networkSpeed,
+                memoryUsed: usageMonitor.memoryUsed,
+                diskUsed: usageMonitor.diskUsed
+            )
         )
         .offset(y: DuoGlyphMetrics.menuBarVerticalOffset)
         .frame(width: targetWidth, height: 22)
         .contentShape(Rectangle())
         .animation(animation, value: targetWidth)
         .onAppear { onWidthChange(targetWidth) }
-        .onChange(of: targetWidth) { newValue in onWidthChange(newValue) }
+        .onChange(of: targetWidth) { _, newValue in onWidthChange(newValue) }
         .onAppear {
             lastAdaptiveSourceBinding.wrappedValue = AdaptiveRingSourceIdentity(state: adaptiveRingMonitor.state)
             adaptiveSourcePresentationsEnabledBinding.wrappedValue = usesAdaptiveRing
@@ -98,7 +106,7 @@ struct DuoStatusView: View {
             adaptiveSessionIsSynchronizedBinding.wrappedValue = false
             adaptiveRingMonitor.release(owner: adaptiveRingOwner)
         }
-        .onChange(of: usesAdaptiveRing) { isAdaptive in
+        .onChange(of: usesAdaptiveRing) { _, isAdaptive in
             temporaryAdaptiveSourceBinding.wrappedValue = nil
             if isAdaptive {
                 adaptiveSourcePresentationsEnabledBinding.wrappedValue = !usesLaptopAdaptiveRing
@@ -111,7 +119,7 @@ struct DuoStatusView: View {
                 adaptiveRingMonitor.release(owner: adaptiveRingOwner)
             }
         }
-        .onChange(of: statusStore.laptopRingModeState.mode) { newMode in
+        .onChange(of: statusStore.laptopRingModeState.mode) { _, newMode in
             let oldMode = lastLaptopRingMode
             lastLaptopRingModeBinding.wrappedValue = newMode
             guard AdaptiveEntryCenterPolicy.shouldRequest(from: oldMode, to: newMode) else {
@@ -132,14 +140,14 @@ struct DuoStatusView: View {
             adaptiveQALog("Adaptive-entry sparkles requested once")
             #endif
         }
-        .onChange(of: priorityController.presentation) { _ in
+        .onChange(of: priorityController.presentation) {
             guard adaptiveEntryCenterOverride != nil,
                   !allowsAdaptiveEntryCenterPresentation
             else { return }
             adaptiveEntryCenterOverrideBinding.wrappedValue = nil
             adaptiveSourcePresentationsEnabledBinding.wrappedValue = true
         }
-        .onChange(of: adaptiveRingMonitor.state) { newState in
+        .onChange(of: adaptiveRingMonitor.state) { _, newState in
             guard usesAdaptiveRing else { return }
             let oldSource = lastAdaptiveSource ?? AdaptiveRingSourceIdentity(state: newState)
             let newSource = AdaptiveRingSourceIdentity(state: newState)

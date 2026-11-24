@@ -29,3 +29,31 @@ enum MenuBarIconSize {
         max(minimumStatusItemWidth, baseStatusItemWidth * CGFloat(resolve(rawScale)))
     }
 }
+
+/// How heavy the indicator's ring is drawn (Settings → Indicator → Icon).
+enum IconThickness: String, CaseIterable, Sendable {
+    case thin
+    case regular
+    case bold
+
+    /// Multiplier on the ring's stroke width; regular is the default look.
+    var ringWidthMultiplier: CGFloat {
+        switch self {
+        case .thin: 0.75
+        case .regular: 1.0
+        case .bold: 1.3
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .thin: localized("Thin")
+        case .regular: localized("Regular")
+        case .bold: localized("Bold")
+        }
+    }
+
+    static func resolve(_ rawValue: String?) -> IconThickness {
+        rawValue.flatMap(IconThickness.init(rawValue:)) ?? .regular
+    }
+}
