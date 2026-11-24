@@ -6,7 +6,7 @@
 
 [**Скачать CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [Все версии](https://github.com/Mikeli7666/DuoBar/releases) · [English](README.md)
 
-CbarDuo 1.4.2 (сборка 11) · macOS 15 Sequoia или новее · только Apple Silicon
+CbarDuo 1.4.3 (сборка 12) · macOS 15 Sequoia или новее · только Apple Silicon
 
 > **Примечание:** Это бесплатный CbarDuo с открытым исходным кодом от Mikeli7666, доступный только на GitHub. Другое приложение с тем же названием продаётся в Mac App Store — это отдельное приложение с закрытым исходным кодом от другого разработчика, не связанное с этим проектом.
 

@@ -10,7 +10,7 @@
 
 [**ดาวน์โหลด CbarDuo 1.4.2**](https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg) · [**รุ่นทั้งหมด**](https://github.com/Mikeli7666/DuoBar/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/Mikeli7666/DuoBar/issues)
 
-CbarDuo 1.4.2 (Build 11) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
+CbarDuo 1.4.3 (Build 12) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
 
 > **หมายเหตุ:** นี่คือ CbarDuo ฟรีแบบโอเพนซอร์สโดย Mikeli7666 มีให้เฉพาะบน GitHub เท่านั้น แอปอื่นที่มีชื่อเดียวกันจำหน่ายบน Mac App Store ซึ่งเป็นแอปแยกต่างหากแบบปิดซอร์สโดยนักพัฒนาอีกราย และไม่เกี่ยวข้องกับโปรเจกต์นี้
 
