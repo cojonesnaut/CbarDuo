@@ -2,13 +2,25 @@
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
     <channel>
         <title>CbarDuo</title>
+        <link>https://github.com/cojonesnaut/CbarDuo/releases</link>
         <item>
-            <title>1.4.2</title>
-            <pubDate>Sun, 22 Nov 2026 14:53:21 -0600</pubDate>
-            <sparkle:version>11</sparkle:version>
-            <sparkle:shortVersionString>1.4.2</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/Mikeli7666/DuoBar/releases/download/v1.4.2/DuoBar-1.4.2.dmg" length="4326184" type="application/octet-stream" sparkle:edSignature="LftsML/mLj4U+8LQ1+KBYxGKJU83P+0ftv4s+ZeUIMkxRIubtEmXUGOnlrbrf1agmmdnzJxRU5f3QRpOnf1mBQ=="/>
+            <title>1.4.3</title>
+            <pubDate>Tue, 24 Nov 2026 17:24:16 +0000</pubDate>
+            <sparkle:version>12</sparkle:version>
+            <sparkle:shortVersionString>1.4.3</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <sparkle:fullReleaseNotesLink>https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.3</sparkle:fullReleaseNotesLink>
+            <description><![CDATA[
+                <h2>CbarDuo 1.4.3</h2>
+                <ul>
+                    <li>Redesigned popover with Network, Volume, Mic, Battery, Bluetooth and System tabs</li>
+                    <li>Per-app volume, mute and output routing</li>
+                    <li>Battery health, energy-heavy apps, battery temperature and power draw</li>
+                    <li>System stats: temperatures, CPU and GPU usage, memory, uptime, USB devices</li>
+                    <li>Requires macOS 15 and an Apple Silicon Mac</li>
+                </ul>
+            ]]></description>
+            <enclosure url="https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg" length="3538517" type="application/octet-stream" sparkle:edSignature="v6zLFXuQR3eUEiUcd+w+xZcuM5yvYYOx1c6D6v9fsLKRsmlqS3vJUyxFOnPbHkS3IoMhPE2Wtolm5mHh8DcGAA=="/>
         </item>
     </channel>
 </rss>
