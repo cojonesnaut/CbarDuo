@@ -6,7 +6,7 @@
 
 [**Скачать CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [Все версии](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
-CbarDuo 1.4.3 (сборка 12) · macOS 15 Sequoia или новее · только Apple Silicon
+CbarDuo 1.4.4 (сборка 13) · macOS 15 Sequoia или новее · только Apple Silicon
 
 > **Примечание:** CbarDuo — это форк [DuoBar](https://github.com/Mikeli7666/DuoBar) от Mikeli7666.
 

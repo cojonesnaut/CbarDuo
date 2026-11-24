@@ -10,7 +10,7 @@
 
 [**ดาวน์โหลด CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [**รุ่นทั้งหมด**](https://github.com/cojonesnaut/CbarDuo/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.3 (Build 12) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
+CbarDuo 1.4.4 (Build 13) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
 
 > **หมายเหตุ:** CbarDuo เป็นฟอร์กของ [DuoBar](https://github.com/Mikeli7666/DuoBar) โดย Mikeli7666
 

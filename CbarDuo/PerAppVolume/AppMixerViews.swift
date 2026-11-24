@@ -30,6 +30,8 @@ struct AppMixerSection: View {
                 .frame(maxHeight: 280)
             }
         }
+        .onAppear { monitor.viewAppeared() }
+        .onDisappear { monitor.viewDisappeared() }
     }
 
     /// Apps audible now, plus silent ones the user has adjusted — hiding those
@@ -69,6 +71,8 @@ struct RecordingAppsSection: View {
                 }
             }
         }
+        .onAppear { monitor.viewAppeared() }
+        .onDisappear { monitor.viewDisappeared() }
     }
 }
 

@@ -103,6 +103,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NetworkTrafficMonitor.shared.setInterface(network.isConnected ? network.interfaceName : nil)
         NetworkTrafficMonitor.shared.start()
         PowerMonitor.shared.start()
+        // Drives the three history graphs above; started after they subscribe.
+        HistoryClock.shared.start()
         PerAppVolumeEngine.shared.start()
         desktopWidgetController = DesktopWidgetController(statusStore: statusStore)
         applyDesktopWidgetPolicy()

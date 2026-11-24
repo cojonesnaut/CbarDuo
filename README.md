@@ -10,7 +10,7 @@
 
 [**Download CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [**All Releases**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Report a Bug**](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.3 (Build 12) · macOS 15+ · Apple Silicon only · Free and Open Source
+CbarDuo 1.4.4 (Build 13) · macOS 15+ · Apple Silicon only · Free and Open Source
 
 > **Note:** CbarDuo is a fork of [DuoBar](https://github.com/Mikeli7666/DuoBar) by Mikeli7666.
 
