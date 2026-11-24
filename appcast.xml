@@ -4,6 +4,24 @@
         <title>CbarDuo</title>
         <link>https://github.com/cojonesnaut/CbarDuo/releases</link>
         <item>
+            <title>1.4.4</title>
+            <pubDate>Tue, 24 Nov 2026 21:45:04 +0000</pubDate>
+            <sparkle:version>13</sparkle:version>
+            <sparkle:shortVersionString>1.4.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <sparkle:fullReleaseNotesLink>https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.4</sparkle:fullReleaseNotesLink>
+            <description><![CDATA[
+                <h2>CbarDuo 1.4.4</h2>
+                <ul>
+                    <li>About 90% less background CPU with the popover closed</li>
+                    <li>Volume and Mic tabs about 70% lighter while open, Network and System about 35%</li>
+                    <li>Per-app volume checks apps only when it needs to</li>
+                    <li>In-app updates now use CbarDuo's own signing key</li>
+                </ul>
+            ]]></description>
+            <enclosure url="https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg" length="3548617" type="application/octet-stream" sparkle:edSignature="WLWn7y9To2nIepINkZuvhItxpVIbj54n2jgS/JCwYZqbFU31jY2//eNaRVJRh/9q6Cx6wCXBeXLlX+W5JyAMCA=="/>
+        </item>
+        <item>
             <title>1.4.3</title>
             <pubDate>Tue, 24 Nov 2026 17:24:16 +0000</pubDate>
             <sparkle:version>12</sparkle:version>
