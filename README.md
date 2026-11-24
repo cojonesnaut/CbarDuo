@@ -18,7 +18,7 @@ CbarDuo 1.4.3 (Build 12) · macOS 15+ · Apple Silicon only · Free and Open Sou
 
 <br>
 
-<img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo in the macOS menu bar" width="1340">
+<img src="marketing/1.4.3/readme/cbarduo-1.4.3-menubar.png" alt="CbarDuo in the macOS menu bar" width="108">
 
 </div>
 
@@ -33,8 +33,8 @@ CbarDuo adapts the iPhone Duo-style three-in-one status concept for the Mac menu
 Persistent status stays monochrome and native-looking. When AirPods or another supported Bluetooth audio output becomes active, the center briefly transitions from Network → AirPods/headphones → Network. Disconnecting does not trigger an animation.
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="CbarDuo 1.4.2 popover, classic style" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="CbarDuo 1.4.2 popover, Liquid Glass style" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-network.png" alt="CbarDuo 1.4.3 popover, Network tab" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-system.png" alt="CbarDuo 1.4.3 popover, System tab" width="360">
 </p>
 
 ## Adaptive Ring and Battery Ring

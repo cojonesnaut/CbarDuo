@@ -51,7 +51,7 @@ struct NetworkDetailView: View {
                 if network.isConnected, network.transport == .wifi, let ssid = network.ssid {
                     infoRow(localized("Network Name"), ssid)
                 }
-                infoRow(localized("IP Address"), network.isConnected ? (traffic.ipAddress ?? "–") : "–")
+                infoRow(localized("IP Address"), network.isConnected ? (displayedIPAddress ?? "–") : "–")
             }
 
             divider
@@ -65,6 +65,14 @@ struct NetworkDetailView: View {
             .buttonStyle(.plain)
             .padding(.horizontal, 4)
         }
+    }
+
+    /// Marketing captures show a placeholder instead of the Mac's real address.
+    private var displayedIPAddress: String? {
+        #if DEBUG
+        if MarketingCaptureMode.isEnabled { return "192.168.1.20" }
+        #endif
+        return traffic.ipAddress
     }
 
     private var divider: some View {

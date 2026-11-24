@@ -111,7 +111,7 @@ struct StatusPopoverView: View {
         }
 
         #if DEBUG
-        if !FilmTimelinePlayer.captureConfigured {
+        if !FilmTimelinePlayer.captureConfigured, !MarketingCaptureMode.isEnabled {
             DebugStatusSimulatorView(statusStore: statusStore)
         }
         #endif

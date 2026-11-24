@@ -18,7 +18,7 @@ CbarDuo 1.4.3 (Build 12) · macOS 15+ · Apple Silicon uniquement · Gratuit et 
 
 <br>
 
-<img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo dans la barre de menus macOS" width="1340">
+<img src="marketing/1.4.3/readme/cbarduo-1.4.3-menubar.png" alt="CbarDuo dans la barre de menus macOS" width="108">
 
 </div>
 
@@ -33,8 +33,8 @@ CbarDuo adapte le concept de statut trois-en-un inspiré de l'iPhone Duo pour la
 L'état persistant reste monochrome et d'aspect natif. Quand des AirPods ou une autre sortie audio Bluetooth prise en charge devient active, le centre passe brièvement de Réseau → AirPods / écouteurs → Réseau. La déconnexion ne déclenche pas d'animation.
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="Fenêtre CbarDuo 1.4.2, style classique" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="Fenêtre CbarDuo 1.4.2, style Liquid Glass" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-network.png" alt="Fenêtre CbarDuo 1.4.3, onglet Réseau" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-system.png" alt="Fenêtre CbarDuo 1.4.3, onglet Système" width="360">
 </p>
 
 ## Anneau adaptatif et anneau de batterie

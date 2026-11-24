@@ -76,12 +76,14 @@ final class SystemStatusStore: ObservableObject {
             if self?.batteryTimeTimer != nil { self?.updateBatteryTimeEstimate() }
         }
         networkService.onStatusChange = { [weak self] value in
+            // The traffic graph follows the real interface even while a debug
+            // or marketing status is staged over it.
+            NetworkTrafficMonitor.shared.setInterface(value.isConnected ? value.interfaceName : nil)
             #if DEBUG
             guard self?.debugNetworkOverride == nil else { return }
             #endif
             self?.mutate { $0.network = value }
             self?.networkSpeedService.setInterface(value.isConnected ? value.interfaceName : nil)
-            NetworkTrafficMonitor.shared.setInterface(value.isConnected ? value.interfaceName : nil)
         }
         networkSpeedService.onSpeedChange = { [weak self] speed in
             #if DEBUG

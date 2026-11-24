@@ -18,7 +18,7 @@ CbarDuo 1.4.3 (Build 12) · macOS 15+ · เฉพาะ Apple Silicon · ฟร
 
 <br>
 
-<img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo in the macOS menu bar" width="1340">
+<img src="marketing/1.4.3/readme/cbarduo-1.4.3-menubar.png" alt="CbarDuo in the macOS menu bar" width="108">
 
 </div>
 
@@ -34,8 +34,8 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 </p>
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="CbarDuo 1.4.2 popover, classic style" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="CbarDuo 1.4.2 popover, Liquid Glass style" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-network.png" alt="ป๊อปโอเวอร์ CbarDuo 1.4.3 แท็บเครือข่าย" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-system.png" alt="ป๊อปโอเวอร์ CbarDuo 1.4.3 แท็บระบบ" width="360">
 </p>
 
 ## วงแหวนปรับตัวและวงแหวนแบตเตอรี่

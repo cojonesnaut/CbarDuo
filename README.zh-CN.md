@@ -21,7 +21,7 @@ CbarDuo 1.4.3（Build 12）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 </p>
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-menubar.jpg" alt="CbarDuo 菜单栏" width="1340">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-menubar.png" alt="CbarDuo 菜单栏" width="108">
 
 </p>
 
@@ -95,8 +95,8 @@ CbarDuo 常驻在菜单栏。图标中的三个部分分别表示：
 设置中还可以选择开启 **Open on Hover（悬停打开）**。
 
 <p align="center">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-classic.png" alt="CbarDuo 1.4.2 弹出面板，经典样式" width="360">
-  <img src="marketing/1.4.2/readme/duobar-1.4.2-popover-glass.png" alt="CbarDuo 1.4.2 弹出面板，Liquid Glass 样式" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-network.png" alt="CbarDuo 1.4.3 弹出面板，网络标签页" width="360">
+  <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-system.png" alt="CbarDuo 1.4.3 弹出面板，系统标签页" width="360">
 </p>
 
 ## 功能
