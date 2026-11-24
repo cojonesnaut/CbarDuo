@@ -12,7 +12,7 @@
 
 [**下载 CbarDuo 1.4.3**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.3/CbarDuo-1.4.3.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
-CbarDuo 1.4.3（Build 12）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
+CbarDuo 1.4.4（Build 13）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
 
 > **注意：** CbarDuo 是 Mikeli7666 开发的 [DuoBar](https://github.com/Mikeli7666/DuoBar) 的分支。
 
