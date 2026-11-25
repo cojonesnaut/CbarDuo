@@ -8,6 +8,7 @@ import Foundation
 enum AppLanguage: String, CaseIterable {
     case system = ""
     case english = "en"
+    case french = "fr"
     case simplifiedChinese = "zh-Hans"
     case traditionalChinese = "zh-Hant"
     case russian = "ru"
@@ -22,6 +23,7 @@ enum AppLanguage: String, CaseIterable {
         switch self {
         case .system: return localized("System Default")
         case .english: return "English"
+        case .french: return "Français"
         case .simplifiedChinese: return "简体中文"
         case .traditionalChinese: return "繁體中文"
         case .russian: return "Русский"

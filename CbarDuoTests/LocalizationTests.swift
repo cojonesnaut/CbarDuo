@@ -52,13 +52,13 @@ final class LocalizationTests: XCTestCase {
     ]
 
     func testAllSupportedLocalizationResourcesExist() {
-        for language in ["en", "ru", "uk", "zh-Hans", "zh-Hant", "tr"] {
+        for language in ["en", "fr", "ru", "uk", "zh-Hans", "zh-Hant", "tr"] {
             XCTAssertNotNil(localizationBundle(for: language), "Missing \(language).lproj")
         }
     }
 
     func testRequiredProductionKeysArePresentAndNonEmptyInEverySupportedLanguage() {
-        for language in ["en", "ru", "uk", "zh-Hans", "zh-Hant", "tr"] {
+        for language in ["en", "fr", "ru", "uk", "zh-Hans", "zh-Hant", "tr"] {
             guard let bundle = localizationBundle(for: language) else {
                 return XCTFail("Missing \(language).lproj")
             }
@@ -76,7 +76,7 @@ final class LocalizationTests: XCTestCase {
     }
 
     func testFormatPlaceholdersRemainCompatible() {
-        for language in ["en", "ru", "uk", "zh-Hans", "zh-Hant", "tr"] {
+        for language in ["en", "fr", "ru", "uk", "zh-Hans", "zh-Hant", "tr"] {
             guard let bundle = localizationBundle(for: language) else {
                 return XCTFail("Missing \(language).lproj")
             }

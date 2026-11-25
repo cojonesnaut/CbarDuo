@@ -126,6 +126,8 @@ struct SystemDetailView: View {
                 .font(Fonts.row)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
+                // Longer translations (French "Processeur") shrink rather than truncate.
+                .minimumScaleFactor(0.75)
                 .frame(width: 52, alignment: .leading)
             UsageBar(fraction: value ?? 0, color: usageColor(value ?? 0))
             Text(value.map { localized("%d%%", Int(($0 * 100).rounded())) } ?? "-")

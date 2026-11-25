@@ -1,0 +1,3 @@
+"NSBluetoothAlwaysUsageDescription" = "CbarDuo utilise la disponibilité Bluetooth et les métadonnées audio publiques pour reconnaître la connexion d’écouteurs sans fil.";
+"NSLocationWhenInUseUsageDescription" = "CbarDuo demande la localisation uniquement pour afficher le nom du réseau Wi‑Fi auquel vous êtes connecté.";
+"NSAudioCaptureUsageDescription" = "CbarDuo règle le volume de chaque app en traitant son audio. Le son ne quitte jamais votre Mac.";
