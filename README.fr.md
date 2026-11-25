@@ -81,7 +81,13 @@ La version 1.4.4 actuelle rend CbarDuo beaucoup plus léger pour le processeur e
 3. Double-cliquez sur le DMG et glissez **CbarDuo.app** vers **Applications**.
 4. Ouvrez Applications et lancez CbarDuo. macOS indiquera qu'il ne peut pas vérifier l'app : ouvrez **Réglages Système → Confidentialité et sécurité**, cliquez sur **Ouvrir quand même** à côté de CbarDuo, puis confirmez. C'est un utilitaire de barre de menus et il n'apparaît normalement pas dans le Dock.
 
-CbarDuo 1.4.4 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Il n'est pas nécessaire de désactiver Gatekeeper / SIP, ni d'utiliser Terminal, `sudo` ou `xattr`.
+CbarDuo 1.4.4 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Vous pouvez aussi éviter cette étape : après avoir copié CbarDuo dans Applications, exécutez cette commande dans Terminal, puis ouvrez CbarDuo normalement :
+
+```bash
+xattr -dr com.apple.quarantine /Applications/CbarDuo.app
+```
+
+Elle retire l'indicateur de téléchargement de CbarDuo uniquement. Inutile d'utiliser `sudo` ou de désactiver Gatekeeper / SIP.
 
 SHA-256 : `ff02c4c9b1b2ac819d716453164366837dc7a3161b65bf0146dde6b2e4400192`
 

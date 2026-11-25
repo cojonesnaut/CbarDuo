@@ -81,7 +81,13 @@ The current 1.4.4 release makes CbarDuo much lighter on CPU and battery, on top 
 3. Double-click the DMG and drag **CbarDuo.app** to **Applications**.
 4. Open Applications and launch CbarDuo. macOS will say it can't verify the app: open **System Settings → Privacy & Security**, click **Open Anyway** next to CbarDuo, and confirm. CbarDuo is a menu-bar utility and normally does not appear in the Dock.
 
-CbarDuo 1.4.4 is ad-hoc signed and not notarized by Apple, so the first launch needs **Open Anyway** once. You don't need to disable Gatekeeper or SIP, or use Terminal, `sudo`, or `xattr`.
+CbarDuo 1.4.4 is ad-hoc signed and not notarized by Apple, so the first launch needs **Open Anyway** once. Or skip that step: after copying CbarDuo to Applications, run this in Terminal, then open CbarDuo normally:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/CbarDuo.app
+```
+
+It removes the download flag from CbarDuo only. You don't need `sudo`, or to disable Gatekeeper or SIP.
 
 SHA-256: `ff02c4c9b1b2ac819d716453164366837dc7a3161b65bf0146dde6b2e4400192`
 
