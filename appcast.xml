@@ -4,6 +4,22 @@
         <title>CbarDuo</title>
         <link>https://github.com/cojonesnaut/CbarDuo/releases</link>
         <item>
+            <title>1.4.5</title>
+            <pubDate>Wed, 25 Nov 2026 09:00:54 +0000</pubDate>
+            <sparkle:version>14</sparkle:version>
+            <sparkle:shortVersionString>1.4.5</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <sparkle:fullReleaseNotesLink>https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.5</sparkle:fullReleaseNotesLink>
+            <description><![CDATA[
+                <h2>CbarDuo 1.4.5</h2>
+                <ul>
+                    <li>New app icon: CbarDuo's own Liquid Glass design</li>
+                    <li>Turkish (Türkçe) language support</li>
+                </ul>
+            ]]></description>
+            <enclosure url="https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.5/CbarDuo-1.4.5.dmg" length="3154335" type="application/octet-stream" sparkle:edSignature="D0zrYAfZ0fy+e8fbHbzMnvdvShjjL7BW6eteXxL2jj9Re7SZQU3P3d2irCYip/0K2ER3lPKk2501Oq1lXsHiAg=="/>
+        </item>
+        <item>
             <title>1.4.4</title>
             <pubDate>Tue, 24 Nov 2026 21:45:04 +0000</pubDate>
             <sparkle:version>13</sparkle:version>

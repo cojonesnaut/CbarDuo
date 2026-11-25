@@ -8,7 +8,7 @@
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
-[**Télécharger CbarDuo 1.4.4**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg) · [**Toutes les versions**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Signaler un bug**](https://github.com/cojonesnaut/CbarDuo/issues)
+[**Télécharger CbarDuo 1.4.5**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.5/CbarDuo-1.4.5.dmg) · [**Toutes les versions**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Signaler un bug**](https://github.com/cojonesnaut/CbarDuo/issues)
 
 CbarDuo 1.4.5 (Build 14) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
 
@@ -43,7 +43,7 @@ Sur les MacBook, l'anneau de batterie extérieur affiche le niveau de batterie e
 
 ## CbarDuo sur macOS
 
-La version 1.4.4 actuelle rend CbarDuo beaucoup plus léger pour le processeur et la batterie, en plus de la fenêtre repensée de la 1.4.3 avec des onglets Réseau, Volume, Micro, Batterie, Bluetooth et Système, du volume par app et des statistiques système et d'alimentation.
+La version 1.4.5 actuelle ajoute une nouvelle icône et le turc, en plus de la forte baisse d'utilisation du processeur et de la batterie de la 1.4.4 et de la fenêtre repensée de la 1.4.3 avec des onglets Réseau, Volume, Micro, Batterie, Bluetooth et Système, du volume par app et des statistiques système et d'alimentation.
 
 ## Fonctionnalités
 
@@ -76,12 +76,12 @@ La version 1.4.4 actuelle rend CbarDuo beaucoup plus léger pour le processeur e
 
 ## Installation
 
-1. Ouvrez la [version CbarDuo 1.4.4](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.4) et trouvez **Assets**.
-2. Téléchargez **CbarDuo-1.4.4.dmg**. Ne téléchargez pas `Source code (zip)` ou `Source code (tar.gz)`.
+1. Ouvrez la [version CbarDuo 1.4.5](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.5) et trouvez **Assets**.
+2. Téléchargez **CbarDuo-1.4.5.dmg**. Ne téléchargez pas `Source code (zip)` ou `Source code (tar.gz)`.
 3. Double-cliquez sur le DMG et glissez **CbarDuo.app** vers **Applications**.
 4. Ouvrez Applications et lancez CbarDuo. macOS indiquera qu'il ne peut pas vérifier l'app : ouvrez **Réglages Système → Confidentialité et sécurité**, cliquez sur **Ouvrir quand même** à côté de CbarDuo, puis confirmez. C'est un utilitaire de barre de menus et il n'apparaît normalement pas dans le Dock.
 
-CbarDuo 1.4.4 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Vous pouvez aussi éviter cette étape : après avoir copié CbarDuo dans Applications, exécutez cette commande dans Terminal, puis ouvrez CbarDuo normalement :
+CbarDuo 1.4.5 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Vous pouvez aussi éviter cette étape : après avoir copié CbarDuo dans Applications, exécutez cette commande dans Terminal, puis ouvrez CbarDuo normalement :
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/CbarDuo.app
@@ -89,7 +89,7 @@ xattr -dr com.apple.quarantine /Applications/CbarDuo.app
 
 Elle retire l'indicateur de téléchargement de CbarDuo uniquement. Inutile d'utiliser `sudo` ou de désactiver Gatekeeper / SIP.
 
-SHA-256 : `ff02c4c9b1b2ac819d716453164366837dc7a3161b65bf0146dde6b2e4400192`
+SHA-256 : `85a29c93011bbcb53b0613fcbad6f2f9f20f5af24c06448cba41707e8602f9a9`
 
 Les travaux de build et de compatibilité / fiabilité ont été vérifiés avec Xcode 27 et le SDK macOS 27 avec macOS 15 comme version minimale. Cela ne prétend pas à une validation matérielle de macOS 27.
 

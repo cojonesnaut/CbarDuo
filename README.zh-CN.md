@@ -10,7 +10,7 @@
 - 网络
 - 音量
 
-[**下载 CbarDuo 1.4.4**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
+[**下载 CbarDuo 1.4.5**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.5/CbarDuo-1.4.5.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
 CbarDuo 1.4.5（Build 14）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
 
@@ -29,9 +29,9 @@ CbarDuo 1.4.5（Build 14）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 ### 第一步：下载 CbarDuo
 
-点击页面上方的“下载 CbarDuo 1.4.4”。浏览器会下载：
+点击页面上方的“下载 CbarDuo 1.4.5”。浏览器会下载：
 
-`CbarDuo-1.4.4.dmg`
+`CbarDuo-1.4.5.dmg`
 
 普通用户只需要这个 DMG 文件。不要下载：
 
@@ -42,13 +42,13 @@ CbarDuo 1.4.5（Build 14）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 如果你是从 GitHub Releases 页面开始：
 
-1. 找到最新版本 **CbarDuo 1.4.4**。
+1. 找到最新版本 **CbarDuo 1.4.5**。
 2. 找到页面下方的 **Assets** 文件列表。
-3. 点击 **CbarDuo-1.4.4.dmg**。
+3. 点击 **CbarDuo-1.4.5.dmg**。
 
 ### 第二步：安装
 
-1. 双击 `CbarDuo-1.4.4.dmg`。
+1. 双击 `CbarDuo-1.4.5.dmg`。
 2. Finder 会打开一个磁盘映像窗口。
 3. 将 `CbarDuo.app` 拖到 **Applications / 应用程序** 文件夹；窗口中提供了应用程序文件夹入口。
 4. 等待复制完成。
@@ -57,7 +57,7 @@ CbarDuo 1.4.5（Build 14）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 ### 第三步：第一次打开
 
-CbarDuo 1.4.4 使用临时（ad-hoc）签名，未经 Apple 公证。第一次打开时 macOS 会提示无法验证该 App：请打开 **系统设置 → 隐私与安全性**，点击 CbarDuo 旁边的 **仍要打开**，然后确认。只需操作一次。
+CbarDuo 1.4.5 使用临时（ad-hoc）签名，未经 Apple 公证。第一次打开时 macOS 会提示无法验证该 App：请打开 **系统设置 → 隐私与安全性**，点击 CbarDuo 旁边的 **仍要打开**，然后确认。只需操作一次。
 
 也可以跳过这一步：将 CbarDuo 拷贝到“应用程序”后，在终端中运行以下命令，然后正常打开 CbarDuo：
 
@@ -137,7 +137,7 @@ CbarDuo 常驻在菜单栏。图标中的三个部分分别表示：
 
 ## 安全与隐私
 
-CbarDuo 1.4.4 使用临时（ad-hoc）签名，未经 Apple 公证。CbarDuo 不通过 Mac App Store 分发。
+CbarDuo 1.4.5 使用临时（ad-hoc）签名，未经 Apple 公证。CbarDuo 不通过 Mac App Store 分发。
 
 系统状态在本机处理：
 
@@ -164,9 +164,9 @@ CbarDuo 是独立项目，与 Apple Inc. 没有隶属、赞助或认可关系。
 
 ## 下载完整性
 
-官方 CbarDuo 1.4.4 DMG 的 SHA-256：
+官方 CbarDuo 1.4.5 DMG 的 SHA-256：
 
-`ff02c4c9b1b2ac819d716453164366837dc7a3161b65bf0146dde6b2e4400192`
+`85a29c93011bbcb53b0613fcbad6f2f9f20f5af24c06448cba41707e8602f9a9`
 
 普通用户不需要验证这一项。它主要用于希望确认下载文件完整性的用户。
 
