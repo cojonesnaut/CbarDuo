@@ -57,7 +57,15 @@ CbarDuo 1.4.5（Build 14）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 ### 第三步：第一次打开
 
-CbarDuo 1.4.4 使用临时（ad-hoc）签名，未经 Apple 公证。第一次打开时 macOS 会提示无法验证该 App：请打开 **系统设置 → 隐私与安全性**，点击 CbarDuo 旁边的 **仍要打开**，然后确认。只需操作一次，不需要关闭 Gatekeeper 或 SIP，也不需要 Terminal、`sudo` 或 `xattr`。
+CbarDuo 1.4.4 使用临时（ad-hoc）签名，未经 Apple 公证。第一次打开时 macOS 会提示无法验证该 App：请打开 **系统设置 → 隐私与安全性**，点击 CbarDuo 旁边的 **仍要打开**，然后确认。只需操作一次。
+
+也可以跳过这一步：将 CbarDuo 拷贝到“应用程序”后，在终端中运行以下命令，然后正常打开 CbarDuo：
+
+```bash
+xattr -dr com.apple.quarantine /Applications/CbarDuo.app
+```
+
+该命令只移除 CbarDuo 的下载标记。不需要 `sudo`，也不需要关闭 Gatekeeper 或 SIP。
 
 CbarDuo 是菜单栏应用，默认不会出现在 Dock 中（可在设置中开启可选的 Dock 图标，点击打开设置）。打开后，请查看屏幕最上方的 macOS 菜单栏，CbarDuo 图标会在那里出现。
 
