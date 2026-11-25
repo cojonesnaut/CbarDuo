@@ -4,7 +4,7 @@
 
 Компактний індикатор для рядка меню macOS: акумулятор, мережа й гучність в одному значку.
 
-[Завантажити CbarDuo 1.4.5](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.5/CbarDuo-1.4.5.dmg) · [Усі версії](https://github.com/cojonesnaut/CbarDuo/releases) · [Повідомити про помилку](https://github.com/cojonesnaut/CbarDuo/issues)
+[Завантажити CbarDuo 1.4.6](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.6/CbarDuo-1.4.6.dmg) · [Усі версії](https://github.com/cojonesnaut/CbarDuo/releases) · [Повідомити про помилку](https://github.com/cojonesnaut/CbarDuo/issues)
 
 CbarDuo 1.4.6 (збірка 15) · macOS 15+ · лише Apple Silicon · Безкоштовний проєкт із відкритим кодом
 
@@ -20,12 +20,12 @@ CbarDuo 1.4.6 (збірка 15) · macOS 15+ · лише Apple Silicon · Без
 
 ## 📥 Встановлення для початківців
 
-1. Відкрийте [реліз CbarDuo 1.4.5](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.5).
-2. У розділі **Assets** завантажте **CbarDuo-1.4.5.dmg**. Не завантажуйте `Source code (zip)` або `Source code (tar.gz)` — це вихідний код.
-3. Двічі клацніть файл **CbarDuo-1.4.5.dmg** і перетягніть **CbarDuo.app** до **Applications / Програми**.
+1. Відкрийте [реліз CbarDuo 1.4.6](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.6).
+2. У розділі **Assets** завантажте **CbarDuo-1.4.6.dmg**. Не завантажуйте `Source code (zip)` або `Source code (tar.gz)` — це вихідний код.
+3. Двічі клацніть файл **CbarDuo-1.4.6.dmg** і перетягніть **CbarDuo.app** до **Applications / Програми**.
 4. Відкрийте «Програми» та запустіть CbarDuo. macOS повідомить, що не може перевірити програму: відкрийте **Системні параметри → Приватність і безпека**, натисніть **Усе одно відкрити** поруч із CbarDuo та підтвердьте. Це утиліта рядка меню, тому зазвичай вона не з’являється в Dock.
 
-CbarDuo 1.4.5 підписано ad-hoc і не нотаризовано Apple, тому під час першого запуску потрібно один раз натиснути **Усе одно відкрити**. Або пропустіть цей крок: після копіювання CbarDuo до «Програм» виконайте в Терміналі команду нижче й відкрийте CbarDuo як зазвичай:
+CbarDuo 1.4.6 підписано ad-hoc і не нотаризовано Apple, тому під час першого запуску потрібно один раз натиснути **Усе одно відкрити**. Або пропустіть цей крок: після копіювання CbarDuo до «Програм» виконайте в Терміналі команду нижче й відкрийте CbarDuo як зазвичай:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/CbarDuo.app
@@ -66,8 +66,8 @@ xattr -dr com.apple.quarantine /Applications/CbarDuo.app
 
 Системний стан обробляється локально: немає аналітики, відстеження, бекенду, телеметрії чи сторонніх мережевих запитів. CbarDuo не сканує найближчі Wi‑Fi мережі, не підключається до них і не створює пару з Bluetooth-пристроями. Деякі зовнішні аудіопристрої не підтримують програмне керування гучністю.
 
-SHA-256 офіційного DMG CbarDuo 1.4.5:
+SHA-256 офіційного DMG CbarDuo 1.4.6:
 
-`85a29c93011bbcb53b0613fcbad6f2f9f20f5af24c06448cba41707e8602f9a9`
+`3276817b158700bd0dfba4c915cd0698435835639b5fcc1d74230e70414197c3`
 
 CbarDuo поширюється за [MIT License](LICENSE).
