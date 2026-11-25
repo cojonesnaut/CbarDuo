@@ -13,6 +13,7 @@ enum AppLanguage: String, CaseIterable {
     case russian = "ru"
     case ukrainian = "uk"
     case thai = "th"
+    case turkish = "tr"
 
     /// The language's name written in itself, as is conventional in
     /// language pickers. "System Default" goes through the current
@@ -26,6 +27,7 @@ enum AppLanguage: String, CaseIterable {
         case .russian: return "Русский"
         case .ukrainian: return "Українська"
         case .thai: return "ไทย"
+        case .turkish: return "Türkçe"
         }
     }
 
