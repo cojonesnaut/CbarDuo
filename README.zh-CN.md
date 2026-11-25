@@ -12,7 +12,7 @@
 
 [**下载 CbarDuo 1.4.4**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
-CbarDuo 1.4.4（Build 13）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
+CbarDuo 1.4.5（Build 14）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
 
 > **注意：** CbarDuo 是 Mikeli7666 开发的 [DuoBar](https://github.com/Mikeli7666/DuoBar) 的分支。
 
@@ -118,7 +118,7 @@ CbarDuo 常驻在菜单栏。图标中的三个部分分别表示：
 - 改进的 Battery Ring、音量指示点和充电展示
 - Liquid Glass 弹出面板（macOS 26 及以后；可在设置中关闭，恢复经典样式）
 - 可选的 Dock 图标（默认关闭；在设置中开启，点击打开设置）
-- English、法语、俄语、乌克兰语、简体中文、繁體中文、泰语
+- English、法语、俄语、乌克兰语、简体中文、繁體中文、泰语、土耳其语
 
 ## 系统要求
 

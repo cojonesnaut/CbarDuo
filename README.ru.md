@@ -6,7 +6,7 @@
 
 [**Скачать CbarDuo 1.4.4**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg) · [Все версии](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
-CbarDuo 1.4.4 (сборка 13) · macOS 15 Sequoia или новее · только Apple Silicon
+CbarDuo 1.4.5 (сборка 14) · macOS 15 Sequoia или новее · только Apple Silicon
 
 > **Примечание:** CbarDuo — это форк [DuoBar](https://github.com/Mikeli7666/DuoBar) от Mikeli7666.
 
@@ -108,7 +108,7 @@ CbarDuo постоянно в строке меню. Три части знач�
 - Необязательный значок в Dock (по умолчанию выключен)
 - Open on Hover (открывать при наведении)
 - Настраиваемый размер значка в строке меню
-- English, французский, русский, украинский, 简体中文, 繁體中文, тайский
+- English, французский, русский, украинский, 简体中文, 繁體中文, тайский, турецкий
 
 ## Системные требования
 

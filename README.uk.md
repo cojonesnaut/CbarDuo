@@ -6,7 +6,7 @@
 
 [Завантажити CbarDuo 1.4.4](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg) · [Усі версії](https://github.com/cojonesnaut/CbarDuo/releases) · [Повідомити про помилку](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.4 (збірка 13) · macOS 15+ · лише Apple Silicon · Безкоштовний проєкт із відкритим кодом
+CbarDuo 1.4.5 (збірка 14) · macOS 15+ · лише Apple Silicon · Безкоштовний проєкт із відкритим кодом
 
 > **Примітка:** CbarDuo — це форк [DuoBar](https://github.com/Mikeli7666/DuoBar) від Mikeli7666.
 
@@ -43,7 +43,7 @@ CbarDuo 1.4.4 підписано ad-hoc і не нотаризовано Apple, 
 - Швидкі переходи до налаштувань Network, Battery і Sound.
 - Панель Liquid Glass у macOS 26 і новіших (можна вимкнути в налаштуваннях і повернути класичний вигляд).
 - Необов’язковий значок у Dock (вимкнено за замовчуванням); клацання відкриває налаштування.
-- English, французька, 简体中文, 繁體中文, русский, українська та тайська.
+- English, французька, 简体中文, 繁體中文, русский, українська, тайська та турецька.
 
 <p align="center">
   <img src="marketing/1.4.3/readme/cbarduo-1.4.3-popover-network.png" alt="Спливаюча панель CbarDuo 1.4.3, вкладка «Мережа»" width="360">

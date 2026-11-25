@@ -10,7 +10,7 @@
 
 [**Télécharger CbarDuo 1.4.4**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.4/CbarDuo-1.4.4.dmg) · [**Toutes les versions**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Signaler un bug**](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.4 (Build 13) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
+CbarDuo 1.4.5 (Build 14) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
 
 > **Remarque :** CbarDuo est un fork de [DuoBar](https://github.com/Mikeli7666/DuoBar) par Mikeli7666.
 
@@ -60,7 +60,7 @@ La version 1.4.4 actuelle rend CbarDuo beaucoup plus léger pour le processeur e
 - Curseur de volume compact, coupure du son Core Audio publique et changement de périphérique de sortie quand c'est pris en charge
 - Présentation temporaire de la connexion AirPods / écouteurs
 - Taille d'icône de la barre de menus réglable
-- Anglais, français, russe, ukrainien, chinois simplifié, chinois traditionnel et thaï
+- Anglais, français, russe, ukrainien, chinois simplifié, chinois traditionnel, thaï et turc
 - Fenêtre personnalisée compacte : Réseau et Batterie ouvrent les Réglages Système, alimentation Wi-Fi, volume, sélection de sortie audio, Réglages et Quitter
 - Fenêtre Liquid Glass sur macOS 26 et versions ultérieures, avec un interrupteur dans Réglages pour revenir à l'aspect classique d'avant la 1.4.0
 - Modes clair et sombre

@@ -1,0 +1,3 @@
+"NSBluetoothAlwaysUsageDescription" = "CbarDuo, kablosuz kulaklıkların bağlandığını algılamak için Bluetooth kullanılabilirliğini ve herkese açık ses meta verilerini kullanır.";
+"NSLocationWhenInUseUsageDescription" = "CbarDuo konumu yalnızca bağlı olduğunuz Wi‑Fi ağının adını göstermek için ister.";
+"NSAudioCaptureUsageDescription" = "CbarDuo her uygulamanın ses düzeyini, sesini işleyerek ayarlar. Ses hiçbir zaman Mac'inizden çıkmaz.";
