@@ -298,7 +298,8 @@ struct DesktopWidgetView: View {
             Color.clear
                 .widgetSurface(
                     in: RoundedRectangle(cornerRadius: 30 * sizeScale, style: .continuous),
-                    style: widgetStyle.style
+                    style: widgetStyle.style,
+                    glassTint: widgetStyle.glassTint
                 )
 
             VStack(spacing: 7 * sizeScale) {
@@ -337,7 +338,7 @@ struct DesktopWidgetView: View {
                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                     .padding(.horizontal, 9)
                     .padding(.vertical, 4)
-                    .widgetSurface(in: Capsule(), style: widgetStyle.style)
+                    .widgetSurface(in: Capsule(), style: widgetStyle.style, glassTint: widgetStyle.glassTint)
                     .padding(.top, 7 * sizeScale)
                     .transition(.opacity.combined(with: .offset(y: -4)))
             }
@@ -522,13 +523,14 @@ private struct WidgetModeBlurModifier: ViewModifier {
 
 private extension View {
     /// The widget's card surface, matched to the system's own desktop
-    /// widgets in each Icon & widget style. The native widgets ignore the
-    /// Liquid Glass slider, so this does too. Earlier systems keep the
-    /// translucent material, without a border.
+    /// widgets in each Icon & widget style. In the see-through styles the
+    /// Liquid Glass slider sets how much the wallpaper behind is blurred, as
+    /// it does for the native widgets. Earlier systems keep the translucent
+    /// material, without a border.
     @ViewBuilder
-    func widgetSurface<S: InsettableShape>(in shape: S, style: WidgetStyle) -> some View {
+    func widgetSurface<S: InsettableShape>(in shape: S, style: WidgetStyle, glassTint: Double) -> some View {
         if #available(macOS 26.0, *) {
-            background { WidgetSurface(shape: shape, style: style) }
+            background { WidgetSurface(shape: shape, style: style, glassTint: glassTint) }
         } else {
             background { shape.fill(.ultraThinMaterial) }
         }
@@ -537,13 +539,21 @@ private extension View {
 
 /// Fills and rim measured from the native widgets, against the wallpaper
 /// behind them, for each Icon & widget style.
+@available(macOS 26.0, *)
 private struct WidgetSurface<S: InsettableShape>: View {
     let shape: S
     let style: WidgetStyle
+    let glassTint: Double
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         ZStack {
+            switch style {
+            case .clear(let isDark), .tinted(let isDark, _):
+                WidgetFrost(shape: shape, glassTint: glassTint, isDark: isDark)
+            default:
+                EmptyView()
+            }
             switch style {
             case .standard:
                 opaqueCard(dark: colorScheme == .dark)
@@ -552,7 +562,7 @@ private struct WidgetSurface<S: InsettableShape>: View {
             case .light:
                 opaqueCard(dark: false)
             case .clear(let isDark):
-                // Dark: the wallpaper about a tenth darker, no blur.
+                // Dark: the wallpaper about a tenth darker.
                 // Light: a white veil of about a sixth.
                 shape.fill(isDark ? Color.black.opacity(0.10) : Color.white.opacity(0.17))
             case .tinted(let isDark, let tint):
@@ -584,6 +594,102 @@ private struct WidgetSurface<S: InsettableShape>: View {
                 endPoint: .bottom
             )
         )
+    }
+}
+
+/// The see-through styles' blur of the wallpaper behind the widget, which
+/// follows the Liquid Glass slider. Measured on the native widgets: no blur
+/// at the Clear end, about half at 0.6, and full from about 0.77 on (0.77
+/// and 1 look identical), with no change in color. A behind-window blur
+/// with the material's tint removed does it; its opacity sets the strength.
+@available(macOS 26.0, *)
+private struct WidgetFrost<S: InsettableShape>: View {
+    let shape: S
+    let glassTint: Double
+    let isDark: Bool
+
+    static func strength(for glassTint: Double) -> Double {
+        min(max((glassTint - 0.35) / 0.42, 0), 1)
+    }
+
+    var body: some View {
+        let strength = Self.strength(for: glassTint)
+        if strength > 0.01 {
+            BehindWindowBlur(material: .hudWindow, isDark: isDark)
+                .clipShape(shape)
+                .opacity(strength)
+
+        }
+    }
+}
+
+/// A blur of whatever is behind the window (here, the wallpaper).
+/// A blur of whatever is behind the window (here, the wallpaper), without
+/// the gray tint every system material adds on top. The native widgets blur
+/// the wallpaper but keep its color, so the material's tint and color
+/// filters are switched off and only its blur is kept. That relies on the
+/// material's layer structure, which is not public: if it is not found, the
+/// view keeps the plain material (blur plus tint).
+private struct BehindWindowBlur: NSViewRepresentable {
+    let material: NSVisualEffectView.Material
+    let isDark: Bool
+
+    func makeNSView(context: Context) -> PureBlurView {
+        let view = PureBlurView()
+        view.blendingMode = .behindWindow
+        // Always active: the widget's panel is never the key window.
+        view.state = .active
+        updateNSView(view, context: context)
+        return view
+    }
+
+    func updateNSView(_ view: PureBlurView, context: Context) {
+        view.material = material
+        view.appearance = NSAppearance(named: isDark ? .darkAqua : .aqua)
+        view.needsLayout = true
+    }
+}
+
+final class PureBlurView: NSVisualEffectView {
+    // The material repaints its layers in updateLayer and layout, so the
+    // tint is removed again after each.
+    override func updateLayer() {
+        super.updateLayer()
+        removeTint()
+    }
+
+    override func layout() {
+        super.layout()
+        removeTint()
+    }
+
+    /// The material is a blurring backdrop layer with plain color layers
+    /// over it (on macOS 26-27: a 40% gray fill, a lighten-blended dark gray
+    /// and a faint chameleon tint), and the backdrop saturates what it blurs.
+    /// Hiding every leaf layer that carries no filters, and dropping the
+    /// saturation filter, leaves just the blur. If the structure changes and
+    /// no filtered layer is found, nothing is hidden.
+    private func removeTint() {
+        guard let root = layer else { return }
+        var hasBackdrop = false
+        visit(root) { if !($0.filters ?? []).isEmpty { hasBackdrop = true } }
+        guard hasBackdrop else { return }
+        visit(root) { layer in
+            if layer !== root, (layer.filters ?? []).isEmpty, layer.sublayers?.isEmpty ?? true {
+                layer.isHidden = true
+            }
+            // The backdrop also boosts saturation; the native widgets keep
+            // the wallpaper's color, so only that filter is dropped.
+            if let filters = layer.filters as? [NSObject], filters.count > 1 {
+                let kept = filters.filter { "\($0.value(forKey: "name") ?? "")" != "colorSaturate" }
+                if kept.count != filters.count { layer.filters = kept }
+            }
+        }
+    }
+
+    private func visit(_ layer: CALayer, _ body: (CALayer) -> Void) {
+        body(layer)
+        layer.sublayers?.forEach { visit($0, body) }
     }
 }
 

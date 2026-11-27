@@ -35,8 +35,8 @@ enum WidgetStyle: Equatable {
     }
 }
 
-/// Follows Icon & widget style in System Settings, so the desktop widget can
-/// look like the system's own widgets in every style.
+/// Follows Icon & widget style and the Liquid Glass slider in System
+/// Settings, so the desktop widget can look like the system's own widgets.
 ///
 /// macOS keeps the style in the global defaults `AppleIconAppearanceTheme`
 /// and `AppleIconAppearanceTintColor` / `AppleIconAppearanceCustomTintColor`.
@@ -45,12 +45,20 @@ enum WidgetStyle: Equatable {
 @MainActor
 final class WidgetStyleObserver: ObservableObject {
     @Published private(set) var style: WidgetStyle
+    /// The Liquid Glass slider in System Settings > Appearance, 0 (Clear)
+    /// through 1 (Tinted), from the global default `NSGlassTintAmount`.
+    /// The see-through styles blur the wallpaper more toward Tinted.
+    @Published private(set) var glassTint: Double
+
+    /// Used when the slider has never been moved and the key is missing.
+    static let defaultGlassTint = 0.5
 
     private var observations: [NSKeyValueObservation] = []
     private var appearanceObserver: NSObjectProtocol?
 
     init() {
         style = Self.currentStyle
+        glassTint = Self.currentGlassTint
         // Key-value observing a defaults key also reports writes made by
         // other processes (System Settings), through cfprefsd.
         let defaults = UserDefaults.standard
@@ -62,6 +70,9 @@ final class WidgetStyleObserver: ObservableObject {
                 DispatchQueue.main.async { self?.refresh() }
             },
             defaults.observe(\.AppleIconAppearanceCustomTintColor, options: []) { [weak self] _, _ in
+                DispatchQueue.main.async { self?.refresh() }
+            },
+            defaults.observe(\.NSGlassTintAmount, options: []) { [weak self] _, _ in
                 DispatchQueue.main.async { self?.refresh() }
             }
         ]
@@ -85,6 +96,15 @@ final class WidgetStyleObserver: ObservableObject {
     private func refresh() {
         let style = Self.currentStyle
         if style != self.style { self.style = style }
+        let glassTint = Self.currentGlassTint
+        if glassTint != self.glassTint { self.glassTint = glassTint }
+    }
+
+    private static var currentGlassTint: Double {
+        let defaults = UserDefaults.standard
+        guard defaults.object(forKey: "NSGlassTintAmount") != nil else { return defaultGlassTint }
+        // double(forKey:) also accepts the value stored as text.
+        return min(max(defaults.double(forKey: "NSGlassTintAmount"), 0), 1)
     }
 
     private static var currentStyle: WidgetStyle {
@@ -119,4 +139,5 @@ private extension UserDefaults {
     @objc dynamic var AppleIconAppearanceCustomTintColor: String? {
         string(forKey: "AppleIconAppearanceCustomTintColor")
     }
+    @objc dynamic var NSGlassTintAmount: Double { double(forKey: "NSGlassTintAmount") }
 }
