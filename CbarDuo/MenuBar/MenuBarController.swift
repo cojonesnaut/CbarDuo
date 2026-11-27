@@ -4,6 +4,8 @@ import SwiftUI
 @MainActor
 final class MenuBarController: NSObject {
     private static let hoverCloseDelay: TimeInterval = 0.25
+    /// How long the popover's content stays loaded after it closes.
+    static let popoverContentReleaseDelay: TimeInterval = 45
 
     private let statusItem: NSStatusItem
     private var popover: NSPopover?
@@ -11,6 +13,7 @@ final class MenuBarController: NSObject {
     private var hostingController: NSHostingController<StatusPopoverView>?
     private var isClosing = false
     private var closeWorkItem: DispatchWorkItem?
+    private var contentReleaseWorkItem: DispatchWorkItem?
     private var isPanelVisible: Bool { popover?.isShown == true && !isClosing }
     private var popoverWindow: NSWindow? { popover?.contentViewController?.view.window }
     private let statusStore: SystemStatusStore
@@ -74,6 +77,31 @@ final class MenuBarController: NSObject {
     }
 
     private func configurePopover() {
+        let hoverTracker = PopoverHoverTracker()
+        hoverTracker.onHoverChanged = { [weak self] isInside in
+            guard let self else { return }
+            let commands = isInside
+                ? self.hoverInteraction.popoverEntered()
+                : self.hoverInteraction.popoverExited()
+            self.perform(commands)
+        }
+        popoverHoverTracker = hoverTracker
+    }
+
+    /// Builds the popover and its SwiftUI content if they are not loaded.
+    /// Both are created on demand rather than at launch: a hidden popover
+    /// would otherwise keep its whole view tree in memory and keep
+    /// re-rendering it on every status change.
+    private func loadPopoverContentIfNeeded() {
+        cancelPopoverContentRelease()
+        guard popover == nil || hostingController == nil else { return }
+        // A real NSPopover: the system draws its Liquid Glass, arrow and shadow.
+        // Closing stays with this controller (outside clicks, hover, other
+        // windows), so AppKit's own transient behavior is off.
+        let popover = NSPopover()
+        popover.behavior = .applicationDefined
+        popover.animates = true
+        popover.delegate = self
         let hostingController = NSHostingController(
             rootView: StatusPopoverView(
                 statusStore: statusStore,
@@ -86,28 +114,48 @@ final class MenuBarController: NSObject {
         // default options also pin the view to its intrinsic size, which fights
         // the popover while it animates between tabs of different heights.
         hostingController.sizingOptions = [.preferredContentSize]
-        let hoverTracker = PopoverHoverTracker()
-        hoverTracker.onHoverChanged = { [weak self] isInside in
-            guard let self else { return }
-            let commands = isInside
-                ? self.hoverInteraction.popoverEntered()
-                : self.hoverInteraction.popoverExited()
-            self.perform(commands)
-        }
-        hoverTracker.install(on: hostingController.view)
-        // A real NSPopover: the system draws its Liquid Glass, arrow and shadow.
-        // Closing stays with this controller (outside clicks, hover, other
-        // windows), so AppKit's own transient behavior is off.
+        popoverHoverTracker?.install(on: hostingController.view)
         // The SwiftUI controller is the popover's content directly, so AppKit
         // resizes (and animates) the popover from its preferred content size.
-        let popover = NSPopover()
         popover.contentViewController = hostingController
-        popover.behavior = .applicationDefined
-        popover.animates = true
-        popover.delegate = self
         self.popover = popover
         self.hostingController = hostingController
-        popoverHoverTracker = hoverTracker
+    }
+
+    /// Frees the popover and its content a while after it closes. Reopening
+    /// within the grace period reuses the loaded content, so quick
+    /// open/close cycles stay instant.
+    private func schedulePopoverContentRelease() {
+        cancelPopoverContentRelease()
+        let workItem = DispatchWorkItem { [weak self] in
+            Task { @MainActor in self?.releasePopoverContent() }
+        }
+        contentReleaseWorkItem = workItem
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + Self.popoverContentReleaseDelay,
+            execute: workItem
+        )
+    }
+
+    private func cancelPopoverContentRelease() {
+        contentReleaseWorkItem?.cancel()
+        contentReleaseWorkItem = nil
+    }
+
+    private func releasePopoverContent() {
+        contentReleaseWorkItem = nil
+        guard !isInvalidated, let popover, !popover.isShown else { return }
+        if let view = hostingController?.view, let area = popoverHoverTracker?.trackingArea {
+            view.removeTrackingArea(area)
+        }
+        // Drop the whole popover, not only its content: NSPopover keeps the
+        // last content view in its private window after
+        // `contentViewController` is cleared, so the view tree would survive.
+        popover.delegate = nil
+        popover.contentViewController = nil
+        self.popover = nil
+        hostingController = nil
+        MemoryRelief.releaseFreedPages()
     }
 
     @objc private func togglePopover() {
@@ -119,7 +167,9 @@ final class MenuBarController: NSObject {
     }
 
     private func showPopover() {
-        guard !isPanelVisible, let popover, let hostingController, let button = statusItem.button else { return }
+        guard !isPanelVisible, statusItem.button != nil else { return }
+        loadPopoverContentIfNeeded()
+        guard let popover, let hostingController, let button = statusItem.button else { return }
 
         NSApp.activate(ignoringOtherApps: true)
         hostingController.view.layoutSubtreeIfNeeded()
@@ -331,6 +381,7 @@ final class MenuBarController: NSObject {
         isInvalidated = true
         removeOutsideClickMonitors()
         cancelHoverClose()
+        cancelPopoverContentRelease()
         lengthAnimationTimer?.invalidate()
         lengthAnimationTimer = nil
         removePopoverResignObserver()
@@ -357,6 +408,7 @@ final class MenuBarController: NSObject {
             NSEvent.removeMonitor(globalOutsideClickMonitor)
         }
         pendingHoverClose?.cancel()
+        contentReleaseWorkItem?.cancel()
         lengthAnimationTimer?.invalidate()
         if let defaultsObserver {
             NotificationCenter.default.removeObserver(defaultsObserver)
@@ -468,6 +520,7 @@ extension MenuBarController: NSPopoverDelegate {
         removePopoverResignObserver()
         statusItem.button?.highlight(false)
         removeEscapeKeyMonitor()
+        if !isInvalidated { schedulePopoverContentRelease() }
         guard !closedByController, !isInvalidated else { return }
         removeOutsideClickMonitors()
         statusStore.setPopoverActive(false)
