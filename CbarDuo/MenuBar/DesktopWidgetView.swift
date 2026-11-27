@@ -153,6 +153,8 @@ struct DesktopWidgetView: View {
     @State private var monitorOwner = UUID()
     @State private var toastName: String?
     @State private var toastGeneration = 0
+    /// Follows Icon & widget style in System Settings.
+    @StateObject private var widgetStyle = WidgetStyleObserver()
 
     private var mode: DesktopWidgetMode {
         let stored = DesktopWidgetMode(rawValue: modeRaw) ?? .standard
@@ -293,12 +295,11 @@ struct DesktopWidgetView: View {
         let adaptiveTransitionBinding = $adaptiveTransition
 
         ZStack {
-            RoundedRectangle(cornerRadius: 30 * sizeScale, style: .continuous)
-                .fill(.ultraThinMaterial)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 30 * sizeScale, style: .continuous)
-                        .strokeBorder(Color.white.opacity(0.14), lineWidth: 1)
-                }
+            Color.clear
+                .widgetSurface(
+                    in: RoundedRectangle(cornerRadius: 30 * sizeScale, style: .continuous),
+                    style: widgetStyle.style
+                )
 
             VStack(spacing: 7 * sizeScale) {
                 // The glyph's layout box stays at the menu-bar size (its
@@ -336,12 +337,7 @@ struct DesktopWidgetView: View {
                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                     .padding(.horizontal, 9)
                     .padding(.vertical, 4)
-                    .background {
-                        Capsule().fill(.ultraThinMaterial)
-                    }
-                    .overlay {
-                        Capsule().strokeBorder(Color.white.opacity(0.14), lineWidth: 1)
-                    }
+                    .widgetSurface(in: Capsule(), style: widgetStyle.style)
                     .padding(.top, 7 * sizeScale)
                     .transition(.opacity.combined(with: .offset(y: -4)))
             }
@@ -521,5 +517,95 @@ private struct WidgetModeBlurModifier: ViewModifier {
         content
             .blur(radius: radius)
             .opacity(opacity)
+    }
+}
+
+private extension View {
+    /// The widget's card surface, matched to the system's own desktop
+    /// widgets in each Icon & widget style. The native widgets ignore the
+    /// Liquid Glass slider, so this does too. Earlier systems keep the
+    /// translucent material, without a border.
+    @ViewBuilder
+    func widgetSurface<S: InsettableShape>(in shape: S, style: WidgetStyle) -> some View {
+        if #available(macOS 26.0, *) {
+            background { WidgetSurface(shape: shape, style: style) }
+        } else {
+            background { shape.fill(.ultraThinMaterial) }
+        }
+    }
+}
+
+/// Fills and rim measured from the native widgets, against the wallpaper
+/// behind them, for each Icon & widget style.
+private struct WidgetSurface<S: InsettableShape>: View {
+    let shape: S
+    let style: WidgetStyle
+    @Environment(\.colorScheme) private var colorScheme
+
+    var body: some View {
+        ZStack {
+            switch style {
+            case .standard:
+                opaqueCard(dark: colorScheme == .dark)
+            case .dark:
+                opaqueCard(dark: true)
+            case .light:
+                opaqueCard(dark: false)
+            case .clear(let isDark):
+                // Dark: the wallpaper about a tenth darker, no blur.
+                // Light: a white veil of about a sixth.
+                shape.fill(isDark ? Color.black.opacity(0.10) : Color.white.opacity(0.17))
+            case .tinted(let isDark, let tint):
+                if isDark {
+                    shape.fill(Color.black.opacity(0.10))
+                    shape.fill(Color(nsColor: tint).opacity(0.02))
+                } else {
+                    shape.fill(Color(nsColor: tint).opacity(0.13))
+                    shape.fill(Color.white.opacity(0.07))
+                }
+            }
+            WidgetSurfaceRim(shape: shape)
+        }
+    }
+
+    /// The Default and Dark styles: an opaque card, lighter at the top.
+    /// The native dark card measures 55 → 33 (of 255) on screen, top to
+    /// bottom. In this desktop-level panel grays come out brighter than
+    /// specified (about value^0.82), so the inputs are set lower to land on
+    /// the measured values. The light card is an estimate: it could not be
+    /// measured.
+    private func opaqueCard(dark: Bool) -> some View {
+        let top = dark ? 42.0 / 255 : 0.96
+        let bottom = dark ? 24.0 / 255 : 0.89
+        return shape.fill(
+            LinearGradient(
+                colors: [Color(.sRGB, white: top), Color(.sRGB, white: bottom)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
+    }
+}
+
+/// The thin light rim of the native widgets: a one-point edge, brightest at
+/// the top and bottom. No inner glow: next to the native widgets, a glow
+/// reads as frost around the edges.
+private struct WidgetSurfaceRim<S: InsettableShape>: View {
+    let shape: S
+
+    var body: some View {
+        shape.strokeBorder(
+            LinearGradient(
+                stops: [
+                    .init(color: .white.opacity(0.30), location: 0),
+                    .init(color: .white.opacity(0.12), location: 0.5),
+                    .init(color: .white.opacity(0.26), location: 1)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            ),
+            lineWidth: 1
+        )
+        .allowsHitTesting(false)
     }
 }

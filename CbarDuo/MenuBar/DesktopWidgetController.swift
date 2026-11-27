@@ -108,7 +108,7 @@ final class DesktopWidgetController {
         panel.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
         panel.backgroundColor = .clear
         panel.isOpaque = false
-        panel.hasShadow = true
+        panel.hasShadow = false // the system's desktop widgets cast none
         panel.hidesOnDeactivate = false
         panel.isMovable = false // dragging is manual, in the surface view
         panel.isReleasedWhenClosed = false // lifetime is owned by `panel` above
