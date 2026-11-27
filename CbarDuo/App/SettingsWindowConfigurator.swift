@@ -59,6 +59,7 @@ enum SettingsPresenter {
     /// The app's live status, handed to the Indicator preview. Set once at launch.
     static weak var statusStore: SystemStatusStore?
     private static var window: NSWindow?
+    private static var closeObserver: NSObjectProtocol?
 
     static func show() {
         NSApp.activate(ignoringOtherApps: true)
@@ -80,7 +81,33 @@ enum SettingsPresenter {
         }
         window.setFrameAutosaveName("CbarDuoSettingsWindowV2")
         self.window = window
+        closeObserver = NotificationCenter.default.addObserver(
+            forName: NSWindow.willCloseNotification,
+            object: window,
+            queue: .main
+        ) { _ in
+            MainActor.assumeIsolated { releaseWindow() }
+        }
         window.makeKeyAndOrderFront(nil)
+    }
+
+    /// Drops the closed window and its SwiftUI view tree. Keeping it around
+    /// would hold the whole Settings view graph (and its live observers) in
+    /// memory for the rest of the session; reopening rebuilds it, and the
+    /// frame autosave name restores its size and position.
+    private static func releaseWindow() {
+        if let closeObserver {
+            NotificationCenter.default.removeObserver(closeObserver)
+            self.closeObserver = nil
+        }
+        guard let window else { return }
+        self.window = nil
+        // Detach the content after the close finishes, so AppKit is not
+        // tearing down the view it is still closing.
+        DispatchQueue.main.async {
+            window.contentViewController = nil
+            MemoryRelief.releaseFreedPages()
+        }
     }
 }
 

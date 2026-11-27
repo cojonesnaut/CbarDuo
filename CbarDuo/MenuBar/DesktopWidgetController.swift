@@ -67,8 +67,20 @@ final class DesktopWidgetController {
         if visible {
             show()
         } else {
-            panel?.orderOut(nil)
+            hide()
         }
+    }
+
+    /// Destroys the panel rather than only ordering it out: a hidden panel
+    /// would keep its SwiftUI view tree alive, observing and re-rendering
+    /// the live status store with nobody looking. The position is already
+    /// saved in UserDefaults, so turning the widget back on restores it.
+    private func hide() {
+        guard let panel else { return }
+        panel.orderOut(nil)
+        panel.contentView = nil
+        self.panel = nil
+        MemoryRelief.releaseFreedPages()
     }
 
     private func show() {
@@ -96,9 +108,10 @@ final class DesktopWidgetController {
         panel.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
         panel.backgroundColor = .clear
         panel.isOpaque = false
-        panel.hasShadow = true
+        panel.hasShadow = false // the system's desktop widgets cast none
         panel.hidesOnDeactivate = false
         panel.isMovable = false // dragging is manual, in the surface view
+        panel.isReleasedWhenClosed = false // lifetime is owned by `panel` above
 
         let surface = DesktopWidgetSurfaceView(frame: NSRect(origin: .zero, size: size))
         surface.onClick = { [weak self] in self?.cycleMode() }
