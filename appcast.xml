@@ -4,6 +4,24 @@
         <title>CbarDuo</title>
         <link>https://github.com/cojonesnaut/CbarDuo/releases</link>
         <item>
+            <title>1.4.7</title>
+            <pubDate>Fri, 27 Nov 2026 21:43:50 +0000</pubDate>
+            <sparkle:version>16</sparkle:version>
+            <sparkle:shortVersionString>1.4.7</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <sparkle:fullReleaseNotesLink>https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.7</sparkle:fullReleaseNotesLink>
+            <description><![CDATA[
+                <h2>CbarDuo 1.4.7</h2>
+                <ul>
+                    <li>Much lower memory use: the popover, Settings and the desktop widget free their memory when they close</li>
+                    <li>The desktop widget follows Icon &amp; widget style (Default, Dark, Clear, Tinted) like the macOS widgets</li>
+                    <li>In the Clear and Tinted styles, the Liquid Glass slider sets how much the widget blurs the wallpaper</li>
+                    <li>A thin rim of light replaces the widget's border, and it no longer casts a shadow</li>
+                </ul>
+            ]]></description>
+            <enclosure url="https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg" length="3186619" type="application/octet-stream" sparkle:edSignature="ECwArD0gfiuq27ItWhdyDwxcfTVyXt0G6W4jx6iUJokbl5DYRrEd5w7wX6kfk4iei+TGuTAMYrFArx0blQsPBQ=="/>
+        </item>
+        <item>
             <title>1.4.6</title>
             <pubDate>Wed, 25 Nov 2026 09:18:04 +0000</pubDate>
             <sparkle:version>15</sparkle:version>
