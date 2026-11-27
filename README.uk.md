@@ -6,7 +6,7 @@
 
 [Завантажити CbarDuo 1.4.6](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.6/CbarDuo-1.4.6.dmg) · [Усі версії](https://github.com/cojonesnaut/CbarDuo/releases) · [Повідомити про помилку](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.6 (збірка 15) · macOS 15+ · лише Apple Silicon · Безкоштовний проєкт із відкритим кодом
+CbarDuo 1.4.7 (збірка 16) · macOS 15+ · лише Apple Silicon · Безкоштовний проєкт із відкритим кодом
 
 > **Примітка:** CbarDuo — це форк [DuoBar](https://github.com/Mikeli7666/DuoBar) від Mikeli7666.
 
