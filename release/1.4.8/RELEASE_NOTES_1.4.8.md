@@ -25,4 +25,4 @@ CbarDuo 1.4.8 keeps the desktop widget in step with the menu bar.
    ```
 
 Build 17 · SHA-256 of CbarDuo-1.4.8.dmg:
-`4b3d403fd3b6508c09604a4cfd341dfe32315dc34065f99d7abfc9dcc348b6a1`
+`66c78b5ad5fa2dfa9508886c9c6d286b0baa7cd93d965e5fd06d78286a43caef`
