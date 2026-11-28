@@ -10,7 +10,7 @@
 - 网络
 - 音量
 
-[**下载 CbarDuo 1.4.7**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
+[**下载 CbarDuo 1.4.8**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.8/CbarDuo-1.4.8.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
 CbarDuo 1.4.8（Build 17）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
 
@@ -29,9 +29,9 @@ CbarDuo 1.4.8（Build 17）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 ### 第一步：下载 CbarDuo
 
-点击页面上方的“下载 CbarDuo 1.4.7”。浏览器会下载：
+点击页面上方的“下载 CbarDuo 1.4.8”。浏览器会下载：
 
-`CbarDuo-1.4.7.dmg`
+`CbarDuo-1.4.8.dmg`
 
 普通用户只需要这个 DMG 文件。不要下载：
 
@@ -42,13 +42,13 @@ CbarDuo 1.4.8（Build 17）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 如果你是从 GitHub Releases 页面开始：
 
-1. 找到最新版本 **CbarDuo 1.4.7**。
+1. 找到最新版本 **CbarDuo 1.4.8**。
 2. 找到页面下方的 **Assets** 文件列表。
-3. 点击 **CbarDuo-1.4.7.dmg**。
+3. 点击 **CbarDuo-1.4.8.dmg**。
 
 ### 第二步：安装
 
-1. 双击 `CbarDuo-1.4.7.dmg`。
+1. 双击 `CbarDuo-1.4.8.dmg`。
 2. Finder 会打开一个磁盘映像窗口。
 3. 将 `CbarDuo.app` 拖到 **Applications / 应用程序** 文件夹；窗口中提供了应用程序文件夹入口。
 4. 等待复制完成。
@@ -164,9 +164,9 @@ CbarDuo 是独立项目，与 Apple Inc. 没有隶属、赞助或认可关系。
 
 ## 下载完整性
 
-官方 CbarDuo 1.4.7 DMG 的 SHA-256：
+官方 CbarDuo 1.4.8 DMG 的 SHA-256：
 
-`06c58033d0a1a6dd5def9a2858ac460f1fb52aa5a7c1b255b36c8381b95bd630`
+`66c78b5ad5fa2dfa9508886c9c6d286b0baa7cd93d965e5fd06d78286a43caef`
 
 普通用户不需要验证这一项。它主要用于希望确认下载文件完整性的用户。
 

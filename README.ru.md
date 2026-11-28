@@ -4,7 +4,7 @@
 
 Индикатор в стиле iPhone Duo для строки меню macOS: батарея, сеть и громкость в одном значке.
 
-[**Скачать CbarDuo 1.4.7**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg) · [Все версии](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
+[**Скачать CbarDuo 1.4.8**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.8/CbarDuo-1.4.8.dmg) · [Все версии](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
 CbarDuo 1.4.8 (сборка 17) · macOS 15 Sequoia или новее · только Apple Silicon
 
@@ -22,9 +22,9 @@ CbarDuo 1.4.8 (сборка 17) · macOS 15 Sequoia или новее · тол�
 
 ### Шаг 1. Скачать CbarDuo
 
-Нажмите «Скачать CbarDuo 1.4.7» выше. Браузер загрузит файл:
+Нажмите «Скачать CbarDuo 1.4.8» выше. Браузер загрузит файл:
 
-`CbarDuo-1.4.7.dmg`
+`CbarDuo-1.4.8.dmg`
 
 Обычному пользователю нужен только этот DMG. Не скачивайте:
 
@@ -35,13 +35,13 @@ CbarDuo 1.4.8 (сборка 17) · macOS 15 Sequoia или новее · тол�
 
 Если вы открыли страницу [Releases](https://github.com/cojonesnaut/CbarDuo/releases):
 
-1. Найдите последнюю версию **CbarDuo 1.4.7**.
+1. Найдите последнюю версию **CbarDuo 1.4.8**.
 2. Внизу страницы откройте список **Assets**.
-3. Скачайте **CbarDuo-1.4.7.dmg**.
+3. Скачайте **CbarDuo-1.4.8.dmg**.
 
 ### Шаг 2. Установить
 
-1. Дважды щёлкните `CbarDuo-1.4.7.dmg`.
+1. Дважды щёлкните `CbarDuo-1.4.8.dmg`.
 2. Finder откроет окно образа диска.
 3. Перетащите `CbarDuo.app` в папку **Программы / Applications**.
 4. Дождитесь окончания копирования.
@@ -152,9 +152,9 @@ CbarDuo — независимый проект и не связан с Apple In
 
 ## Целостность загрузки
 
-SHA-256 официального DMG CbarDuo 1.4.7:
+SHA-256 официального DMG CbarDuo 1.4.8:
 
-`06c58033d0a1a6dd5def9a2858ac460f1fb52aa5a7c1b255b36c8381b95bd630`
+`66c78b5ad5fa2dfa9508886c9c6d286b0baa7cd93d965e5fd06d78286a43caef`
 
 Обычному пользователю это проверять не нужно. Строка для тех, кто хочет убедиться, что файл не подменили.
 

@@ -4,6 +4,23 @@
         <title>CbarDuo</title>
         <link>https://github.com/cojonesnaut/CbarDuo/releases</link>
         <item>
+            <title>1.4.8</title>
+            <pubDate>Sat, 28 Nov 2026 15:07:35 +0000</pubDate>
+            <sparkle:version>17</sparkle:version>
+            <sparkle:shortVersionString>1.4.8</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <sparkle:fullReleaseNotesLink>https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.8</sparkle:fullReleaseNotesLink>
+            <description><![CDATA[
+                <h2>CbarDuo 1.4.8</h2>
+                <ul>
+                    <li>The desktop widget now matches the menu bar when your MacBook is fully charged on power: both switch to the Adaptive Ring together</li>
+                    <li>On desktop Macs, the widget draws the Adaptive Ring like the menu bar instead of an empty battery ring</li>
+                    <li>The widget's Adaptive Ring follows the Adaptive Ring colour coding setting</li>
+                </ul>
+            ]]></description>
+            <enclosure url="https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.8/CbarDuo-1.4.8.dmg" length="3189314" type="application/octet-stream" sparkle:edSignature="LtJXTPOPz91YhFIk+exo7RwWO33RdYPrU65OHqfRK88xJLzFhRTTqtO1wUkRs2qDjTHq8O7eAKzPuk3XyC5aCQ=="/>
+        </item>
+        <item>
             <title>1.4.7</title>
             <pubDate>Fri, 27 Nov 2026 21:43:50 +0000</pubDate>
             <sparkle:version>16</sparkle:version>
