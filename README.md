@@ -8,9 +8,9 @@
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
-[**Download CbarDuo 1.4.7**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg) · [**All Releases**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Report a Bug**](https://github.com/cojonesnaut/CbarDuo/issues)
+[**Download CbarDuo 1.4.8**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.8/CbarDuo-1.4.8.dmg) · [**All Releases**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Report a Bug**](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.7 (Build 16) · macOS 15+ · Apple Silicon only · Free and Open Source
+CbarDuo 1.4.8 (Build 17) · macOS 15+ · Apple Silicon only · Free and Open Source
 
 > **Note:** CbarDuo is a fork of [DuoBar](https://github.com/Mikeli7666/DuoBar) by Mikeli7666.
 
@@ -43,7 +43,7 @@ On MacBooks, the outer Battery Ring shows live battery level, a dynamic charging
 
 ## CbarDuo on macOS
 
-The current 1.4.7 release cuts memory use and gives the desktop widget the look of the macOS widgets around it, on top of 1.4.6's French, 1.4.5's new app icon and Turkish, 1.4.4's big cut in CPU and battery use and 1.4.3's redesigned popover with Network, Volume, Mic, Battery, Bluetooth, and System tabs, per-app volume, and system and power stats.
+The current 1.4.8 release keeps the desktop widget in step with the menu bar's Adaptive Ring, on top of 1.4.7's lower memory use and macOS-style desktop widget, 1.4.6's French, 1.4.5's new app icon and Turkish, 1.4.4's big cut in CPU and battery use and 1.4.3's redesigned popover with Network, Volume, Mic, Battery, Bluetooth, and System tabs, per-app volume, and system and power stats.
 
 ## Features
 
@@ -76,12 +76,12 @@ The current 1.4.7 release cuts memory use and gives the desktop widget the look 
 
 ## Installation
 
-1. Open the [CbarDuo 1.4.7 release](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.7) and find **Assets**.
-2. Download **CbarDuo-1.4.7.dmg**. Do not download `Source code (zip)` or `Source code (tar.gz)`.
+1. Open the [CbarDuo 1.4.8 release](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.8) and find **Assets**.
+2. Download **CbarDuo-1.4.8.dmg**. Do not download `Source code (zip)` or `Source code (tar.gz)`.
 3. Double-click the DMG and drag **CbarDuo.app** to **Applications**.
 4. Open Applications and launch CbarDuo. macOS will say it can't verify the app: open **System Settings → Privacy & Security**, click **Open Anyway** next to CbarDuo, and confirm. CbarDuo is a menu-bar utility and normally does not appear in the Dock.
 
-CbarDuo 1.4.7 is ad-hoc signed and not notarized by Apple, so the first launch needs **Open Anyway** once. Or skip that step: after copying CbarDuo to Applications, run this in Terminal, then open CbarDuo normally:
+CbarDuo 1.4.8 is ad-hoc signed and not notarized by Apple, so the first launch needs **Open Anyway** once. Or skip that step: after copying CbarDuo to Applications, run this in Terminal, then open CbarDuo normally:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/CbarDuo.app
@@ -89,7 +89,7 @@ xattr -dr com.apple.quarantine /Applications/CbarDuo.app
 
 It removes the download flag from CbarDuo only. You don't need `sudo`, or to disable Gatekeeper or SIP.
 
-SHA-256: `06c58033d0a1a6dd5def9a2858ac460f1fb52aa5a7c1b255b36c8381b95bd630`
+SHA-256: `66c78b5ad5fa2dfa9508886c9c6d286b0baa7cd93d965e5fd06d78286a43caef`
 
 Build and compatibility/reliability work was checked using Xcode 27 and the macOS 27 SDK with macOS 15 as the minimum. This does not claim macOS 27 hardware validation.
 

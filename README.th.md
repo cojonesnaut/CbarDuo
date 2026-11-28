@@ -8,9 +8,9 @@
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
-[**ดาวน์โหลด CbarDuo 1.4.7**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg) · [**รุ่นทั้งหมด**](https://github.com/cojonesnaut/CbarDuo/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/cojonesnaut/CbarDuo/issues)
+[**ดาวน์โหลด CbarDuo 1.4.8**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.8/CbarDuo-1.4.8.dmg) · [**รุ่นทั้งหมด**](https://github.com/cojonesnaut/CbarDuo/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.7 (Build 16) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
+CbarDuo 1.4.8 (Build 17) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
 
 > **หมายเหตุ:** CbarDuo เป็นฟอร์กของ [DuoBar](https://github.com/Mikeli7666/DuoBar) โดย Mikeli7666
 
@@ -44,7 +44,7 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 
 ## CbarDuo บน macOS
 
-รุ่น 1.4.7 ปัจจุบันลดการใช้หน่วยความจำ และทำให้วิดเจ็ตบนเดสก์ท็อปดูเหมือนวิดเจ็ตของ macOS ที่อยู่รอบ ๆ ต่อยอดจากรุ่น 1.4.6 ที่เพิ่มภาษาฝรั่งเศส รุ่น 1.4.5 ที่เพิ่มไอคอนแอปใหม่และภาษาตุรกี รุ่น 1.4.4 ที่ลดการใช้ CPU และแบตเตอรี่ลงมาก และรุ่น 1.4.3 ที่ออกแบบป๊อปโอเวอร์ใหม่ด้วยแท็บเครือข่าย เสียง ไมโครโฟน แบตเตอรี่ บลูทูธ และระบบ พร้อมการปรับเสียงแยกตามแอป รวมถึงสถิติระบบและพลังงาน
+รุ่น 1.4.8 ปัจจุบันทำให้วิดเจ็ตบนเดสก์ท็อปแสดง Adaptive Ring ตรงกับแถบเมนู ต่อยอดจากรุ่น 1.4.7 ที่ลดการใช้หน่วยความจำและทำให้วิดเจ็ตบนเดสก์ท็อปดูเหมือนวิดเจ็ตของ macOS รุ่น 1.4.6 ที่เพิ่มภาษาฝรั่งเศส รุ่น 1.4.5 ที่เพิ่มไอคอนแอปใหม่และภาษาตุรกี รุ่น 1.4.4 ที่ลดการใช้ CPU และแบตเตอรี่ลงมาก และรุ่น 1.4.3 ที่ออกแบบป๊อปโอเวอร์ใหม่ด้วยแท็บเครือข่าย เสียง ไมโครโฟน แบตเตอรี่ บลูทูธ และระบบ พร้อมการปรับเสียงแยกตามแอป รวมถึงสถิติระบบและพลังงาน
 
 ## คุณสมบัติ
 
@@ -77,12 +77,12 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 
 ## การติดตั้ง
 
-1. เปิด [รุ่น CbarDuo 1.4.7](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.7) และค้นหา **Assets**
-2. ดาวน์โหลด **CbarDuo-1.4.7.dmg** อย่าดาวน์โหลด `Source code (zip)` หรือ `Source code (tar.gz)`
+1. เปิด [รุ่น CbarDuo 1.4.8](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.8) และค้นหา **Assets**
+2. ดาวน์โหลด **CbarDuo-1.4.8.dmg** อย่าดาวน์โหลด `Source code (zip)` หรือ `Source code (tar.gz)`
 3. ดับเบิลคลิก DMG แล้วลาก **CbarDuo.app** ไปยัง **Applications**
 4. เปิด Applications แล้วเปิด CbarDuo macOS จะแจ้งว่าไม่สามารถตรวจสอบแอปได้: เปิด **การตั้งค่าระบบ → ความเป็นส่วนตัวและความปลอดภัย** คลิก **เปิดต่อไป** ข้าง CbarDuo แล้วยืนยัน เป็นยูทิลิตี้แถบเมนูและปกติจะไม่ปรากฏใน Dock
 
-CbarDuo 1.4.7 ลงนามแบบ ad-hoc และไม่ได้รับการรับรอง (notarize) จาก Apple การเปิดครั้งแรกจึงต้องคลิก **เปิดต่อไป** หนึ่งครั้ง หรือข้ามขั้นตอนนี้: หลังจากคัดลอก CbarDuo ไปยัง Applications แล้ว ให้เรียกใช้คำสั่งนี้ใน Terminal จากนั้นเปิด CbarDuo ตามปกติ
+CbarDuo 1.4.8 ลงนามแบบ ad-hoc และไม่ได้รับการรับรอง (notarize) จาก Apple การเปิดครั้งแรกจึงต้องคลิก **เปิดต่อไป** หนึ่งครั้ง หรือข้ามขั้นตอนนี้: หลังจากคัดลอก CbarDuo ไปยัง Applications แล้ว ให้เรียกใช้คำสั่งนี้ใน Terminal จากนั้นเปิด CbarDuo ตามปกติ
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/CbarDuo.app
@@ -90,7 +90,7 @@ xattr -dr com.apple.quarantine /Applications/CbarDuo.app
 
 คำสั่งนี้ลบเครื่องหมายการดาวน์โหลดออกจาก CbarDuo เท่านั้น ไม่ต้องใช้ `sudo` และไม่ต้องปิด Gatekeeper หรือ SIP
 
-SHA-256: `06c58033d0a1a6dd5def9a2858ac460f1fb52aa5a7c1b255b36c8381b95bd630`
+SHA-256: `66c78b5ad5fa2dfa9508886c9c6d286b0baa7cd93d965e5fd06d78286a43caef`
 
 งานสร้างและความเข้ากันได้/ความน่าเชื่อถือได้รับการตรวจสอบโดยใช้ Xcode 27 และ macOS 27 SDK โดยต้องใช้ macOS 15 ขึ้นไป ซึ่งไม่ได้อ้างถึงการตรวจสอบฮาร์ดแวร์ macOS 27
 

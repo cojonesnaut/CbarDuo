@@ -8,9 +8,9 @@
 
 [English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md) | [Русский](README.ru.md) | [Українська](README.uk.md) | [ไทย](README.th.md)
 
-[**Télécharger CbarDuo 1.4.7**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg) · [**Toutes les versions**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Signaler un bug**](https://github.com/cojonesnaut/CbarDuo/issues)
+[**Télécharger CbarDuo 1.4.8**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.8/CbarDuo-1.4.8.dmg) · [**Toutes les versions**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Signaler un bug**](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.7 (Build 16) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
+CbarDuo 1.4.8 (Build 17) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
 
 > **Remarque :** CbarDuo est un fork de [DuoBar](https://github.com/Mikeli7666/DuoBar) par Mikeli7666.
 
@@ -43,7 +43,7 @@ Sur les MacBook, l'anneau de batterie extérieur affiche le niveau de batterie e
 
 ## CbarDuo sur macOS
 
-La version 1.4.7 actuelle réduit l'utilisation de la mémoire et donne au widget de bureau l'apparence des widgets macOS qui l'entourent, en plus du français de la 1.4.6, de la nouvelle icône et du turc de la 1.4.5, de la forte baisse d'utilisation du processeur et de la batterie de la 1.4.4 et de la fenêtre repensée de la 1.4.3 avec des onglets Réseau, Volume, Micro, Batterie, Bluetooth et Système, du volume par app et des statistiques système et d'alimentation.
+La version 1.4.8 actuelle aligne le widget de bureau sur l'Adaptive Ring de la barre des menus, en plus de la mémoire allégée et du widget de bureau au style macOS de la 1.4.7, du français de la 1.4.6, de la nouvelle icône et du turc de la 1.4.5, de la forte baisse d'utilisation du processeur et de la batterie de la 1.4.4 et de la fenêtre repensée de la 1.4.3 avec des onglets Réseau, Volume, Micro, Batterie, Bluetooth et Système, du volume par app et des statistiques système et d'alimentation.
 
 ## Fonctionnalités
 
@@ -76,12 +76,12 @@ La version 1.4.7 actuelle réduit l'utilisation de la mémoire et donne au widge
 
 ## Installation
 
-1. Ouvrez la [version CbarDuo 1.4.7](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.7) et trouvez **Assets**.
-2. Téléchargez **CbarDuo-1.4.7.dmg**. Ne téléchargez pas `Source code (zip)` ou `Source code (tar.gz)`.
+1. Ouvrez la [version CbarDuo 1.4.8](https://github.com/cojonesnaut/CbarDuo/releases/tag/v1.4.8) et trouvez **Assets**.
+2. Téléchargez **CbarDuo-1.4.8.dmg**. Ne téléchargez pas `Source code (zip)` ou `Source code (tar.gz)`.
 3. Double-cliquez sur le DMG et glissez **CbarDuo.app** vers **Applications**.
 4. Ouvrez Applications et lancez CbarDuo. macOS indiquera qu'il ne peut pas vérifier l'app : ouvrez **Réglages Système → Confidentialité et sécurité**, cliquez sur **Ouvrir quand même** à côté de CbarDuo, puis confirmez. C'est un utilitaire de barre de menus et il n'apparaît normalement pas dans le Dock.
 
-CbarDuo 1.4.7 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Vous pouvez aussi éviter cette étape : après avoir copié CbarDuo dans Applications, exécutez cette commande dans Terminal, puis ouvrez CbarDuo normalement :
+CbarDuo 1.4.8 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Vous pouvez aussi éviter cette étape : après avoir copié CbarDuo dans Applications, exécutez cette commande dans Terminal, puis ouvrez CbarDuo normalement :
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/CbarDuo.app
@@ -89,7 +89,7 @@ xattr -dr com.apple.quarantine /Applications/CbarDuo.app
 
 Elle retire l'indicateur de téléchargement de CbarDuo uniquement. Inutile d'utiliser `sudo` ou de désactiver Gatekeeper / SIP.
 
-SHA-256 : `06c58033d0a1a6dd5def9a2858ac460f1fb52aa5a7c1b255b36c8381b95bd630`
+SHA-256 : `66c78b5ad5fa2dfa9508886c9c6d286b0baa7cd93d965e5fd06d78286a43caef`
 
 Les travaux de build et de compatibilité / fiabilité ont été vérifiés avec Xcode 27 et le SDK macOS 27 avec macOS 15 comme version minimale. Cela ne prétend pas à une validation matérielle de macOS 27.
 
