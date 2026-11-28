@@ -10,7 +10,7 @@
 
 [**ดาวน์โหลด CbarDuo 1.4.7**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg) · [**รุ่นทั้งหมด**](https://github.com/cojonesnaut/CbarDuo/releases) · [**แจ้งข้อบกพร่อง**](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.7 (Build 16) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
+CbarDuo 1.4.8 (Build 17) · macOS 15+ · เฉพาะ Apple Silicon · ฟรีและโอเพนซอร์ส
 
 > **หมายเหตุ:** CbarDuo เป็นฟอร์กของ [DuoBar](https://github.com/Mikeli7666/DuoBar) โดย Mikeli7666
 
@@ -82,7 +82,7 @@ CbarDuo นำแนวคิดสถานะสามในหนึ่งส
 3. ดับเบิลคลิก DMG แล้วลาก **CbarDuo.app** ไปยัง **Applications**
 4. เปิด Applications แล้วเปิด CbarDuo macOS จะแจ้งว่าไม่สามารถตรวจสอบแอปได้: เปิด **การตั้งค่าระบบ → ความเป็นส่วนตัวและความปลอดภัย** คลิก **เปิดต่อไป** ข้าง CbarDuo แล้วยืนยัน เป็นยูทิลิตี้แถบเมนูและปกติจะไม่ปรากฏใน Dock
 
-CbarDuo 1.4.7 ลงนามแบบ ad-hoc และไม่ได้รับการรับรอง (notarize) จาก Apple การเปิดครั้งแรกจึงต้องคลิก **เปิดต่อไป** หนึ่งครั้ง หรือข้ามขั้นตอนนี้: หลังจากคัดลอก CbarDuo ไปยัง Applications แล้ว ให้เรียกใช้คำสั่งนี้ใน Terminal จากนั้นเปิด CbarDuo ตามปกติ
+CbarDuo 1.4.8 ลงนามแบบ ad-hoc และไม่ได้รับการรับรอง (notarize) จาก Apple การเปิดครั้งแรกจึงต้องคลิก **เปิดต่อไป** หนึ่งครั้ง หรือข้ามขั้นตอนนี้: หลังจากคัดลอก CbarDuo ไปยัง Applications แล้ว ให้เรียกใช้คำสั่งนี้ใน Terminal จากนั้นเปิด CbarDuo ตามปกติ
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/CbarDuo.app
