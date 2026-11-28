@@ -10,7 +10,7 @@
 
 [**Télécharger CbarDuo 1.4.7**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg) · [**Toutes les versions**](https://github.com/cojonesnaut/CbarDuo/releases) · [**Signaler un bug**](https://github.com/cojonesnaut/CbarDuo/issues)
 
-CbarDuo 1.4.7 (Build 16) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
+CbarDuo 1.4.8 (Build 17) · macOS 15+ · Apple Silicon uniquement · Gratuit et open source
 
 > **Remarque :** CbarDuo est un fork de [DuoBar](https://github.com/Mikeli7666/DuoBar) par Mikeli7666.
 
@@ -81,7 +81,7 @@ La version 1.4.7 actuelle réduit l'utilisation de la mémoire et donne au widge
 3. Double-cliquez sur le DMG et glissez **CbarDuo.app** vers **Applications**.
 4. Ouvrez Applications et lancez CbarDuo. macOS indiquera qu'il ne peut pas vérifier l'app : ouvrez **Réglages Système → Confidentialité et sécurité**, cliquez sur **Ouvrir quand même** à côté de CbarDuo, puis confirmez. C'est un utilitaire de barre de menus et il n'apparaît normalement pas dans le Dock.
 
-CbarDuo 1.4.7 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Vous pouvez aussi éviter cette étape : après avoir copié CbarDuo dans Applications, exécutez cette commande dans Terminal, puis ouvrez CbarDuo normalement :
+CbarDuo 1.4.8 est signé ad hoc et n'est pas notarisé par Apple : le premier lancement demande donc une fois **Ouvrir quand même**. Vous pouvez aussi éviter cette étape : après avoir copié CbarDuo dans Applications, exécutez cette commande dans Terminal, puis ouvrez CbarDuo normalement :
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/CbarDuo.app

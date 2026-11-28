@@ -12,7 +12,7 @@
 
 [**下载 CbarDuo 1.4.7**](https://github.com/cojonesnaut/CbarDuo/releases/download/v1.4.7/CbarDuo-1.4.7.dmg) · [查看所有版本](https://github.com/cojonesnaut/CbarDuo/releases) · [English](README.md)
 
-CbarDuo 1.4.7（Build 16）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
+CbarDuo 1.4.8（Build 17）· macOS 15 Sequoia 或更高版本 · 仅支持 Apple Silicon
 
 > **注意：** CbarDuo 是 Mikeli7666 开发的 [DuoBar](https://github.com/Mikeli7666/DuoBar) 的分支。
 
@@ -57,7 +57,7 @@ CbarDuo 1.4.7（Build 16）· macOS 15 Sequoia 或更高版本 · 仅支持 Appl
 
 ### 第三步：第一次打开
 
-CbarDuo 1.4.7 使用临时（ad-hoc）签名，未经 Apple 公证。第一次打开时 macOS 会提示无法验证该 App：请打开 **系统设置 → 隐私与安全性**，点击 CbarDuo 旁边的 **仍要打开**，然后确认。只需操作一次。
+CbarDuo 1.4.8 使用临时（ad-hoc）签名，未经 Apple 公证。第一次打开时 macOS 会提示无法验证该 App：请打开 **系统设置 → 隐私与安全性**，点击 CbarDuo 旁边的 **仍要打开**，然后确认。只需操作一次。
 
 也可以跳过这一步：将 CbarDuo 拷贝到“应用程序”后，在终端中运行以下命令，然后正常打开 CbarDuo：
 
@@ -137,7 +137,7 @@ CbarDuo 常驻在菜单栏。图标中的三个部分分别表示：
 
 ## 安全与隐私
 
-CbarDuo 1.4.7 使用临时（ad-hoc）签名，未经 Apple 公证。CbarDuo 不通过 Mac App Store 分发。
+CbarDuo 1.4.8 使用临时（ad-hoc）签名，未经 Apple 公证。CbarDuo 不通过 Mac App Store 分发。
 
 系统状态在本机处理：
 
