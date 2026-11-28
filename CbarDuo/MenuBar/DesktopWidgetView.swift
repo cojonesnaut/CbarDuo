@@ -146,6 +146,7 @@ struct DesktopWidgetView: View {
     @AppStorage(PreferenceKeys.desktopWidgetSize) private var widgetSizeRaw = DesktopWidgetSize.medium.rawValue
     @AppStorage(PreferenceKeys.animationsEnabled) private var animationsEnabled = true
     @AppStorage(PreferenceKeys.batteryColorCoding) private var batteryColorCoding = false
+    @AppStorage(PreferenceKeys.adaptiveRingColorCoding) private var adaptiveRingColorCoding = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var adaptivePresentation = AdaptiveRingPresentationState()
@@ -219,7 +220,20 @@ struct DesktopWidgetView: View {
     /// and in custom mode (CPU / memory / thermal dots or centre read
     /// its snapshots). Standard mode never acquires it.
     private var needsMonitor: Bool {
-        mode == .adaptive || mode == .custom
+        mode == .adaptive || mode == .custom || mirrorsMenuBarAdaptiveRing
+    }
+
+    /// Standard mode mirrors the menu bar, so it must also follow the
+    /// menu bar's own Battery → Adaptive switch: a desktop Mac, or a
+    /// MacBook that has reached full charge on power, draws the Adaptive
+    /// Ring there, and the widget has to draw the same ring.
+    private var mirrorsMenuBarAdaptiveRing: Bool {
+        mode == .standard && statusStore.usesReleasedAdaptiveRing
+    }
+
+    /// Whether the ring currently draws the Adaptive Ring's progress.
+    private var drawsAdaptiveRing: Bool {
+        mode == .adaptive || mirrorsMenuBarAdaptiveRing
     }
 
     /// The status the glyph renders. In custom mode with a non-volume
@@ -315,7 +329,7 @@ struct DesktopWidgetView: View {
                     ringPresentation: ringPresentation,
                     centerStateOverride: centerOverride,
                     ringTransitionAnimation: ringAnimation,
-                    usesCustomRingTransition: mode == .adaptive,
+                    usesCustomRingTransition: drawsAdaptiveRing,
                     ringColorOverride: ringColor,
                     batteryColorCodingEnabled: batteryColorCoding,
                     showBatteryPercentage: false
@@ -350,15 +364,19 @@ struct DesktopWidgetView: View {
             adaptiveRingMonitor.release(owner: monitorOwner)
         }
         .onChange(of: mode) { _, newMode in
-            if needsMonitor {
+            // Re-sync the ring when a mode switch keeps the monitor running.
+            if needsMonitor { acquireMonitor() }
+            flashModeName(newMode)
+        }
+        .onChange(of: needsMonitor) { _, needed in
+            if needed {
                 acquireMonitor()
             } else {
                 adaptiveRingMonitor.release(owner: monitorOwner)
             }
-            flashModeName(newMode)
         }
         .onChange(of: adaptiveRingMonitor.state) { _, newState in
-            guard mode == .adaptive else { return }
+            guard drawsAdaptiveRing else { return }
             var presentation = adaptivePresentationBinding.wrappedValue
             let transition = presentation.retarget(to: newState)
             adaptivePresentationBinding.wrappedValue = presentation
@@ -373,7 +391,7 @@ struct DesktopWidgetView: View {
             return .adaptive(progress: ringFraction ?? 0)
         }
         return DuoPersistentRingPresentationResolver.resolve(
-            mode: mode == .adaptive ? .adaptive : .battery,
+            mode: drawsAdaptiveRing ? .adaptive : .battery,
             battery: statusStore.status.battery,
             adaptiveProgress: adaptivePresentation.displayedProgress,
             batteryColorCodingEnabled: batteryColorCoding
@@ -419,16 +437,19 @@ struct DesktopWidgetView: View {
             }
             return AdaptiveRingColorPresentation(role: role, intensity: 0.85).color
         }
-        guard mode == .adaptive else { return nil }
+        guard drawsAdaptiveRing else { return nil }
         return AdaptiveRingColorResolver.resolve(
             state: adaptiveRingMonitor.state,
             decision: adaptiveRingMonitor.performanceDecision,
-            colorCodingEnabled: true
+            // Standard mode mirrors the menu bar, so it honours the
+            // Settings colour-coding toggle; the adaptive showcase mode
+            // colour-codes unconditionally.
+            colorCodingEnabled: mode == .adaptive || adaptiveRingColorCoding
         ).color
     }
 
     private var ringAnimation: Animation? {
-        guard mode == .adaptive else { return nil }
+        guard drawsAdaptiveRing else { return nil }
         let duration = adaptiveTransition.effectiveDuration(
             animationsEnabled: animationsEnabled,
             reduceMotion: reduceMotion
